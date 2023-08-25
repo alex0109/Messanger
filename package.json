@@ -20,6 +20,7 @@
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-ionicons": "^4.6.5",
     "react-native-reanimated": "~3.3.0",
+    "@react-native-async-storage/async-storage": "1.18.2",
     "typescript": "^5.1.6"
   },
   "devDependencies": {
