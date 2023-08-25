@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import React, { useContext } from "react";
 import Animated, {
   interpolateColor,
@@ -19,30 +19,20 @@ const ScreenTwo = () => {
     return { backgroundColor };
   });
   return (
-    <Animated.View style={[{ flex: 1 }, rStyle]}>
-      <View
-        style={{ height: "5%", width: "100%", backgroundColor: "#ccc" }}
-      ></View>
+    <Animated.View
+      style={[
+        { flex: 1, justifyContent: "center", alignItems: "center" },
+        rStyle,
+      ]}
+    >
       <View
         style={{
-          height: "90%",
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
+          height: 200,
+          width: 200,
+          backgroundColor: "violet",
+          borderRadius: 100,
         }}
-      >
-        <View
-          style={{
-            height: 200,
-            width: 200,
-            backgroundColor: "violet",
-            borderRadius: 100,
-          }}
-        />
-      </View>
-      <View
-        style={{ height: "5%", width: "100%", backgroundColor: "#ccc" }}
-      ></View>
+      />
     </Animated.View>
   );
 };

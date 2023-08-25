@@ -1,4 +1,4 @@
-import { Switch, Text, View } from "react-native";
+import { Text } from "react-native";
 import React, { useContext } from "react";
 import Animated, {
   interpolateColor,
@@ -8,7 +8,7 @@ import Colors from "../shared/assets/styles/colors";
 import { ThemeContext } from "../shared/lib/providers/ThemeProvider";
 
 const ScreenOne = () => {
-  const { themeProgress, theme, changeTheme } = useContext(ThemeContext);
+  const { themeProgress } = useContext(ThemeContext);
 
   const rStyle = useAnimatedStyle(() => {
     const backgroundColor = interpolateColor(
@@ -20,27 +20,13 @@ const ScreenOne = () => {
   });
 
   return (
-    <Animated.View style={[{ flex: 1 }, rStyle]}>
-      <View
-        style={{ height: "5%", width: "100%", backgroundColor: "#ccc" }}
-      ></View>
-      <View
-        style={{
-          height: "90%",
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ fontSize: 28, fontWeight: "600" }}>Hello</Text>
-        <Switch
-          value={theme === "dark"}
-          onValueChange={(toggled) => changeTheme(toggled ? "dark" : "light")}
-        />
-      </View>
-      <View
-        style={{ height: "5%", width: "100%", backgroundColor: "#ccc" }}
-      ></View>
+    <Animated.View
+      style={[
+        { flex: 1, justifyContent: "center", alignItems: "center" },
+        rStyle,
+      ]}
+    >
+      <Text style={{ fontSize: 28, fontWeight: "600" }}>Hello</Text>
     </Animated.View>
   );
 };

@@ -1,29 +1,24 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React from "react";
+import { View, Text } from "react-native";
+import ScreenOne from "../../../pages/ScreenOne";
+import ScreenTwo from "../../../pages/ScreenTwo";
 
 const UserScreenStackNavigator = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>User Screen</Text>
-    </View>
-  );
+  return <ScreenOne />;
 };
 const CreateGroupScreenStackNavigator = () => {
+  return <ScreenTwo />;
+};
+const SettingsScreenStackNavigator = () => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Create Group Screen</Text>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Settings Screen</Text>
     </View>
   );
 };
-const SettingsScreenStackNavigator = () => {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings Screen</Text>
-      </View>
-    );
-  };
 
 export {
-    UserScreenStackNavigator,
-    CreateGroupScreenStackNavigator,
-    SettingsScreenStackNavigator};
+  UserScreenStackNavigator,
+  CreateGroupScreenStackNavigator,
+  SettingsScreenStackNavigator,
+};
