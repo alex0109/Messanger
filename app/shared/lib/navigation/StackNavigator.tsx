@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
-import ScreenOne from "../../../pages/ScreenOne";
+import ChatsHub from "../../../pages/ChatsHub/components/ChatsHub/ChatsHub";
 import ScreenTwo from "../../../pages/ScreenTwo";
 
 const UserScreenStackNavigator = () => {
-  return <ScreenOne />;
+  return <ChatsHub />;
 };
 const CreateGroupScreenStackNavigator = () => {
   return <ScreenTwo />;
