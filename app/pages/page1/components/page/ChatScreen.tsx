@@ -1,4 +1,3 @@
-// import { StatusBar } from 'expo-status-bar';
 import React from "react";
 import {
   StyleSheet,
@@ -14,7 +13,6 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-
 
 export default function ChatScreen() {
   return (

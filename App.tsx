@@ -16,7 +16,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <NavigationContainer>
-        <ChatScreen/>
+        <ChatScreen></ChatScreen>
       </NavigationContainer>
     </ThemeProvider>
   );
