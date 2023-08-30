@@ -6,6 +6,7 @@ import {
   View,
   Text,
   TextInput,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   Image,
   ScrollView,
@@ -14,55 +15,14 @@ import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
+
 export default function ChatScreen() {
   return (
-    <View style={{ backgroundColor: "#F1F1F1" }}>
-      <StatusBar />
-
-      <View style={style.header}>
-        <View style={[{ flex: 1 }, style.fullAlign]}>
-          <AntDesign name="arrowleft" size={24} color="black"></AntDesign>
-        </View>
-        <View style={[{ flex: 1, borderRadius: 90 }, style.fullAlign]}>
-          <Image
-            style={style.userAvatar}
-            source={{
-              uri: "https://cdn-icons-png.flaticon.com/512/266/266033.png",
-            }}
-          />
-        </View>
-        <View style={[{ flex: 4 }, style.topStatus]}>
-          <Text style={style.username}>Username</Text>
-          <Text style={style.timeStatus}>last time 09:32</Text>
-        </View>
-        <View style={[{ flex: 1 }, style.fullAlign]}>
-          <Entypo name="dots-three-vertical" size={24} color="black" />
-        </View>
-      </View>
-      <View style={style.main}>
-        <View style={style.clrChatBG}>
-          <Text style={[style.clrCMess1]}>Chat’s clear!</Text>
-          <Text style={style.clrCMess2}>
-            Send your first message to start a dialog ;)
-          </Text>
-          <Text style={style.clrCMess3}>wish you good luck</Text>
-        </View>
-      </View>
-
-      <View style={style.footer}>
-        <View style={{ flex: 6, justifyContent: "center" }}>
-          <TextInput
-            style={style.baseText}
-            multiline
-            placeholder="Type type"
-            placeholderTextColor={"#747474"}
-          ></TextInput>
-        </View>
-        <View style={style.separator}></View>
-        <View style={[{ flex: 1 }, style.fullAlign]}>
-          {/* <Feather name="send" size={24} color="black" /> */}
-          <Text style={style.sendText}>Send</Text>
-        </View>
+    <View style = {style.mainView}>
+      <StatusBar barStyle = "default"></StatusBar>
+      <View style = {style.headerView}>
+        <TouchableOpacity style = {style.headerButtons}></TouchableOpacity>
+        <Image source={require("")} style={style.headerImage}></Image>
       </View>
     </View>
   );
@@ -70,14 +30,28 @@ export default function ChatScreen() {
 
 const style = StyleSheet.create({
   // Верхнее меню
+  mainView: {
+    flex: 1,
+  },
+  headerView: {
+
+  },
   header: {
     flexDirection: "row",
     height: 50,
     width: "100%",
     alignItems: "center",
     backgroundColor: "#5698FB",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    borderBottomRadius: 10,
+  },
+  headerImage: {
+    height: '100%',
+  },
+  headerButtons: {
+    borderRadius: 30,
+    backgroundColor: '#5698FB',
+    height: '100%',
+    width: '100%',
   },
   // Подложка чата
   main: {
