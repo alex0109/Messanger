@@ -1,24 +1,30 @@
 import React from "react";
-import { View, Text } from "react-native";
-import ChatsHub from "../../../pages/ChatsHub/components/ChatsHub/ChatsHub";
-import ScreenTwo from "../../../pages/ScreenTwo";
 
-const UserScreenStackNavigator = () => {
-  return <ChatsHub />;
+import ChatsHub from "../../../pages/ChatsHub/components/ChatsHub/ChatsHub";
+import { createStackNavigator } from "@react-navigation/stack";
+import Options from "../../../pages/Options/Options";
+import Auth from "../../../pages/Auth/Auth";
+
+export type RootStackParamList = {
+  ChatStack: { name: string };
+  OptionsStack: { name: string };
+  AuthStack: { name: string };
+  DrawerStack: { name: string };
 };
-const CreateGroupScreenStackNavigator = () => {
-  return <ScreenTwo />;
-};
-const SettingsScreenStackNavigator = () => {
+
+const InitialStack = createStackNavigator<RootStackParamList>();
+
+const InitialStackNavigator = () => {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings Screen</Text>
-    </View>
+    <InitialStack.Navigator
+      initialRouteName="ChatStack"
+      screenOptions={{ headerShown: false }}
+    >
+      <InitialStack.Screen name="ChatStack" component={ChatsHub} />
+      <InitialStack.Screen name="OptionsStack" component={Options} />
+      <InitialStack.Screen name="AuthStack" component={Auth} />
+    </InitialStack.Navigator>
   );
 };
 
-export {
-  UserScreenStackNavigator,
-  CreateGroupScreenStackNavigator,
-  SettingsScreenStackNavigator,
-};
+export { InitialStackNavigator };

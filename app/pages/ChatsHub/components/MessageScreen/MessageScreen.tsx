@@ -14,7 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-export default function ChatScreen() {
+export function MessageScreen() {
   return (
     <View style={{ backgroundColor: "#F1F1F1" }}>
       <StatusBar />

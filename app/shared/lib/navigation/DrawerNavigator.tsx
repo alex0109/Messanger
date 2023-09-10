@@ -1,104 +1,17 @@
-import React, { useState, useContext } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  Switch,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import React from "react";
+
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import {
-  CreateGroupScreenStackNavigator,
-  UserScreenStackNavigator,
-} from "./StackNavigator";
-import DropDownPicker from "react-native-dropdown-picker";
-import { ThemeContext } from "../providers/ThemeProvider";
+import { InitialStackNavigator, RootStackParamList } from "./StackNavigator";
+import CustomDrawerContent from "./CustomDrawerContent";
 
-const Drawer = createDrawerNavigator();
-
-const CustomDrawerContent = () => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-  ]);
-
-  const { theme, changeTheme } = useContext(ThemeContext);
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.drawerProfile}>
-        <View style={{ alignItems: "center", width: "70%" }}>
-          <TouchableOpacity>
-            <Image source={require("../../assets/images/Ellipse.png")} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={{ fontSize: 16, fontWeight: "600" }}>User Name</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={{ color: "gray" }}>@user_login</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ height: "100%", width: "15%", paddingVertical: 10 }}>
-          <Switch
-            value={theme === "dark"}
-            onValueChange={(toggled) => changeTheme(toggled ? "dark" : "light")}
-          />
-        </View>
-      </View>
-      <View style={styles.drawerLinks}>
-        <TouchableOpacity style={styles.drawerButton}>
-          <Ionicons name="people" size={30} />
-          <Text style={styles.drawerButtonText}>Create group</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerButton}>
-          <Ionicons name="settings" size={30} />
-          <Text style={styles.drawerButtonText}>Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerButton}>
-          <Ionicons name="radio" size={30} />
-          <DropDownPicker
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
-          />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-};
+const Drawer = createDrawerNavigator<RootStackParamList>();
 
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerContent={CustomDrawerContent}>
-      <Drawer.Screen name="profile" component={UserScreenStackNavigator} />
+      <Drawer.Screen name="DrawerStack" component={InitialStackNavigator} />
     </Drawer.Navigator>
   );
 };
-const styles = StyleSheet.create({
-  drawerButtonText: { fontSize: 16, paddingLeft: 10 },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 15,
-  },
-  drawerProfile: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-  },
-  drawerLinks: { marginTop: 10 },
-  drawerButtonContainer: {
-    marginVertical: 10,
-  },
-  drawerButton: { flexDirection: "row", alignItems: "center", padding: 10 },
-});
+
 export default DrawerNavigator;

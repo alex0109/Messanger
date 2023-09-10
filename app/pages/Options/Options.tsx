@@ -4,10 +4,10 @@ import Animated, {
   interpolateColor,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import Colors from "../shared/assets/styles/colors";
-import { ThemeContext } from "../shared/lib/providers/ThemeProvider";
+import Colors from "../../shared/assets/styles/colors";
+import { ThemeContext } from "../../shared/lib/providers/ThemeProvider";
 
-const ScreenOne = () => {
+const Options = () => {
   const { themeProgress } = useContext(ThemeContext);
 
   const rStyle = useAnimatedStyle(() => {
@@ -26,9 +26,9 @@ const ScreenOne = () => {
         rStyle,
       ]}
     >
-      <Text style={{ fontSize: 28, fontWeight: "600" }}>Hello</Text>
+      <Text style={{ fontSize: 28, fontWeight: "600" }}>Options</Text>
     </Animated.View>
   );
 };
 
-export default ScreenOne;
+export default Options;

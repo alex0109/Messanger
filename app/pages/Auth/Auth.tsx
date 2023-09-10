@@ -4,10 +4,10 @@ import Animated, {
   interpolateColor,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import Colors from "../shared/assets/styles/colors";
-import { ThemeContext } from "../shared/lib/providers/ThemeProvider";
+import Colors from "../../shared/assets/styles/colors";
+import { ThemeContext } from "../../shared/lib/providers/ThemeProvider";
 
-const ScreenTwo = () => {
+const Auth = () => {
   const { themeProgress, theme, changeTheme } = useContext(ThemeContext);
 
   const rStyle = useAnimatedStyle(() => {
@@ -37,4 +37,4 @@ const ScreenTwo = () => {
   );
 };
 
-export default ScreenTwo;
+export default Auth;
