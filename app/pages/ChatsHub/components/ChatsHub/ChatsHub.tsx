@@ -5,7 +5,7 @@ import { useTypedSelector } from "../../../../shared/lib/hooks/useTypedSelector"
 import { useActions } from "../../../../shared/lib/hooks/useActions";
 
 const ChatsHub = () => {
-  const { chats } = useTypedSelector((state) => state);
+  const chats = useTypedSelector((state) => state.chats);
   const { addChatHandler } = useActions();
 
   return (
@@ -13,7 +13,11 @@ const ChatsHub = () => {
       <Button
         title="Add chat"
         onPress={() =>
-          addChatHandler({ id: "110", userName: "Boba", message: "Hallow" })
+          addChatHandler({
+            id: `${Math.random()}`,
+            userName: "Boba",
+            message: "Hallow",
+          })
         }
       />
       <FlatList
