@@ -112,7 +112,7 @@ const style = StyleSheet.create({
     borderRadius: 20,
     height: 40,
     width: 40,
-    marginLeft: 10,
+    margin: 10,
     justifyContent: "center",
     alignContent: "flex-end",
   },
