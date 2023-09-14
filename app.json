@@ -27,7 +27,8 @@
     "extra": {
       "eas": {
         "projectId": "4d8c8c40-82ff-44ae-8b7f-2c845e625f00"
-      }
+      },
+      "clerkPublishableKey": "pk_test_ZW5nYWdlZC1zbHVnLTUxLmNsZXJrLmFjY291bnRzLmRldiQ"
     },
     "owner": "arios-company"
   }
