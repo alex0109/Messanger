@@ -12,6 +12,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import { store } from "./app/shared/lib/store/store";
 import Constants from "expo-constants";
+import { AuthStackNavigator } from "./app/shared/lib/navigation/StackNavigator";
 
 import SignInScreen from "./app/pages/Auth/SignInScreen";
 
@@ -25,22 +26,14 @@ export default function App() {
           publishableKey={Constants.expoConfig?.extra!.clerkPublishableKey}
           tokenCache={tokenCache}
         >
-          <SignedIn>
-            <NavigationContainer>
+          <NavigationContainer>
+            <SignedIn>
               <DrawerNavigator />
-            </NavigationContainer>
-          </SignedIn>
-          <SignedOut>
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <SignInScreen />
-            </View>
-          </SignedOut>
+            </SignedIn>
+            <SignedOut>
+              <AuthStackNavigator />
+            </SignedOut>
+          </NavigationContainer>
         </ClerkProvider>
       </ThemeProvider>
     </Provider>
