@@ -1,8 +1,9 @@
+import React from "react";
 import { Button, FlatList, SafeAreaView, StyleSheet } from "react-native";
-import React, { useState } from "react";
-import Chat from "../Chat/Chat";
-import { useTypedSelector } from "../../../../shared/lib/hooks/useTypedSelector";
+
 import { useActions } from "../../../../shared/lib/hooks/useActions";
+import { useTypedSelector } from "../../../../shared/lib/hooks/useTypedSelector";
+import Chat from "../Chat/Chat";
 
 const ChatsHub = () => {
   const chats = useTypedSelector((state) => state.chats);

@@ -1,3 +1,5 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   Text,
@@ -6,30 +8,20 @@ import {
   View,
   StyleSheet,
 } from "react-native";
-import { useSignIn } from "@clerk/clerk-expo";
-import { RootStackParamList } from "../../shared/lib/navigation/StackNavigator";
-import { useNavigation } from "@react-navigation/native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import type { RootStackParamList } from "@/shared/lib/navigation/StackNavigator";
 
 export default function SignInScreen() {
-  const { signIn, setActive, isLoaded } = useSignIn();
-
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation<RootStackParamList>();
+
   const [securePassword, setSecurePassword] = useState(true);
+
+  const navigation = useNavigation<RootStackParamList>();
+
   const onSignInPress = async () => {
-    if (!isLoaded) {
-      return;
-    }
-
     try {
-      const completeSignIn = await signIn.create({
-        identifier: emailAddress,
-        password,
-      });
-
-      await setActive({ session: completeSignIn.createdSessionId });
+      console.log("Loged in");
     } catch (err: any) {
       console.log(err);
     }

@@ -1,11 +1,11 @@
-import { Text } from "react-native";
+import Colors from "@shared/assets/styles/colors";
+import { ThemeContext } from "@shared/lib/providers/ThemeProvider";
 import React, { useContext } from "react";
+import { Text } from "react-native";
 import Animated, {
   interpolateColor,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import Colors from "../../shared/assets/styles/colors";
-import { ThemeContext } from "../../shared/lib/providers/ThemeProvider";
 
 const Options = () => {
   const { themeProgress } = useContext(ThemeContext);

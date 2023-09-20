@@ -1,4 +1,5 @@
 // import { StatusBar } from 'expo-status-bar';
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import React from "react";
 import {
   StyleSheet,
@@ -6,13 +7,8 @@ import {
   View,
   Text,
   TextInput,
-  TouchableWithoutFeedback,
   Image,
-  ScrollView,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 
 export function MessageScreen() {
   return (
@@ -21,7 +17,7 @@ export function MessageScreen() {
 
       <View style={style.header}>
         <View style={[{ flex: 1 }, style.fullAlign]}>
-          <AntDesign name="arrowleft" size={24} color="black"></AntDesign>
+          <AntDesign name="arrowleft" size={24} color="black" />
         </View>
         <View style={[{ flex: 1, borderRadius: 90 }, style.fullAlign]}>
           <Image
@@ -56,9 +52,9 @@ export function MessageScreen() {
             multiline
             placeholder="Type type"
             placeholderTextColor={"#747474"}
-          ></TextInput>
+          />
         </View>
-        <View style={style.separator}></View>
+        <View style={style.separator} />
         <View style={[{ flex: 1 }, style.fullAlign]}>
           {/* <Feather name="send" size={24} color="black" /> */}
           <Text style={style.sendText}>Send</Text>

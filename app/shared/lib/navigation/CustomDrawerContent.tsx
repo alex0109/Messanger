@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { ThemeContext } from "../providers/ThemeProvider";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import React, { useContext } from "react";
 import {
   Switch,
   TouchableOpacity,
@@ -9,8 +9,8 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+
+import { ThemeContext } from "../providers/ThemeProvider";
 
 //import DropDownPicker from "react-native-dropdown-picker";
 
