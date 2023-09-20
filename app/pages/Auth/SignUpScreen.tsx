@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   input: {
     width: "90%",
     marginVertical: 10,
-    color: "#FFF",
+    color: "#000",
   },
   inputsContainer: {
     paddingVertical: 20,

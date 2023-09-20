@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-
-//import DropDownPicker from "react-native-dropdown-picker";
+import SignOutButton from "../../../shared/ui/SignOutButton/SignOutButton";
+import UserScreen from "../../../pages/User/Components/UserScreen/userScreen";
 
 const CustomDrawerContent = () => {
   const { theme, changeTheme } = useContext(ThemeContext);
@@ -23,13 +23,13 @@ const CustomDrawerContent = () => {
     <View style={styles.container}>
       <View style={styles.drawerProfile}>
         <View style={{ alignItems: "center", width: "70%" }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => UserScreen()}>
             <Image source={require("../../assets/images/Ellipse.png")} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => UserScreen()}>
             <Text style={{ fontSize: 16, fontWeight: "600" }}>User Name</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => UserScreen()}>
             <Text style={{ color: "gray" }}>@user_login</Text>
           </TouchableOpacity>
         </View>
@@ -62,6 +62,7 @@ const CustomDrawerContent = () => {
           <Ionicons name="settings" size={30} />
           <Text style={styles.drawerButtonText}>Settings</Text>
         </TouchableOpacity>
+        <SignOutButton />
       </View>
     </View>
   );

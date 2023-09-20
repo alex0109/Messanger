@@ -15,6 +15,7 @@ import Constants from "expo-constants";
 import { AuthStackNavigator } from "./app/shared/lib/navigation/StackNavigator";
 
 import SignInScreen from "./app/pages/Auth/SignInScreen";
+import UserScreen from "./app/pages/User/Components/UserScreen/userScreen";
 
 export default function App() {
   return (
@@ -31,7 +32,8 @@ export default function App() {
               <DrawerNavigator />
             </SignedIn>
             <SignedOut>
-              <AuthStackNavigator />
+              {/* <AuthStackNavigator /> */}
+              <UserScreen />
             </SignedOut>
           </NavigationContainer>
         </ClerkProvider>
