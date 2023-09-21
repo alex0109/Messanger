@@ -1,3 +1,4 @@
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -5,9 +6,10 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React, { FC } from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import { truncate } from "../../lib/helpers/truncate";
+
+import type { FC } from "react";
 
 interface ChatProps {
   userName: string;
@@ -16,25 +18,23 @@ interface ChatProps {
 
 const { width } = Dimensions.get("screen");
 
-const Chat: FC<ChatProps> = ({ userName, message }) => {
-  return (
-    <TouchableOpacity>
-      <View style={styles.container}>
-        <TouchableOpacity>
-          <View style={styles.userAvatarContainer}>
-            <View style={styles.userAvatar} />
-          </View>
-        </TouchableOpacity>
-        <View style={styles.userInfoContainer}>
-          <Text style={styles.userInfoName}>{userName}</Text>
-          <View style={styles.userInfoMessageContainer}>
-            <Text>{truncate(message, 70)}</Text>
-          </View>
+const Chat: FC<ChatProps> = ({ userName, message }) => (
+  <TouchableOpacity>
+    <View style={styles.container}>
+      <TouchableOpacity>
+        <View style={styles.userAvatarContainer}>
+          <View style={styles.userAvatar} />
+        </View>
+      </TouchableOpacity>
+      <View style={styles.userInfoContainer}>
+        <Text style={styles.userInfoName}>{userName}</Text>
+        <View style={styles.userInfoMessageContainer}>
+          <Text>{truncate(message, 70)}</Text>
         </View>
       </View>
-    </TouchableOpacity>
-  );
-};
+    </View>
+  </TouchableOpacity>
+);
 
 export default Chat;
 

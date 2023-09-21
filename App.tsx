@@ -1,51 +1,23 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
-
-import { ThemeProvider } from "./app/shared/lib/providers/ThemeProvider";
-
-import tokenCache from "./app/pages/Auth/SignInWithOAuth";
-import SignUpScreen from "./app/pages/Auth/SignUpScreen";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import DrawerNavigator from "./app/shared/lib/navigation/DrawerNavigator";
 import { NavigationContainer } from "@react-navigation/native";
-import { Provider } from "react-redux";
-import { store } from "./app/shared/lib/store/store";
-import Constants from "expo-constants";
-import { AuthStackNavigator } from "./app/shared/lib/navigation/StackNavigator";
+import { ThemeProvider } from "@shared/lib/providers/ThemeProvider";
 
-import SignInScreen from "./app/pages/Auth/SignInScreen";
-import UserScreen from "./app/pages/User/Components/UserScreen/userScreen";
+import { store } from "@shared/lib/store/store";
+import React from "react";
+import { Provider } from "react-redux";
+
+import UserScreen from "@/pages/User/components/UserScreen/UserScreen";
+import DrawerNavigator from "@/shared/lib/navigation/DrawerNavigator";
+import { AuthStackNavigator } from "@/shared/lib/navigation/StackNavigator";
 
 export default function App() {
   return (
     <Provider store={store}>
       <ThemeProvider>
-        {/*  */}
-
-        <ClerkProvider
-          publishableKey={Constants.expoConfig?.extra!.clerkPublishableKey}
-          tokenCache={tokenCache}
-        >
-          <NavigationContainer>
-            <SignedIn>
-              <DrawerNavigator />
-            </SignedIn>
-            <SignedOut>
-              {/* <AuthStackNavigator /> */}
-              <UserScreen />
-            </SignedOut>
-          </NavigationContainer>
-        </ClerkProvider>
+        <NavigationContainer>
+          <DrawerNavigator />
+          {/* <AuthStackNavigator /> */}
+        </NavigationContainer>
       </ThemeProvider>
     </Provider>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

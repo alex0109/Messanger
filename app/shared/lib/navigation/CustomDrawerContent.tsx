@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { ThemeContext } from "../providers/ThemeProvider";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import React, { useContext } from "react";
 import {
   Switch,
   TouchableOpacity,
@@ -9,10 +9,10 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import React from "react";
-import SignOutButton from "../../../shared/ui/SignOutButton/SignOutButton";
-import UserScreen from "../../../pages/User/Components/UserScreen/userScreen";
+
+import SignOutButton from "@/shared/ui/SignOutButton/SignOutButton";
+
+import { ThemeContext } from "../providers/ThemeProvider";
 
 const CustomDrawerContent = () => {
   const { theme, changeTheme } = useContext(ThemeContext);
@@ -23,13 +23,13 @@ const CustomDrawerContent = () => {
     <View style={styles.container}>
       <View style={styles.drawerProfile}>
         <View style={{ alignItems: "center", width: "70%" }}>
-          <TouchableOpacity onPress={() => UserScreen()}>
+          <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
             <Image source={require("../../assets/images/Ellipse.png")} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => UserScreen()}>
+          <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
             <Text style={{ fontSize: 16, fontWeight: "600" }}>User Name</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => UserScreen()}>
+          <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
             <Text style={{ color: "gray" }}>@user_login</Text>
           </TouchableOpacity>
         </View>
@@ -62,7 +62,6 @@ const CustomDrawerContent = () => {
           <Ionicons name="settings" size={30} />
           <Text style={styles.drawerButtonText}>Settings</Text>
         </TouchableOpacity>
-        <SignOutButton />
       </View>
     </View>
   );

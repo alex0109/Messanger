@@ -1,4 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = [
   {
@@ -21,7 +23,7 @@ export const chatsSlice = createSlice({
   reducers: {
     addChatHandler: (
       state,
-      action: PayloadAction<{ id: string; userName: string; message: string }>
+      action: PayloadAction<{ id: string; userName: string; message: string }>,
     ) => {
       state.push({
         id: action.payload.id,

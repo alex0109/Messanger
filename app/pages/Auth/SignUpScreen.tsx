@@ -1,4 +1,6 @@
-import * as React from "react";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
@@ -6,59 +8,27 @@ import {
   View,
   StyleSheet,
 } from "react-native";
-import { useSignUp } from "@clerk/clerk-expo";
-import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../../shared/lib/navigation/StackNavigator";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import type * as StackNavigator from "@shared/lib/navigation/StackNavigator";
 
 export default function SignUpScreen() {
-  const { isLoaded, signUp, setActive } = useSignUp();
-  const navigation = useNavigation<RootStackParamList>();
-  const [emailAddress, setEmailAddress] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [securePassword, setSecurePassword] = React.useState(true);
-  const [secureConfirmPassword, setSecureConfirmPassword] =
-    React.useState(true);
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [pendingVerification, setPendingVerification] = React.useState(false);
-  const [code, setCode] = React.useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [securePassword, setSecurePassword] = useState(true);
+  const [secureConfirmPassword, setSecureConfirmPassword] = useState(true);
+
+  const navigation = useNavigation<StackNavigator.RootStackParamList>();
 
   const onSignUpPress = async () => {
-    if (!isLoaded) {
-      return;
-    }
     if (password !== confirmPassword) {
       return;
     }
     try {
-      await signUp.create({
-        emailAddress,
-        password,
-      });
-
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-
-      setPendingVerification(true);
-      setPassword("");
-      setConfirmPassword("");
+      console.log("Created account");
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
-    }
-  };
-
-  const onPressVerify = async () => {
-    if (!isLoaded) {
-      return;
-    }
-
-    try {
-      const completeSignUp = await signUp.attemptEmailAddressVerification({
-        code,
-      });
-
-      await setActive({ session: completeSignUp.createdSessionId });
-    } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
+      console.log(err);
     }
   };
 
@@ -67,121 +37,92 @@ export default function SignUpScreen() {
       <View style={[styles.registrationTitle]}>
         <Text style={styles.titleText}>Register</Text>
       </View>
-      {!pendingVerification && (
-        <>
-          <View style={styles.registrationBox}>
-            <View style={styles.inputsContainer}>
-              <View style={styles.textInput}>
-                <TextInput
-                  autoCapitalize="none"
-                  value={emailAddress}
-                  placeholder="Email"
-                  onChangeText={(email) => setEmailAddress(email)}
-                  placeholderTextColor="#9D9D9D"
-                  style={styles.input}
-                />
-              </View>
-
-              <View style={styles.textInput}>
-                <TextInput
-                  value={password}
-                  placeholder="Password"
-                  placeholderTextColor="#9D9D9D"
-                  secureTextEntry={securePassword}
-                  onChangeText={(password) => setPassword(password)}
-                  style={styles.input}
-                />
-                <TouchableOpacity
-                  style={styles.eye}
-                  onPress={() => setSecurePassword((state) => !state)}
-                >
-                  {securePassword ? (
-                    <MaterialCommunityIcons
-                      name="eye"
-                      size={25}
-                      color="#D9D9D9"
-                    />
-                  ) : (
-                    <MaterialCommunityIcons
-                      name="eye-off"
-                      size={25}
-                      color="#D9D9D9"
-                    />
-                  )}
-                </TouchableOpacity>
-              </View>
-              <View style={styles.textInput}>
-                <TextInput
-                  value={confirmPassword}
-                  placeholder="Confirm Password"
-                  placeholderTextColor="#9D9D9D"
-                  secureTextEntry={secureConfirmPassword}
-                  onChangeText={(confirmPassword) =>
-                    setConfirmPassword(confirmPassword)
-                  }
-                  style={styles.input}
-                />
-                <TouchableOpacity
-                  style={styles.eye}
-                  onPress={() => setSecureConfirmPassword((state) => !state)}
-                >
-                  {secureConfirmPassword ? (
-                    <MaterialCommunityIcons
-                      name="eye"
-                      size={25}
-                      color="#D9D9D9"
-                    />
-                  ) : (
-                    <MaterialCommunityIcons
-                      name="eye-off"
-                      size={25}
-                      color="#D9D9D9"
-                    />
-                  )}
-                </TouchableOpacity>
-              </View>
-            </View>
-            <TouchableOpacity
-              onPress={onSignUpPress}
-              style={styles.loginButton}
-            >
-              <Text style={styles.loginText}>Create account</Text>
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity style={styles.googleButton}>
-            <Text style={[{ color: "#4285F4" }, styles.googleText]}>G</Text>
-            <Text style={[{ color: "#DB4437" }, styles.googleText]}>o</Text>
-            <Text style={[{ color: "#F4B400" }, styles.googleText]}>o</Text>
-            <Text style={[{ color: "#4285F4" }, styles.googleText]}>g</Text>
-            <Text style={[{ color: "#0F9D58" }, styles.googleText]}>l</Text>
-            <Text style={[{ color: "#DB4437" }, styles.googleText]}>e</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.facebookButton}>
-            <Text style={styles.facebookText}>Facebook</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.createAccountButton}
-            onPress={() => navigation.navigate("SignInStack", {})}
-          >
-            <Text style={styles.createAccountText}>Log in</Text>
-          </TouchableOpacity>
-        </>
-      )}
-      {pendingVerification && (
-        <View>
-          <View>
+      <View style={styles.registrationBox}>
+        <View style={styles.inputsContainer}>
+          <View style={styles.textInput}>
             <TextInput
-              value={code}
-              placeholder="Code"
-              onChangeText={(code) => setCode(code)}
+              autoCapitalize="none"
+              value={emailAddress}
+              placeholder="Email"
+              onChangeText={(email) => setEmailAddress(email)}
+              placeholderTextColor="#9D9D9D"
+              style={styles.input}
             />
           </View>
-          <TouchableOpacity onPress={onPressVerify}>
-            <Text>Verify Email</Text>
-          </TouchableOpacity>
+
+          <View style={styles.textInput}>
+            <TextInput
+              value={password}
+              placeholder="Password"
+              placeholderTextColor="#9D9D9D"
+              secureTextEntry={securePassword}
+              onChangeText={(password) => setPassword(password)}
+              style={styles.input}
+            />
+            <TouchableOpacity
+              style={styles.eye}
+              onPress={() => setSecurePassword((state) => !state)}
+            >
+              {securePassword ? (
+                <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
+              ) : (
+                <MaterialCommunityIcons
+                  name="eye-off"
+                  size={25}
+                  color="#D9D9D9"
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+          <View style={styles.textInput}>
+            <TextInput
+              value={confirmPassword}
+              placeholder="Confirm Password"
+              placeholderTextColor="#9D9D9D"
+              secureTextEntry={secureConfirmPassword}
+              onChangeText={(confirmPassword) =>
+                setConfirmPassword(confirmPassword)
+              }
+              style={styles.input}
+            />
+            <TouchableOpacity
+              style={styles.eye}
+              onPress={() => setSecureConfirmPassword((state) => !state)}
+            >
+              {secureConfirmPassword ? (
+                <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
+              ) : (
+                <MaterialCommunityIcons
+                  name="eye-off"
+                  size={25}
+                  color="#D9D9D9"
+                />
+              )}
+            </TouchableOpacity>
+          </View>
         </View>
-      )}
+        <TouchableOpacity onPress={onSignUpPress} style={styles.loginButton}>
+          <Text style={styles.loginText}>Create account</Text>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity style={styles.googleButton}>
+        <Text style={[{ color: "#4285F4" }, styles.googleText]}>G</Text>
+        <Text style={[{ color: "#DB4437" }, styles.googleText]}>o</Text>
+        <Text style={[{ color: "#F4B400" }, styles.googleText]}>o</Text>
+        <Text style={[{ color: "#4285F4" }, styles.googleText]}>g</Text>
+        <Text style={[{ color: "#0F9D58" }, styles.googleText]}>l</Text>
+        <Text style={[{ color: "#DB4437" }, styles.googleText]}>e</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.facebookButton}>
+        <Text style={styles.facebookText}>Facebook</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.createAccountButton}
+        onPress={() => navigation.navigate("SignInStack", {})}
+      >
+        <Text style={styles.createAccountText}>Log in</Text>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -1,11 +1,12 @@
+import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 
-import ChatsHub from "../../../pages/ChatsHub/components/ChatsHub/ChatsHub";
-import { createStackNavigator } from "@react-navigation/stack";
-import Options from "../../../pages/Options/Options";
-import Auth from "../../../pages/Auth/Auth";
-import SignUpScreen from "../../../pages/Auth/SignUpScreen";
+import UserScreen from "@/pages/User/components/UserScreen/UserScreen";
+
 import SignInScreen from "../../../pages/Auth/SignInScreen";
+import SignUpScreen from "../../../pages/Auth/SignUpScreen";
+import ChatsHub from "../../../pages/ChatsHub/components/ChatsHub/ChatsHub";
+import Options from "../../../pages/Options/Options";
 
 export type RootStackParamList = {
   ChatStack: { name: string };
@@ -14,33 +15,30 @@ export type RootStackParamList = {
   DrawerStack: { name: string };
   SignUpStack: { name: string };
   SignInStack: { name: string };
+  UserStack: { name: string };
 };
 
 const InitialStack = createStackNavigator<RootStackParamList>();
 const AuthStack = createStackNavigator<RootStackParamList>();
 
-const InitialStackNavigator = () => {
-  return (
-    <InitialStack.Navigator
-      initialRouteName="ChatStack"
-      screenOptions={{ headerShown: false }}
-    >
-      <InitialStack.Screen name="ChatStack" component={ChatsHub} />
-      <InitialStack.Screen name="OptionsStack" component={Options} />
-      <InitialStack.Screen name="AuthStack" component={Auth} />
-    </InitialStack.Navigator>
-  );
-};
+const InitialStackNavigator = () => (
+  <InitialStack.Navigator
+    initialRouteName="ChatStack"
+    screenOptions={{ headerShown: false }}
+  >
+    <InitialStack.Screen name="ChatStack" component={ChatsHub} />
+    <InitialStack.Screen name="OptionsStack" component={Options} />
+    <InitialStack.Screen name="UserStack" component={UserScreen} />
+  </InitialStack.Navigator>
+);
 
-const AuthStackNavigator = () => {
-  return (
-    <AuthStack.Navigator
-      initialRouteName="SignInStack"
-      screenOptions={{ headerShown: false }}
-    >
-      <AuthStack.Screen name="SignUpStack" component={SignUpScreen} />
-      <AuthStack.Screen name="SignInStack" component={SignInScreen} />
-    </AuthStack.Navigator>
-  );
-};
+const AuthStackNavigator = () => (
+  <AuthStack.Navigator
+    initialRouteName="SignInStack"
+    screenOptions={{ headerShown: false }}
+  >
+    <AuthStack.Screen name="SignUpStack" component={SignUpScreen} />
+    <AuthStack.Screen name="SignInStack" component={SignInScreen} />
+  </AuthStack.Navigator>
+);
 export { InitialStackNavigator, AuthStackNavigator };
