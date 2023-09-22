@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Image } from "expo-image";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import ChatsHub from "app/pages/ChatsHub/components/ChatsHub/ChatsHub";
 
 const ChatListBase = () => {
   const [isUnread, setIsUnread] = useState(false);
@@ -9,6 +10,7 @@ const ChatListBase = () => {
       style={style.chatItem}
       onPress={() => setIsUnread(!isUnread)}
     >
+      <ChatsHub />
       <View style={style.chatItemBase}>
         <Image
           source="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Red_flag.svg/1200px-Red_flag.svg.png"

@@ -19,7 +19,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <NavigationContainer>
-        <SettingsPage />
+        <ChatListPage />
       </NavigationContainer>
     </ThemeProvider>
   );
