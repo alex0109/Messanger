@@ -1,14 +1,14 @@
-import { View } from "react-native";
+import Colors from "@shared/assets/styles/colors";
+import { ThemeContext } from "@shared/lib/providers/ThemeProvider";
 import React, { useContext } from "react";
+import { Text } from "react-native";
 import Animated, {
   interpolateColor,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import Colors from "../shared/assets/styles/colors";
-import { ThemeContext } from "../shared/lib/providers/ThemeProvider";
 
-const ScreenTwo = () => {
-  const { themeProgress, theme, changeTheme } = useContext(ThemeContext);
+const Options = () => {
+  const { themeProgress } = useContext(ThemeContext);
 
   const rStyle = useAnimatedStyle(() => {
     const backgroundColor = interpolateColor(
@@ -18,6 +18,7 @@ const ScreenTwo = () => {
     );
     return { backgroundColor };
   });
+
   return (
     <Animated.View
       style={[
@@ -25,16 +26,9 @@ const ScreenTwo = () => {
         rStyle,
       ]}
     >
-      <View
-        style={{
-          height: 200,
-          width: 200,
-          backgroundColor: "violet",
-          borderRadius: 100,
-        }}
-      />
+      <Text style={{ fontSize: 28, fontWeight: "600" }}>Options</Text>
     </Animated.View>
   );
 };
 
-export default ScreenTwo;
+export default Options;

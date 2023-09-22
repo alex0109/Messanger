@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React, { createContext, useState, useEffect, useCallback } from "react";
 
+import { useDerivedValue, withTiming } from "react-native-reanimated";
+
 import { save, get } from "../utils/asyncMethods";
 
 import type { FC, ReactNode } from "react";
-import Animated, { useDerivedValue, withTiming } from "react-native-reanimated";
+import type Animated from "react-native-reanimated";
 
 interface ThemeContextType {
   theme: string;
@@ -27,9 +29,10 @@ const ThemeContext = createContext<ThemeContextType>(defaultThemeContext);
 const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState<string>("light");
 
-  const themeProgress = useDerivedValue(() => {
-    return theme === "dark" ? withTiming(1) : withTiming(0);
-  }, [theme]);
+  const themeProgress = useDerivedValue(
+    () => (theme === "dark" ? withTiming(1) : withTiming(0)),
+    [theme]
+  );
 
   const saveTheme = useCallback(async (themeValue: string) => {
     await save("Theme", themeValue);

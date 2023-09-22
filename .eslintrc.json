@@ -1,0 +1,55 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": ["universe/native"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "tsconfigRootDir": ".",
+    "project": ["**/tsconfig.json"],
+    "sourceType": "module"
+  },
+  "plugins": ["react", "react-native", "@typescript-eslint", "import"],
+  "rules": {
+    "quotes": ["error", "double"],
+    "react/prop-types": "off",
+    "jsx-quotes": ["error", "prefer-double"],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
+    "no-console": "warn",
+    "arrow-body-style": ["error", "as-needed"],
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      {
+        "checksVoidReturn": {
+          "attributes": false
+        }
+      }
+    ],
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "prefer": "type-imports" }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@/**/**",
+            "group": "parent",
+            "position": "before"
+          }
+        ],
+        "newlines-between": "always-and-inside-groups",
+        "alphabetize": { "order": "asc" }
+      }
+    ]
+  }
+}
