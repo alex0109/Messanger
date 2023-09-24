@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { Button, FlatList, SafeAreaView, StyleSheet } from "react-native";
 
@@ -6,11 +7,14 @@ import { useTypedSelector } from "../../../../shared/lib/hooks/useTypedSelector"
 import Chat from "../Chat/Chat";
 
 const ChatsHub = () => {
+  const colors = useTheme().colors;
   const chats = useTypedSelector((state) => state.chats);
   const { addChatHandler } = useActions();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: colors.themeColor }]}
+    >
       <Button
         title="Add chat"
         onPress={() =>

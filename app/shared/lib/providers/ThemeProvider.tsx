@@ -1,67 +1,49 @@
-/* eslint-disable no-unused-vars */
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 
-import { useDerivedValue, withTiming } from "react-native-reanimated";
+import type { ReactNode, FC } from "react";
 
-import { save, get } from "../utils/asyncMethods";
-
-import type { FC, ReactNode } from "react";
-import type Animated from "react-native-reanimated";
-
-interface ThemeContextType {
-  theme: string;
-  changeTheme: (newTheme: string) => void;
-  themeProgress: Readonly<Animated.SharedValue<0 | 1>>;
+export type ThemeType = "light" | "dark";
+interface ThemeContextInterface {
+  theme: ThemeType;
+  changeTheme: (newTheme: ThemeType) => void;
 }
-
-const defaultThemeContext: ThemeContextType = {
-  theme: "light",
-  changeTheme: () => {},
-  themeProgress: 0,
-};
-
 interface ThemeProviderProps {
   children: ReactNode;
 }
+const defaultThemeContext: ThemeContextInterface = {
+  theme: "light",
+  changeTheme: () => {},
+};
 
-const ThemeContext = createContext<ThemeContextType>(defaultThemeContext);
+const ThemeContext = createContext<ThemeContextInterface>(defaultThemeContext);
 
 const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<string>("light");
+  const [theme, setTheme] = useState<ThemeType>("light");
 
-  const themeProgress = useDerivedValue(
-    () => (theme === "dark" ? withTiming(1) : withTiming(0)),
-    [theme],
-  );
-
-  const saveTheme = useCallback(async (themeValue: string) => {
-    await save("Theme", themeValue);
+  const saveTheme = useCallback(async (themeValue: ThemeType) => {
+    await AsyncStorage.setItem("Theme", themeValue);
   }, []);
 
   const getTheme = useCallback(async () => {
-    const savedTheme = await get("Theme");
+    const savedTheme = await AsyncStorage.getItem("Theme");
     if (savedTheme) {
       setTheme(savedTheme);
     }
   }, []);
 
   useEffect(() => {
-    void getTheme();
+    getTheme();
   }, [getTheme]);
 
   const changeTheme = useCallback(
-    async (newTheme: string) => {
+    (newTheme: ThemeType) => {
       setTheme(newTheme);
-      await saveTheme(newTheme);
     },
-    [saveTheme],
+    [saveTheme]
   );
 
-  const contextValue = {
-    theme,
-    changeTheme,
-    themeProgress,
-  };
+  const contextValue = { theme, changeTheme };
 
   return (
     <ThemeContext.Provider value={contextValue}>
@@ -69,5 +51,4 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     </ThemeContext.Provider>
   );
 };
-
 export { ThemeContext, ThemeProvider };

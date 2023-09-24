@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
 import {
   Switch,
@@ -10,24 +10,33 @@ import {
   StyleSheet,
 } from "react-native";
 
-import SignOutButton from "@/shared/ui/SignOutButton/SignOutButton";
-
 import { ThemeContext } from "../providers/ThemeProvider";
 
 const CustomDrawerContent = () => {
+  const colors = useTheme().colors;
   const { theme, changeTheme } = useContext(ThemeContext);
 
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-      <View style={styles.drawerProfile}>
+    <View style={[styles.container, { backgroundColor: colors.themeColor }]}>
+      <View
+        style={[styles.drawerProfile, { borderColor: colors.themeColorText }]}
+      >
         <View style={{ alignItems: "center", width: "70%" }}>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
             <Image source={require("../../assets/images/Ellipse.png")} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
-            <Text style={{ fontSize: 16, fontWeight: "600" }}>User Name</Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "600",
+                color: colors.themeColorText,
+              }}
+            >
+              User Name
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
             <Text style={{ color: "gray" }}>@user_login</Text>
@@ -36,7 +45,9 @@ const CustomDrawerContent = () => {
         <View style={{ height: "100%", width: "15%", paddingVertical: 10 }}>
           <Switch
             value={theme === "dark"}
-            onValueChange={(toggled) => changeTheme(toggled ? "dark" : "light")}
+            onValueChange={(toggled) => {
+              changeTheme(toggled ? "dark" : "light");
+            }}
           />
         </View>
       </View>
@@ -45,22 +56,12 @@ const CustomDrawerContent = () => {
           style={styles.drawerButton}
           onPress={() => navigation.navigate("ChatStack", {})}
         >
-          <Ionicons name="home" size={30} />
-          <Text style={styles.drawerButtonText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.drawerButton}
-          onPress={() => navigation.navigate("OptionsStack", {})}
-        >
-          <Ionicons name="people" size={30} />
-          <Text style={styles.drawerButtonText}>Create group</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.drawerButton}
-          onPress={() => navigation.navigate("AuthStack", {})}
-        >
-          <Ionicons name="settings" size={30} />
-          <Text style={styles.drawerButtonText}>Settings</Text>
+          <Ionicons name="home" size={30} color={colors.themeColorText} />
+          <Text
+            style={[styles.drawerButtonText, { color: colors.themeColorText }]}
+          >
+            Home
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
   drawerButtonText: { fontSize: 16, paddingLeft: 10 },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     padding: 15,
   },
   drawerProfile: {

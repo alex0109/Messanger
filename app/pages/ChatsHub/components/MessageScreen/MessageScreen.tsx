@@ -1,5 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
 import { AntDesign, Entypo } from "@expo/vector-icons";
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import {
   StyleSheet,
@@ -9,13 +10,13 @@ import {
   TextInput,
   Image,
 } from "react-native";
-
 export function MessageScreen() {
+  const colors = useTheme().colors;
   return (
-    <View style={{ backgroundColor: "#F1F1F1" }}>
+    <View style={{ backgroundColor: colors.themeColor }}>
       <StatusBar />
 
-      <View style={style.header}>
+      <View style={[style.header, { backgroundColor: colors.themeColor }]}>
         <View style={[{ flex: 1 }, style.fullAlign]}>
           <AntDesign name="arrowleft" size={24} color="black" />
         </View>

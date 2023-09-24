@@ -1,4 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import {
   View,
@@ -7,73 +8,97 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-interface UserScreenProps {
-  userName: string;
-  message: string;
-  avatarUrl: string;
-}
 
-const UserScreen = () => (
-  <ScrollView style={{ flex: 1 }}>
-    <View style={styles.header}>
-      <TouchableOpacity
-        style={{
-          justifyContent: "flex-start",
-        }}
-      >
-        <MaterialCommunityIcons name="arrow-left" size={18} color="white" />
-      </TouchableOpacity>
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <Text style={styles.hederText}>user_name</Text>
-      </View>
-      <TouchableOpacity style={{ justifyContent: "flex-end" }}>
-        <MaterialCommunityIcons name="dots-vertical" size={18} color="white" />
-      </TouchableOpacity>
-    </View>
-    <View style={styles.userAvatarContainer}>
-      <View style={styles.userAvatar} />
-    </View>
-    <View style={{ width: "100%", alignItems: "center" }}>
-      <View style={styles.description}>
-        <Text style={{ fontSize: 13, color: "#9D9D9D" }}>Bio </Text>
-        <Text style={{ fontSize: 16, fontWeight: "500" }}>
-          I love flowers🌸
-        </Text>
-      </View>
-      <View style={styles.friendContainer}>
-        <TouchableOpacity style={styles.openChatButton}>
-          <Text style={styles.buttonText}>Open Chat</Text>
+const UserScreen = () => {
+  const colors = useTheme().colors;
+  return (
+    <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={{
+            justifyContent: "flex-start",
+          }}
+        >
+          <MaterialCommunityIcons name="arrow-left" size={18} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.addFriendsButton}>
-          <Text style={styles.buttonText}>Add Friend</Text>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <Text style={styles.hederText}>user_name</Text>
+        </View>
+        <TouchableOpacity style={{ justifyContent: "flex-end" }}>
+          <MaterialCommunityIcons
+            name="dots-vertical"
+            size={18}
+            color="white"
+          />
         </TouchableOpacity>
       </View>
-      <View style={styles.userList}>
-        <TouchableOpacity>
-          <Text style={styles.userListText}>Messages</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.userListText}>Images</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.userListText}>Voices</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.userListText}>Documents</Text>
-        </TouchableOpacity>
+      <View style={styles.userAvatarContainer}>
+        <View style={styles.userAvatar} />
       </View>
-      <View style={styles.history}>
-        <Text style={styles.historyText}>No history yet</Text>
+      <View style={{ width: "100%", alignItems: "center" }}>
+        <View style={styles.description}>
+          <Text style={{ fontSize: 13, color: "#9D9D9D" }}>Bio </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: "500",
+              color: colors.themeColorText,
+            }}
+          >
+            I love flowers🌸
+          </Text>
+        </View>
+        <View style={styles.friendContainer}>
+          <TouchableOpacity style={styles.openChatButton}>
+            <Text style={styles.buttonText}>Open Chat</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.addFriendsButton}>
+            <Text style={styles.buttonText}>Add Friend</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.userList}>
+          <TouchableOpacity>
+            <Text
+              style={[styles.userListText, { color: colors.themeColorText }]}
+            >
+              Messages
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text
+              style={[styles.userListText, { color: colors.themeColorText }]}
+            >
+              Images
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text
+              style={[styles.userListText, { color: colors.themeColorText }]}
+            >
+              Voices
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text
+              style={[styles.userListText, { color: colors.themeColorText }]}
+            >
+              Documents
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.history}>
+          <Text style={styles.historyText}>No history yet</Text>
+        </View>
       </View>
-    </View>
 
-    <View style={styles.blockButtonContainer}>
-      <TouchableOpacity style={styles.blockButton}>
-        <Text style={styles.blockButtonText}>Block user</Text>
-      </TouchableOpacity>
-    </View>
-  </ScrollView>
-);
+      <View style={styles.blockButtonContainer}>
+        <TouchableOpacity style={styles.blockButton}>
+          <Text style={styles.blockButtonText}>Block user</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+};
 export default UserScreen;
 const styles = StyleSheet.create({
   header: {
