@@ -1,17 +1,15 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-const EmptyChat = () => {
-  return (
-    <View style={style.emptyBlock}>
-      <Text style={style.upperText}>Chat’s clear!</Text>
-      <Text style={style.centerText}>
-        Send your first message to start a dialog ;)
-      </Text>
-      <Text style={style.downText}>wish you good luck</Text>
-    </View>
-  );
-};
+const EmptyChat = () => (
+  <View style={style.emptyBlock}>
+    <Text style={style.upperText}>Chat’s clear!</Text>
+    <Text style={style.centerText}>
+      Send your first message to start a dialog ;)
+    </Text>
+    <Text style={style.downText}>wish you good luck</Text>
+  </View>
+);
 
 const style = StyleSheet.create({
   emptyBlock: {

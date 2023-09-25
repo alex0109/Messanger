@@ -8,21 +8,19 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
-const SettingsHeader = () => {
-  return (
-    <View>
-      <StatusBar backgroundColor={"#5698FB"} barStyle={"dark-content"} />
-      <View style={style.header}>
-        <TouchableOpacity style={style.headerButtons}>
-          <Ionicons name="arrow-back" size={25} color="black" />
-        </TouchableOpacity>
-        <TouchableOpacity style={style.headerButtons}>
-          <Text style={style.saveBtn}>Save</Text>
-        </TouchableOpacity>
-      </View>
+const SettingsHeader = () => (
+  <View>
+    <StatusBar backgroundColor={"#5698FB"} barStyle={"dark-content"} />
+    <View style={style.header}>
+      <TouchableOpacity style={style.headerButtons}>
+        <Ionicons name="arrow-back" size={25} color="black" />
+      </TouchableOpacity>
+      <TouchableOpacity style={style.headerButtons}>
+        <Text style={style.saveBtn}>Save</Text>
+      </TouchableOpacity>
     </View>
-  );
-};
+  </View>
+);
 
 const style = StyleSheet.create({
   header: {

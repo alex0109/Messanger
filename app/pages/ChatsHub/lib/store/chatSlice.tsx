@@ -1,4 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = [
   {
@@ -6,12 +8,14 @@ const initialState = [
     userName: "User1",
     message:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+    archived: false,
   },
   {
     id: "2",
     userName: "User2",
     message:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
+    archived: false,
   },
 ];
 
@@ -27,10 +31,18 @@ export const chatsSlice = createSlice({
         id: action.payload.id,
         userName: action.payload.userName,
         message: action.payload.message,
+        archived: false,
       });
     },
-    deleteChatHandler: () => {},
-    archiveChatHandler: () => {},
+    deleteChatHandler: (state, action: PayloadAction<{ id: string }>) =>
+      state.filter((item) => item.id !== action.payload.id),
+    archiveChatHandler: (state, action: PayloadAction<{ id: string }>) =>
+      state.map((item) => {
+        if (item.id == action.payload.id) {
+          return { ...item, archived: !item.archived };
+        }
+        return item;
+      }),
   },
 });
 

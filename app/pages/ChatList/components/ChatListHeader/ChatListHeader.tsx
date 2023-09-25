@@ -8,8 +8,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-const ChatListHeader = () => {
-  return (
+const ChatListHeader = () => (
     <View>
       <StatusBar
         backgroundColor={"#5698FB"}
@@ -38,7 +37,6 @@ const ChatListHeader = () => {
       </View>
     </View>
   );
-};
 
 const style = StyleSheet.create({
   headerBar: {

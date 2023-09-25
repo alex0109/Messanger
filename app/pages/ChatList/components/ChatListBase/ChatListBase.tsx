@@ -1,19 +1,46 @@
-import React, { useState } from "react";
-import { Image } from "expo-image";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import ChatsHub from "app/pages/ChatsHub/components/ChatsHub/ChatsHub";
+import type { FC } from "react";
+import React, { useState, Component } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import ChatsHub from "@/pages/ChatsHub/components/ChatsHub/ChatsHub";
+import { useActions } from "@/shared/lib/hooks/useActions";
+import { useTypedSelector } from "@/shared/lib/hooks/useTypedSelector";
 
-const ChatListBase = () => {
+interface ChatListBaseProps {
+  id: string;
+  userName: string;
+  message: string;
+  archived: boolean;
+}
+const ChatListBase: FC<ChatListBaseProps> = ({
+  id,
+  userName,
+  message,
+  archived,
+}) => {
   const [isUnread, setIsUnread] = useState(false);
+  const navigation = useNavigation();
+  const chats = useTypedSelector((state) => state.chats);
+  const { deleteChatHandler, addChatHandler, archiveChatHandler } =
+    useActions();
+  const [isArchived, setIsArchived] = useState(archived);
+  const handleClick = () => {
+    archiveChatHandler({ id: id });
+    setIsArchived(!isArchived);
+  };
+
   return (
     <TouchableOpacity
-      style={style.chatItem}
-      onPress={() => setIsUnread(!isUnread)}
+      style={[
+        style.chatItem,
+        { backgroundColor: isArchived ? "mediumslateblue" : "transparent" },
+      ]}
+      onPress={() => navigation.navigate("DialogStack", {})}
+      onLongPress={() => handleClick()}
     >
-      <ChatsHub />
       <View style={style.chatItemBase}>
         <Image
-          source="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Red_flag.svg/1200px-Red_flag.svg.png"
+          source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
           style={style.chatItemUserAvatar}
         ></Image>
         <View
@@ -22,19 +49,14 @@ const ChatListBase = () => {
             width: "74%",
           }}
         >
-          <Text style={style.chatItemUserName}>Oleg</Text>
+          <Text style={style.chatItemUserName}>{userName}</Text>
           <Text style={style.chatItemText} numberOfLines={2}>
-            LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem
+            {isArchived ? "archived" : "none"}
           </Text>
         </View>
       </View>
       <Text style={style.chatItemTime}>11:30</Text>
-      <View
-        style={[
-          style.chatItemUnreadedMsg,
-          { height: isUnread ? 0 : 20, width: isUnread ? 0 : 20 },
-        ]}
-      >
+      <View style={[style.chatItemUnreadedMsg]}>
         <Text
           allowFontScaling={true}
           adjustsFontSizeToFit={true}
@@ -50,8 +72,9 @@ const ChatListBase = () => {
 const style = StyleSheet.create({
   chatItem: {
     marginTop: 5,
+    marginBottom: 5,
     paddingRight: 10,
-    marginLeft: 10,
+    paddingLeft: 10,
     width: "100%",
     height: 92,
     flexDirection: "column",
@@ -60,6 +83,7 @@ const style = StyleSheet.create({
   chatItemUnreadedMsg: {
     flex: 0,
     zIndex: 1,
+    left: 8,
     position: "absolute",
     height: 20,
     width: 20,
@@ -78,7 +102,7 @@ const style = StyleSheet.create({
   chatItemBase: {
     marginTop: 10,
     width: "96%",
-    height: 70,
+    height: 65,
     backgroundColor: "#C6E0FE",
     borderRadius: 10,
     flexDirection: "row",

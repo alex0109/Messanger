@@ -5,6 +5,8 @@ import SignInScreen from "../../../pages/Auth/SignInScreen";
 import SignUpScreen from "../../../pages/Auth/SignUpScreen";
 import ChatsHub from "../../../pages/ChatsHub/components/ChatsHub/ChatsHub";
 import Options from "../../../pages/Options/Options";
+import ChatListBase from "@/pages/ChatList/components/ChatListBase/ChatListBase";
+import { MessageScreen } from "@/pages/ChatsHub/components/MessageScreen/MessageScreen";
 
 export type RootStackParamList = {
   ChatStack: { name: string };
@@ -13,6 +15,7 @@ export type RootStackParamList = {
   DrawerStack: { name: string };
   SignUpStack: { name: string };
   SignInStack: { name: string };
+  DialogStack: { name: string };
 };
 
 const InitialStack = createStackNavigator<RootStackParamList>();
@@ -23,7 +26,14 @@ const InitialStackNavigator = () => (
     initialRouteName="ChatStack"
     screenOptions={{ headerShown: false }}
   >
-    <InitialStack.Screen name="ChatStack" component={ChatsHub} />
+    <InitialStack.Screen
+      name="ChatStack"
+      component={ChatListPage}
+      options={{
+        headerStyle: { backgroundColor: "green", height: 100, width: 100 },
+      }}
+    />
+    <InitialStack.Screen name="DialogStack" component={MessageScreen} />
     <InitialStack.Screen name="OptionsStack" component={Options} />
   </InitialStack.Navigator>
 );

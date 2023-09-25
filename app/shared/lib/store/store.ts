@@ -6,10 +6,12 @@ import { persistStore, persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 
 import { chatsReducer } from "../../../pages/ChatsHub/lib/store/chatSlice";
+import { dialogReducer } from "@/pages/ChatsHub/lib/store/dialogSlice";
 
 const rootReducer = combineReducers({
   //slice: sliceReducer
   chats: chatsReducer,
+  dialogs: dialogReducer,
 });
 
 const store = configureStore({
