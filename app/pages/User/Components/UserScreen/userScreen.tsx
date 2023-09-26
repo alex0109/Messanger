@@ -13,7 +13,7 @@ const UserScreen = () => {
   const colors = useTheme().colors;
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-      <View style={styles.header}>
+      <View style={[styles.header, { backgroundColor: colors.blue }]}>
         <TouchableOpacity
           style={{
             justifyContent: "flex-start",
@@ -37,7 +37,7 @@ const UserScreen = () => {
       </View>
       <View style={{ width: "100%", alignItems: "center" }}>
         <View style={styles.description}>
-          <Text style={{ fontSize: 13, color: "#9D9D9D" }}>Bio </Text>
+          <Text style={{ fontSize: 13, color: colors.grayDark }}>Bio </Text>
           <Text
             style={{
               fontSize: 16,
@@ -48,12 +48,20 @@ const UserScreen = () => {
             I love flowers🌸
           </Text>
         </View>
-        <View style={styles.friendContainer}>
-          <TouchableOpacity style={styles.openChatButton}>
-            <Text style={styles.buttonText}>Open Chat</Text>
+        <View
+          style={[styles.friendContainer, { borderColor: colors.grayDark }]}
+        >
+          <TouchableOpacity
+            style={[styles.openChatButton, { backgroundColor: colors.blue }]}
+          >
+            <Text style={[styles.buttonText, { color: colors.whiter }]}>
+              Open Chat
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.addFriendsButton}>
-            <Text style={styles.buttonText}>Add Friend</Text>
+            <Text style={[styles.buttonText, { color: colors.whiter }]}>
+              Add Friend
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.userList}>
@@ -87,12 +95,16 @@ const UserScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.history}>
-          <Text style={styles.historyText}>No history yet</Text>
+          <Text style={[styles.historyText, { color: colors.grayDark }]}>
+            No history yet
+          </Text>
         </View>
       </View>
 
       <View style={styles.blockButtonContainer}>
-        <TouchableOpacity style={styles.blockButton}>
+        <TouchableOpacity
+          style={[styles.blockButton, { borderColor: colors.grayDark }]}
+        >
           <Text style={styles.blockButtonText}>Block user</Text>
         </TouchableOpacity>
       </View>
@@ -104,7 +116,6 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#4891FF",
     width: "100%",
     height: 51,
     paddingHorizontal: 10,
@@ -137,11 +148,9 @@ const styles = StyleSheet.create({
     paddingBottom: 18,
     borderBottomWidth: 1,
     borderTopWidth: 1,
-    borderColor: "#9D9D9D",
   },
   openChatButton: {
     width: "80%",
-    backgroundColor: "#4891FF",
     borderRadius: 30,
     height: 40,
     marginBottom: 9,
@@ -157,7 +166,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    color: "white",
     fontWeight: "700",
     fontSize: 16,
   },
@@ -182,7 +190,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   historyText: {
-    color: "#9D9D9D",
     fontWeight: "500",
     fontSize: 20,
   },
@@ -194,7 +201,6 @@ const styles = StyleSheet.create({
   blockButton: {
     alignItems: "center",
     borderTopWidth: 1,
-    borderColor: "#9D9D9D",
     width: "80%",
   },
   blockButtonText: {

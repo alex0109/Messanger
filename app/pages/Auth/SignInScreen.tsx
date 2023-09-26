@@ -37,50 +37,59 @@ export default function SignInScreen() {
       </View>
       <View style={styles.registrationBox}>
         <View style={styles.inputsContainer}>
-          <View style={styles.textInput}>
+          <View style={[styles.textInput, { borderColor: colors.grayDark }]}>
             <TextInput
               autoCapitalize="none"
               value={emailAddress}
-              placeholderTextColor="#9D9D9D"
+              placeholderTextColor={colors.grayDark}
               placeholder="Email"
               onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-              style={styles.input}
+              style={[styles.input, { color: colors.whiter }]}
             />
           </View>
 
-          <View style={styles.textInput}>
+          <View style={[styles.textInput, { borderColor: colors.grayDark }]}>
             <TextInput
               value={password}
               placeholder="Password"
-              placeholderTextColor="#9D9D9D"
+              placeholderTextColor={colors.grayDark}
               secureTextEntry={securePassword}
               onChangeText={(password) => setPassword(password)}
-              style={styles.input}
+              style={[styles.input, { color: colors.whiter }]}
             />
             <TouchableOpacity
               style={styles.eye}
               onPress={() => setSecurePassword((state) => !state)}
             >
               {securePassword ? (
-                <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
+                <MaterialCommunityIcons
+                  name="eye"
+                  size={25}
+                  color={colors.grayLight}
+                />
               ) : (
                 <MaterialCommunityIcons
                   name="eye-off"
                   size={25}
-                  color="#D9D9D9"
+                  color={colors.grayLight}
                 />
               )}
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity onPress={onSignInPress} style={styles.loginButton}>
+        <TouchableOpacity
+          onPress={onSignInPress}
+          style={[styles.loginButton, { backgroundColor: colors.whiter }]}
+        >
           <Text style={styles.loginText}>Log in</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.forgotPasswordButton}>
         <Text style={styles.forgotPasswordText}>Forgot password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.googleButton}>
+      <TouchableOpacity
+        style={[styles.googleButton, { backgroundColor: colors.whiter }]}
+      >
         <Text style={[{ color: "#4285F4" }, styles.googleText]}>G</Text>
         <Text style={[{ color: "#DB4437" }, styles.googleText]}>o</Text>
         <Text style={[{ color: "#F4B400" }, styles.googleText]}>o</Text>
@@ -88,7 +97,9 @@ export default function SignInScreen() {
         <Text style={[{ color: "#0F9D58" }, styles.googleText]}>l</Text>
         <Text style={[{ color: "#DB4437" }, styles.googleText]}>e</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.facebookButton}>
+      <TouchableOpacity
+        style={[styles.facebookButton, { backgroundColor: colors.whiter }]}
+      >
         <Text style={styles.facebookText}>Facebook</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -114,7 +125,6 @@ const styles = StyleSheet.create({
     width: "85%",
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderColor: "#9D9D9D",
   },
   registrationBox: {
     borderRadius: 30,
@@ -137,7 +147,6 @@ const styles = StyleSheet.create({
   input: {
     width: "90%",
     marginVertical: 10,
-    color: "#000",
   },
   inputsContainer: {
     paddingVertical: 20,
@@ -150,7 +159,6 @@ const styles = StyleSheet.create({
   loginButton: {
     width: "80%",
     height: 48,
-    backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
     marginVertical: 15,
@@ -163,7 +171,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "80%",
     height: 48,
-    backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 15,
@@ -174,7 +181,6 @@ const styles = StyleSheet.create({
   facebookButton: {
     width: "80%",
     height: 48,
-    backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 17,

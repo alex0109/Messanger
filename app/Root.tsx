@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import Colors from "@shared/assets/styles/colors";
 import { AuthStackNavigator } from "@shared/lib/navigation/StackNavigator";
+import DrawerNavigator from "@shared/lib/navigation/DrawerNavigator";
 import { ThemeContext } from "@shared/lib/providers/ThemeProvider";
 import React, { useContext } from "react";
 
