@@ -1,23 +1,19 @@
 /* eslint-disable no-unused-vars */
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useState, useEffect, useCallback } from "react";
 
-import { useDerivedValue, withTiming } from "react-native-reanimated";
-
-import { save, get } from "../utils/asyncMethods";
-
 import type { FC, ReactNode } from "react";
-import type Animated from "react-native-reanimated";
 
 interface ThemeContextType {
-  theme: string;
-  changeTheme: (newTheme: string) => void;
-  themeProgress: Readonly<Animated.SharedValue<0 | 1>>;
+  theme: "light" | "dark";
+  themeIndex: number;
+  changeTheme: (newTheme: "light" | "dark", newIndex: number) => void;
 }
 
 const defaultThemeContext: ThemeContextType = {
   theme: "light",
+  themeIndex: 2,
   changeTheme: () => {},
-  themeProgress: 0,
 };
 
 interface ThemeProviderProps {
@@ -27,21 +23,25 @@ interface ThemeProviderProps {
 const ThemeContext = createContext<ThemeContextType>(defaultThemeContext);
 
 const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<string>("light");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [themeIndex, setThemeIndex] = useState<number>(2);
 
-  const themeProgress = useDerivedValue(
-    () => (theme === "dark" ? withTiming(1) : withTiming(0)),
-    [theme]
-  );
+  const saveTheme = useCallback(async (themeValue: "light" | "dark") => {
+    await AsyncStorage.setItem("Theme", themeValue);
+  }, []);
 
-  const saveTheme = useCallback(async (themeValue: string) => {
-    await save("Theme", themeValue);
+  const saveThemeIndex = useCallback(async (index: number) => {
+    await AsyncStorage.setItem("ThemeIndex", String(index));
   }, []);
 
   const getTheme = useCallback(async () => {
-    const savedTheme = await get("Theme");
+    const savedTheme = await AsyncStorage.getItem("Theme");
+    const savedThemeIndex = await AsyncStorage.getItem("ThemeIndex");
     if (savedTheme) {
       setTheme(savedTheme);
+    }
+    if (savedThemeIndex) {
+      setThemeIndex(Number(savedThemeIndex));
     }
   }, []);
 
@@ -50,17 +50,19 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   }, [getTheme]);
 
   const changeTheme = useCallback(
-    async (newTheme: string) => {
+    (newTheme: "light" | "dark", newIndex: number) => {
       setTheme(newTheme);
-      await saveTheme(newTheme);
+      setThemeIndex(newIndex);
+      saveTheme(newTheme);
+      saveThemeIndex(newIndex);
     },
-    [saveTheme]
+    [saveTheme, saveThemeIndex]
   );
 
   const contextValue = {
     theme,
+    themeIndex,
     changeTheme,
-    themeProgress,
   };
 
   return (

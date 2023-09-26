@@ -1,5 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import React, { useState } from "react";
 import {
   Text,
@@ -7,23 +9,38 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 
 import type { RootStackParamList } from "@/shared/lib/navigation/StackNavigator";
 
+const url = process.env.EXPO_PUBLIC_LOCAL_URL;
+
 export default function SignInScreen() {
-  const [emailAddress, setEmailAddress] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [securePassword, setSecurePassword] = useState(true);
 
   const navigation = useNavigation<RootStackParamList>();
 
   const onSignInPress = async () => {
+    setLoading(true);
     try {
-      console.log("Loged in");
+      const user = {
+        email,
+        password,
+      };
+
+      const response = await axios.post(`${url}/login`, user);
+      const token = response.data.token;
+      AsyncStorage.setItem("authToken", token);
+      console.log(token);
     } catch (err: any) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,10 +54,10 @@ export default function SignInScreen() {
           <View style={styles.textInput}>
             <TextInput
               autoCapitalize="none"
-              value={emailAddress}
+              value={email}
               placeholderTextColor="#9D9D9D"
               placeholder="Email"
-              onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
+              onChangeText={(emailAddress) => setEmail(emailAddress)}
               style={styles.input}
             />
           </View>
@@ -58,19 +75,27 @@ export default function SignInScreen() {
               onPress={() => setSecurePassword((state) => !state)}
             >
               {securePassword ? (
-                <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
+                <MaterialCommunityIcons name="eye" size={25} color="white" />
               ) : (
                 <MaterialCommunityIcons
                   name="eye-off"
                   size={25}
-                  color="#D9D9D9"
+                  color="white"
                 />
               )}
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity onPress={onSignInPress} style={styles.loginButton}>
-          <Text style={styles.loginText}>Log in</Text>
+        <TouchableOpacity
+          disabled={loading}
+          onPress={() => onSignInPress()}
+          style={styles.loginButton}
+        >
+          {!loading ? (
+            <Text style={[styles.loginText]}>Log in</Text>
+          ) : (
+            <ActivityIndicator color="#2E84E8" size={30} />
+          )}
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.forgotPasswordButton}>
@@ -152,7 +177,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     borderRadius: 30,
   },
-  loginText: { color: "#2E84E8", fontSize: 20, fontWeight: "600" },
+  loginText: { fontSize: 20, fontWeight: "600", color: "#2E84E8" },
   forgotPasswordButton: { marginVertical: 18 },
   forgotPasswordText: { fontWeight: "500", fontSize: 16, color: "#2E84E8" },
   googleButton: {

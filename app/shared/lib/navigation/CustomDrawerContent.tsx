@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import React, { useContext } from "react";
 import {
@@ -57,10 +58,10 @@ const CustomDrawerContent = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
-          onPress={() => navigation.navigate("AuthStack", {})}
+          onPress={() => AsyncStorage.removeItem("authToken", undefined)}
         >
           <Ionicons name="settings" size={30} />
-          <Text style={styles.drawerButtonText}>Settings</Text>
+          <Text style={styles.drawerButtonText}>Remove jwt</Text>
         </TouchableOpacity>
       </View>
     </View>

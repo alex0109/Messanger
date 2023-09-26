@@ -1,10 +1,13 @@
-import mongoose, { ConnectOptions } from "mongoose";
-import express from "express";
-import cors from "cors";
 import bodyParser from "body-parser";
-import passport from "passport";
-import { User } from "./models/user";
+import cors from "cors";
+import express from "express";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+import passport from "passport";
+
+import { User } from "./models/user";
+
+import type { ConnectOptions } from "mongoose";
 
 const app = express();
 const port = 8000;
@@ -29,7 +32,7 @@ app.listen(port, "0.0.0.0", () => {
   console.log("Server running on", port);
 });
 
-const createToken = (userId: string) => {
+const createToken = (userId: mongoose.Types.ObjectId) => {
   const payload = {
     userId,
   };
@@ -75,7 +78,9 @@ app.post("/login", (req, res) => {
       }
 
       const token = createToken(user._id);
-      res.status(200).json({ token });
+      setTimeout(() => {
+        res.status(200).json({ token });
+      }, 1000);
     })
     .catch((error) => {
       console.log("error in finding the user", error);

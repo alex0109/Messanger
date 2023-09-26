@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, FlatList, SafeAreaView, StyleSheet } from "react-native";
+
+import { ThemeContext } from "@/shared/lib/providers/ThemeProvider";
 
 import { useActions } from "../../../../shared/lib/hooks/useActions";
 import { useTypedSelector } from "../../../../shared/lib/hooks/useTypedSelector";
@@ -10,7 +12,7 @@ const ChatsHub = () => {
   const { addChatHandler } = useActions();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container]}>
       <Button
         title="Add chat"
         onPress={() =>
