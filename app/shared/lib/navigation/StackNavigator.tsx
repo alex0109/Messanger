@@ -18,7 +18,7 @@ import type { FC } from "react";
 
 export type RootStackParamList = {
   ChatStack: { name: string };
-  OptionsStack: { name: string };
+  SettingsStack: { name: string };
   AuthStack: { name: string };
   DrawerStack: { name: string };
   SignUpStack: { name: string };
@@ -50,7 +50,7 @@ const InitialStackNavigator = () => (
       options={{ header: () => <UserScreenHeader /> }}
     />
     <InitialStack.Screen
-      name="OptionsStack"
+      name="SettingsStack"
       component={SettingsPage}
       options={{ header: () => <SettingsHeader /> }}
     />

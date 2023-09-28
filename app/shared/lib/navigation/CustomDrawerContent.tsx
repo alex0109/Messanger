@@ -78,6 +78,13 @@ const CustomDrawerContent: FC = () => {
           <Ionicons name="settings" size={30} />
           <Text style={styles.drawerButtonText}>Dialog</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.drawerButton}
+          onPress={() => navigation.navigate("SettingsStack", {})}
+        >
+          <Ionicons name="settings" size={30} />
+          <Text style={styles.drawerButtonText}>Settings</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
