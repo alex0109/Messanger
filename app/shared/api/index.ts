@@ -23,7 +23,7 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    } as ConnectOptions
+    } as ConnectOptions,
   )
   .then(() => console.log("Connected successfully!"))
   .catch((error) => console.log(error));

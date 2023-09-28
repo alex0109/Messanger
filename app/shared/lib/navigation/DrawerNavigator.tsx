@@ -9,7 +9,7 @@ import type { FC } from "react";
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
 
-const DrawerNavigator: FC = () => (
+const DrawerNavigator = () => (
   <Drawer.Navigator
     drawerContent={CustomDrawerContent}
     screenOptions={{ headerShown: false }}

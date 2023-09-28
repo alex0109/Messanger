@@ -1,6 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import React, { useState } from "react";
 import {
   Text,
@@ -8,15 +7,12 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  Alert,
 } from "react-native";
 
 import type * as StackNavigator from "@shared/lib/navigation/StackNavigator";
 
-const url = process.env.EXPO_PUBLIC_LOCAL_URL;
-
 export default function SignUpScreen() {
-  const [email, setEmail] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -30,17 +26,9 @@ export default function SignUpScreen() {
       return;
     }
     try {
-      const user = {
-        email,
-        password,
-      };
-
-      await axios.post(`${url}/register`, user).then(() => {
-        Alert.alert("Successfully registered✅");
-      });
+      console.log("Created account");
     } catch (err: any) {
       console.log(err);
-      Alert.alert("Error while registring⛔️");
     }
   };
 
@@ -54,9 +42,9 @@ export default function SignUpScreen() {
           <View style={styles.textInput}>
             <TextInput
               autoCapitalize="none"
-              value={email}
+              value={emailAddress}
               placeholder="Email"
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={(email) => setEmailAddress(email)}
               placeholderTextColor="#9D9D9D"
               style={styles.input}
             />
@@ -76,12 +64,12 @@ export default function SignUpScreen() {
               onPress={() => setSecurePassword((state) => !state)}
             >
               {securePassword ? (
-                <MaterialCommunityIcons name="eye" size={25} color="white" />
+                <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
               ) : (
                 <MaterialCommunityIcons
                   name="eye-off"
                   size={25}
-                  color="white"
+                  color="#D9D9D9"
                 />
               )}
             </TouchableOpacity>
@@ -102,12 +90,12 @@ export default function SignUpScreen() {
               onPress={() => setSecureConfirmPassword((state) => !state)}
             >
               {secureConfirmPassword ? (
-                <MaterialCommunityIcons name="eye" size={25} color="white" />
+                <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
               ) : (
                 <MaterialCommunityIcons
                   name="eye-off"
                   size={25}
-                  color="white"
+                  color="#D9D9D9"
                 />
               )}
             </TouchableOpacity>
