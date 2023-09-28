@@ -1,4 +1,3 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import React from "react";
 import {
@@ -9,30 +8,14 @@ import {
   ScrollView,
 } from "react-native";
 
-const UserScreen = () => {
+import type { FC } from "react";
+
+const UserScreen: FC = () => {
   const colors = useTheme().colors;
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-      <View style={[styles.header, { backgroundColor: colors.blue }]}>
-        <TouchableOpacity
-          style={{
-            justifyContent: "flex-start",
-          }}
-        >
-          <MaterialCommunityIcons name="arrow-left" size={18} color="white" />
-        </TouchableOpacity>
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <Text style={styles.hederText}>user_name</Text>
-        </View>
-        <TouchableOpacity style={{ justifyContent: "flex-end" }}>
-          <MaterialCommunityIcons
-            name="dots-vertical"
-            size={18}
-            color="white"
-          />
-        </TouchableOpacity>
-      </View>
       <View style={styles.userAvatarContainer}>
+        {/* Это должга быть картинка а не просто view */}
         <View style={styles.userAvatar} />
       </View>
       <View style={{ width: "100%", alignItems: "center" }}>
@@ -49,51 +32,68 @@ const UserScreen = () => {
           </Text>
         </View>
         <View
-          style={[styles.friendContainer, { borderColor: colors.grayDark }]}
+          style={[styles.buttonsContainer, { borderColor: colors.grayDark }]}
         >
           <TouchableOpacity
-            style={[styles.openChatButton, { backgroundColor: colors.blue }]}
+            style={[styles.button, { backgroundColor: colors.blue }]}
           >
             <Text style={[styles.buttonText, { color: colors.whiter }]}>
               Open Chat
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.addFriendsButton}>
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: colors.success }]}
+          >
             <Text style={[styles.buttonText, { color: colors.whiter }]}>
               Add Friend
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.userList}>
+        <View style={styles.chatHistoryButtonsContainer}>
           <TouchableOpacity>
             <Text
-              style={[styles.userListText, { color: colors.themeColorText }]}
+              style={[
+                styles.chatHistoryButtonText,
+                { color: colors.themeColorText },
+              ]}
             >
               Messages
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text
-              style={[styles.userListText, { color: colors.themeColorText }]}
+              style={[
+                styles.chatHistoryButtonText,
+                { color: colors.themeColorText },
+              ]}
             >
               Images
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text
-              style={[styles.userListText, { color: colors.themeColorText }]}
+              style={[
+                styles.chatHistoryButtonText,
+                { color: colors.themeColorText },
+              ]}
             >
               Voices
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text
-              style={[styles.userListText, { color: colors.themeColorText }]}
+              style={[
+                styles.chatHistoryButtonText,
+                { color: colors.themeColorText },
+              ]}
             >
               Documents
             </Text>
           </TouchableOpacity>
         </View>
+
+        {/* В будущем историю нужно будет отделить в отдельную компоненту */}
+        {/* для каждого вида истории нужна будет своя компонента */}
         <View style={styles.history}>
           <Text style={[styles.historyText, { color: colors.grayDark }]}>
             No history yet
@@ -111,63 +111,14 @@ const UserScreen = () => {
     </ScrollView>
   );
 };
+
 export default UserScreen;
+
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    height: 51,
-    paddingHorizontal: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    justifyContent: "center",
-  },
-  hederText: {
-    justifyContent: "center",
-    textAlign: "center",
-    color: "white",
-    fontWeight: "600",
-    fontSize: 18,
-  },
   userAvatarContainer: {
     justifyContent: "center",
     alignItems: "center",
     marginVertical: 37,
-  },
-  description: {
-    width: "80%",
-    marginVertical: 10,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  friendContainer: {
-    alignItems: "center",
-    width: "80%",
-    paddingTop: 18,
-    paddingBottom: 18,
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-  },
-  openChatButton: {
-    width: "80%",
-    borderRadius: 30,
-    height: 40,
-    marginBottom: 9,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  addFriendsButton: {
-    width: "80%",
-    backgroundColor: "#4ACD86",
-    borderRadius: 30,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    fontWeight: "700",
-    fontSize: 16,
   },
   userAvatar: {
     height: 207,
@@ -175,12 +126,47 @@ const styles = StyleSheet.create({
     backgroundColor: "#A1C9DA",
     borderRadius: 180,
   },
-  userList: {
+  description: {
+    width: "80%",
+    marginVertical: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  buttonsContainer: {
+    alignItems: "center",
+    width: "80%",
+    paddingTop: 18,
+    paddingBottom: 18,
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+  },
+  button: {
+    width: "80%",
+    borderRadius: 30,
+    height: 40,
+    marginBottom: 9,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  // Лишний стиль, кнопки одинаковые, не надо дублироваться
+  // addFriendsButton: {
+  //   width: "80%",
+  //   backgroundColor: "#4ACD86",
+  //   borderRadius: 30,
+  //   height: 40,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
+  buttonText: {
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  chatHistoryButtonsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     width: "80%",
   },
-  userListText: {
+  chatHistoryButtonText: {
     fontSize: 16,
     fontWeight: "700",
   },

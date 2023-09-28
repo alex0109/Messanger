@@ -51,16 +51,16 @@ const CustomDrawerContent = () => {
           />
         </View>
       </View>
-      <View style={styles.drawerLinks}>
+      <View style={styles.drawerLinks}></View>
         <TouchableOpacity
           style={styles.drawerButton}
-          onPress={() => navigation.navigate("ChatStack", {})}
+          onPress={() => navigation.navigate("UserStack", {})}
         >
           <Ionicons name="home" size={30} color={colors.themeColorText} />
           <Text
             style={[styles.drawerButtonText, { color: colors.themeColorText }]}
           >
-            Home
+            User
           </Text>
         </TouchableOpacity>
       </View>

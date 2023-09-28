@@ -1,8 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 
 import Colors from "@shared/assets/styles/colors";
-import { AuthStackNavigator } from "@shared/lib/navigation/StackNavigator";
 import DrawerNavigator from "@shared/lib/navigation/DrawerNavigator";
+import { AuthStackNavigator } from "@shared/lib/navigation/StackNavigator";
 import { ThemeContext } from "@shared/lib/providers/ThemeProvider";
 import React, { useContext } from "react";
 
@@ -21,8 +21,8 @@ export default function Root() {
 
   return (
     <NavigationContainer theme={currentTheme(theme)}>
-      {/* <DrawerNavigator /> */}
-      <AuthStackNavigator />
+      <DrawerNavigator />
+      {/* <AuthStackNavigator /> */}
     </NavigationContainer>
   );
 }

@@ -1,12 +1,10 @@
+import SignInScreen from "@pages/Auth/components/SignInScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 
-import UserScreen from "@/pages/User/components/UserScreen/UserScreen";
-
-import SignInScreen from "../../../pages/Auth/SignInScreen";
-import SignUpScreen from "../../../pages/Auth/SignUpScreen";
-import ChatsHub from "../../../pages/ChatsHub/components/ChatsHub/ChatsHub";
-import Options from "../../../pages/Options/Options";
+import SignUpScreen from "@/pages/Auth/components/SignUpScreen";
+import UserScreen from "@/pages/Settings/components/UserScreen";
+import UserScreenHeader from "@/pages/Settings/components/UserScreenHeader";
 
 export type RootStackParamList = {
   ChatStack: { name: string };
@@ -22,13 +20,12 @@ const InitialStack = createStackNavigator<RootStackParamList>();
 const AuthStack = createStackNavigator<RootStackParamList>();
 
 const InitialStackNavigator = () => (
-  <InitialStack.Navigator
-    initialRouteName="ChatStack"
-    screenOptions={{ headerShown: false }}
-  >
-    <InitialStack.Screen name="ChatStack" component={ChatsHub} />
-    <InitialStack.Screen name="OptionsStack" component={Options} />
-    <InitialStack.Screen name="UserStack" component={UserScreen} />
+  <InitialStack.Navigator initialRouteName="UserStack">
+    <InitialStack.Screen
+      name="UserStack"
+      component={UserScreen}
+      options={{ header: () => <UserScreenHeader /> }}
+    />
   </InitialStack.Navigator>
 );
 
