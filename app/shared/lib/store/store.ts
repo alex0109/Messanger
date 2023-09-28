@@ -3,8 +3,10 @@ import { combineReducers } from "redux";
 
 import thunk from "redux-thunk";
 
+import { chatsReducer } from "@/pages/ChatList/lib/store/chatSlice";
+
 const rootReducer = combineReducers({
-  //slice: sliceReducer
+  chats: chatsReducer,
 });
 
 const store = configureStore({

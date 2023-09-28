@@ -5,6 +5,7 @@ import CustomDrawerContent from "./CustomDrawerContent";
 import { InitialStackNavigator } from "./StackNavigator";
 
 import type { RootStackParamList } from "./StackNavigator";
+import type { FC } from "react";
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
 

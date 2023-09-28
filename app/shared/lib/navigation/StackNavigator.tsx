@@ -1,10 +1,20 @@
-import SignInScreen from "@pages/Auth/components/SignInScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 
+import { View } from "react-native";
+
+import SignInScreen from "@/pages/Auth/components/SignInScreen";
 import SignUpScreen from "@/pages/Auth/components/SignUpScreen";
+import ChatList from "@/pages/ChatList/components/ChatList";
+import ChatListHeader from "@/pages/ChatList/components/ChatListHeader";
+
+import DialogHeader from "@/pages/Dialog/components/DialogHeader";
+import SettingsPage from "@/pages/Settings/components/Settings";
+import SettingsHeader from "@/pages/Settings/components/SettingsHeader";
 import UserScreen from "@/pages/Settings/components/UserScreen";
 import UserScreenHeader from "@/pages/Settings/components/UserScreenHeader";
+
+import type { FC } from "react";
 
 export type RootStackParamList = {
   ChatStack: { name: string };
@@ -14,17 +24,35 @@ export type RootStackParamList = {
   SignUpStack: { name: string };
   SignInStack: { name: string };
   UserStack: { name: string };
+  DialogStack: { name: string };
 };
 
 const InitialStack = createStackNavigator<RootStackParamList>();
 const AuthStack = createStackNavigator<RootStackParamList>();
 
+const Empty: FC = () => <View />;
+
 const InitialStackNavigator = () => (
-  <InitialStack.Navigator initialRouteName="UserStack">
+  <InitialStack.Navigator initialRouteName="ChatStack">
+    <InitialStack.Screen
+      name="ChatStack"
+      component={ChatList}
+      options={{ header: () => <ChatListHeader /> }}
+    />
+    <InitialStack.Screen
+      name="DialogStack"
+      component={Empty}
+      options={{ header: () => <DialogHeader /> }}
+    />
     <InitialStack.Screen
       name="UserStack"
       component={UserScreen}
       options={{ header: () => <UserScreenHeader /> }}
+    />
+    <InitialStack.Screen
+      name="OptionsStack"
+      component={SettingsPage}
+      options={{ header: () => <SettingsHeader /> }}
     />
   </InitialStack.Navigator>
 );

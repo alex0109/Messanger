@@ -1,7 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation, useTheme } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
 import {
   Switch,
@@ -14,7 +13,11 @@ import {
 
 import { ThemeContext } from "../providers/ThemeProvider";
 
-const CustomDrawerContent = () => {
+import type { FC } from "react";
+
+//import DropDownPicker from "react-native-dropdown-picker";
+
+const CustomDrawerContent: FC = () => {
   const colors = useTheme().colors;
   const { theme, changeTheme } = useContext(ThemeContext);
 
@@ -53,13 +56,13 @@ const CustomDrawerContent = () => {
           />
         </View>
       </View>
-      <View style={styles.drawerLinks}></View>
+      <View style={styles.drawerLinks}>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("ChatStack", {})}
         >
           <Ionicons name="home" size={30} />
-          <Text style={styles.drawerButtonText}>Home</Text>
+          <Text style={styles.drawerButtonText}>Chats List</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
@@ -70,10 +73,10 @@ const CustomDrawerContent = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
-          onPress={() => AsyncStorage.removeItem("authToken", undefined)}
+          onPress={() => navigation.navigate("DialogStack", {})}
         >
           <Ionicons name="settings" size={30} />
-          <Text style={styles.drawerButtonText}>Remove jwt</Text>
+          <Text style={styles.drawerButtonText}>Dialog</Text>
         </TouchableOpacity>
       </View>
     </View>
