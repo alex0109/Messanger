@@ -1,21 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import type { Chat } from "../types/interfaces";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = [
+//Все должно быть типизированным, если добавляешь параметры к пользователю,
+//то сначала описывай их в интерфейсе
+const initialState: Chat[] = [
   {
-    id: "1",
+    userID: "1",
     userName: "User1",
     message:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-    archived: false,
+    isArchived: false,
   },
   {
-    id: "2",
+    userID: "2",
     userName: "User2",
     message:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout",
-    archived: false,
+    isArchived: false,
   },
 ];
 
@@ -28,18 +31,18 @@ export const chatsSlice = createSlice({
       action: PayloadAction<{ id: string; userName: string; message: string }>
     ) => {
       state.push({
-        id: action.payload.id,
+        userID: action.payload.id,
         userName: action.payload.userName,
         message: action.payload.message,
-        archived: false,
+        isArchived: false,
       });
     },
     deleteChatHandler: (state, action: PayloadAction<{ id: string }>) =>
-      state.filter((item) => item.id !== action.payload.id),
+      state.filter((item) => item.userID !== action.payload.id),
     archiveChatHandler: (state, action: PayloadAction<{ id: string }>) =>
       state.map((item) => {
-        if (item.id == action.payload.id) {
-          return { ...item, archived: !item.archived };
+        if (item.userID === action.payload.id) {
+          return { ...item, archived: !item.isArchived };
         }
         return item;
       }),

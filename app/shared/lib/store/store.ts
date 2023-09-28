@@ -1,17 +1,12 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 
-import { persistStore, persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 
-import { chatsReducer } from "../../../pages/ChatsHub/lib/store/chatSlice";
-import { dialogReducer } from "@/pages/ChatsHub/lib/store/dialogSlice";
+import { chatsReducer } from "@/pages/ChatList/lib/store/chatSlice";
 
 const rootReducer = combineReducers({
-  //slice: sliceReducer
   chats: chatsReducer,
-  dialogs: dialogReducer,
 });
 
 const store = configureStore({

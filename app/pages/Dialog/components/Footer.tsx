@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TouchableHighlight, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import React, { useState, useEffect } from "react";
+import { View, TouchableHighlight, TextInput } from "react-native";
 
-const Footer = ({ setData, data }) => {
+//Ты не импортируешь стили из DialogFooter
+import style from "./DialogFooter";
+
+import type { FC } from "react";
+
+//Зачем нужен этот футер если у тебя уже есть dialogfooter?
+const Footer: FC = ({ setData, data }) => {
   const [input, setInput] = useState("");
 
   useEffect(() => {
@@ -20,7 +26,7 @@ const Footer = ({ setData, data }) => {
   return (
     <View style={style.sendBar}>
       <TextInput
-        multiline={true}
+        multiline
         placeholder="Type..."
         style={style.msgInput}
         cursorColor={"black"}
@@ -34,42 +40,14 @@ const Footer = ({ setData, data }) => {
         underlayColor={"#c0c0c0"}
       >
         <Ionicons
-          name={"send"}
+          name="send"
           size={24}
-          color={"black"}
+          color="black"
           style={style.buttonIcon}
-        ></Ionicons>
+        />
       </TouchableHighlight>
     </View>
   );
 };
 
-const style = StyleSheet.create({
-  separator: {
-    backgroundColor: "gray",
-    height: "70%",
-    alignSelf: "center",
-    width: 2,
-  },
-  sendButton: {
-    height: 50,
-    width: 50,
-    justifyContent: "center",
-    borderRadius: 10,
-  },
-  buttonIcon: {
-    alignSelf: "center",
-  },
-  sendBar: {
-    flexDirection: "row",
-    backgroundColor: "white",
-    alignItems: "center",
-  },
-  msgInput: {
-    flex: 7,
-    margin: 12,
-    maxHeight: 100,
-    fontSize: 16,
-  },
-});
 export default Footer;

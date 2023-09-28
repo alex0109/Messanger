@@ -1,11 +1,10 @@
-import { dialogActions } from "./../../../pages/ChatsHub/lib/store/dialogSlice";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { chatsActions } from "../../../pages/ChatsHub/lib/store/chatSlice";
+
+import { chatsActions } from "@/pages/ChatList/lib/store/chatSlice";
 
 const allActions = {
   ...chatsActions,
-  ...dialogActions,
 };
 
 export const useActions = () => {

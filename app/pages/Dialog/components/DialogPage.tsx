@@ -1,10 +1,10 @@
-import { View, Text, FlatList, StyleSheet } from "react-native";
 import React, { useState } from "react";
+import { View, Text, FlatList, StyleSheet } from "react-native";
+
+import DialogFooter from "./DialogFooter";
+import DialogHeader from "./DialogHeader";
+
 import type { FC } from "react";
-import DialogHeader from "../DialogHeader/DialogHeader";
-import DialogFooter from "../DialogFooter/DialogFooter";
-import { useTypedSelector } from "@/shared/lib/hooks/useTypedSelector";
-import { useActions } from "@/shared/lib/hooks/useActions";
 
 interface MessageItemProps {
   mess: string;
@@ -17,7 +17,11 @@ export const MessageItem: FC<MessageItemProps> = ({ mess, myMess }) => (
   </View>
 );
 
-export default function DialogPage() {
+//Придерживайся одного стиля экспорта компоненты, не мешай разные экспорты
+//У нас это объявление стрелочной функции, типизация ее с помощью FC и дефолтный экспорт
+//А потом стили компоненты
+// export default function DialogPage() {
+const DialogPage: FC = () => {
   const [mess, setMess] = useState([
     {
       id: "1",
@@ -40,16 +44,17 @@ export default function DialogPage() {
       mess: "afasfdafdafd",
     },
   ]);
-  const dialogs = useTypedSelector((state) => state.dialogs);
-  const { addMessageHendler, deleteMessage, editMessage } = useActions();
+
   return (
     <View style={{ flex: 1 }}>
       <DialogHeader />
-      <FlatList></FlatList>
+      {/* <FlatList /> */}
       <DialogFooter setData={undefined} data={undefined} />
     </View>
   );
-}
+};
+
+export default DialogPage;
 
 const style = StyleSheet.create({
   messageItem: {

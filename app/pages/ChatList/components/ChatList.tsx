@@ -1,31 +1,31 @@
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import ChatListBase from "@/pages/ChatList/components/ChatListBase/ChatListBase";
-import ChatListHeader from "../ChatListHeader/ChatListHeader";
-import { useTypedSelector } from "@/shared/lib/hooks/useTypedSelector";
-import { useActions } from "@/shared/lib/hooks/useActions";
-import { chatsSlice } from "@/pages/ChatsHub/lib/store/chatSlice";
 
-const ChatListPage = () => {
+import ChatListBase from "@/pages/ChatList/components/ChatBar";
+import { useActions } from "@/shared/lib/hooks/useActions";
+import { useTypedSelector } from "@/shared/lib/hooks/useTypedSelector";
+
+import type { FC } from "react";
+
+const ChatList: FC = () => {
   const chats = useTypedSelector((state) => state.chats);
-  const { addChatHandler, deleteChatHandler, archiveChatHandler } =
-    useActions();
+  const { addChatHandler } = useActions();
   return (
+    //Углубись в то как работает flexbox позиционирование
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <ChatListHeader />
-        <ScrollView>
-          {chats.map((chat) => (
-            <ChatListBase
-              key={chat.id}
-              id={chat.id}
-              userName={chat.userName}
-              message={chat.message}
-            />
-          ))}
-        </ScrollView>
-      </View>
+      <ScrollView>
+        {chats.map((chat) => (
+          <ChatListBase
+            key={chat.userID}
+            id={chat.userID}
+            userName={chat.userName}
+            message={chat.message}
+            archived={chat.isArchived}
+          />
+        ))}
+      </ScrollView>
+
       <TouchableOpacity
         style={style.addButton}
         onPress={() =>
@@ -41,6 +41,9 @@ const ChatListPage = () => {
     </View>
   );
 };
+
+export default ChatList;
+
 const style = StyleSheet.create({
   addButton: {
     backgroundColor: "#5698FB",
@@ -54,4 +57,3 @@ const style = StyleSheet.create({
     justifyContent: "center",
   },
 });
-export default ChatListPage;
