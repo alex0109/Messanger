@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   Text,
@@ -12,7 +12,6 @@ import {
 import type { RootStackParamList } from "@/shared/lib/navigation/StackNavigator";
 
 export default function SignInScreen() {
-  const colors = useTheme().colors;
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,67 +28,55 @@ export default function SignInScreen() {
   };
 
   return (
-    <View style={[styles.registration, { backgroundColor: colors.themeColor }]}>
+    <View style={styles.registration}>
       <View style={styles.registrationTitle}>
-        <Text style={[styles.titleText, { color: colors.themeColorText }]}>
-          Authorize first
-        </Text>
+        <Text style={styles.titleText}>Authorize first</Text>
       </View>
       <View style={styles.registrationBox}>
         <View style={styles.inputsContainer}>
-          <View style={[styles.textInput, { borderColor: colors.grayDark }]}>
+          <View style={styles.textInput}>
             <TextInput
               autoCapitalize="none"
               value={emailAddress}
-              placeholderTextColor={colors.grayDark}
+              placeholderTextColor="#9D9D9D"
               placeholder="Email"
               onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
-              style={[styles.input, { color: colors.whiter }]}
+              style={styles.input}
             />
           </View>
-
-          <View style={[styles.textInput, { borderColor: colors.grayDark }]}>
+          <View style={styles.textInput}>
             <TextInput
               value={password}
               placeholder="Password"
-              placeholderTextColor={colors.grayDark}
+              placeholderTextColor="#9D9D9D"
               secureTextEntry={securePassword}
               onChangeText={(password) => setPassword(password)}
-              style={[styles.input, { color: colors.whiter }]}
+              style={styles.input}
             />
             <TouchableOpacity
               style={styles.eye}
               onPress={() => setSecurePassword((state) => !state)}
             >
               {securePassword ? (
-                <MaterialCommunityIcons
-                  name="eye"
-                  size={25}
-                  color={colors.grayLight}
-                />
+                <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
               ) : (
                 <MaterialCommunityIcons
                   name="eye-off"
                   size={25}
-                  color={colors.grayLight}
+                  color="#D9D9D9"
                 />
               )}
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity
-          onPress={onSignInPress}
-          style={[styles.loginButton, { backgroundColor: colors.whiter }]}
-        >
+        <TouchableOpacity onPress={onSignInPress} style={styles.loginButton}>
           <Text style={styles.loginText}>Log in</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.forgotPasswordButton}>
         <Text style={styles.forgotPasswordText}>Forgot password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.googleButton, { backgroundColor: colors.whiter }]}
-      >
+      <TouchableOpacity style={styles.googleButton}>
         <Text style={[{ color: "#4285F4" }, styles.googleText]}>G</Text>
         <Text style={[{ color: "#DB4437" }, styles.googleText]}>o</Text>
         <Text style={[{ color: "#F4B400" }, styles.googleText]}>o</Text>
@@ -97,9 +84,7 @@ export default function SignInScreen() {
         <Text style={[{ color: "#0F9D58" }, styles.googleText]}>l</Text>
         <Text style={[{ color: "#DB4437" }, styles.googleText]}>e</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.facebookButton, { backgroundColor: colors.whiter }]}
-      >
+      <TouchableOpacity style={styles.facebookButton}>
         <Text style={styles.facebookText}>Facebook</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -125,6 +110,7 @@ const styles = StyleSheet.create({
     width: "85%",
     flexDirection: "row",
     borderBottomWidth: 1,
+    borderColor: "#9D9D9D",
   },
   registrationBox: {
     borderRadius: 30,
@@ -147,6 +133,7 @@ const styles = StyleSheet.create({
   input: {
     width: "90%",
     marginVertical: 10,
+    color: "#FFF",
   },
   inputsContainer: {
     paddingVertical: 20,
@@ -159,6 +146,7 @@ const styles = StyleSheet.create({
   loginButton: {
     width: "80%",
     height: 48,
+    backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
     marginVertical: 15,
@@ -171,6 +159,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "80%",
     height: 48,
+    backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 15,
@@ -181,6 +170,7 @@ const styles = StyleSheet.create({
   facebookButton: {
     width: "80%",
     height: 48,
+    backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 17,

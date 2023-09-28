@@ -1,5 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import React, { useContext } from "react";
 import {
   Switch,
@@ -54,14 +56,24 @@ const CustomDrawerContent = () => {
       <View style={styles.drawerLinks}></View>
         <TouchableOpacity
           style={styles.drawerButton}
+          onPress={() => navigation.navigate("ChatStack", {})}
+        >
+          <Ionicons name="home" size={30} />
+          <Text style={styles.drawerButtonText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.drawerButton}
           onPress={() => navigation.navigate("UserStack", {})}
         >
-          <Ionicons name="home" size={30} color={colors.themeColorText} />
-          <Text
-            style={[styles.drawerButtonText, { color: colors.themeColorText }]}
-          >
-            User
-          </Text>
+          <Ionicons name="people" size={30} />
+          <Text style={styles.drawerButtonText}>User settings</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.drawerButton}
+          onPress={() => AsyncStorage.removeItem("authToken", undefined)}
+        >
+          <Ionicons name="settings" size={30} />
+          <Text style={styles.drawerButtonText}>Remove jwt</Text>
         </TouchableOpacity>
       </View>
     </View>
