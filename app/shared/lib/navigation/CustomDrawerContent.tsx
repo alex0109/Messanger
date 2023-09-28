@@ -1,23 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import React, { useContext } from "react";
-import {
-  Switch,
-  TouchableOpacity,
-  View,
-  Text,
-  Image,
-  StyleSheet,
-} from "react-native";
+import React from "react";
+import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 
-import { ThemeContext } from "../providers/ThemeProvider";
+import type { FC } from "react";
 
 //import DropDownPicker from "react-native-dropdown-picker";
 
-const CustomDrawerContent = () => {
-  const { theme, changeTheme } = useContext(ThemeContext);
-
+const CustomDrawerContent: FC = () => {
   const navigation = useNavigation();
 
   return (
@@ -34,12 +24,6 @@ const CustomDrawerContent = () => {
             <Text style={{ color: "gray" }}>@user_login</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ height: "100%", width: "15%", paddingVertical: 10 }}>
-          <Switch
-            value={theme === "dark"}
-            onValueChange={(toggled) => changeTheme(toggled ? "dark" : "light")}
-          />
-        </View>
       </View>
       <View style={styles.drawerLinks}>
         <TouchableOpacity
@@ -47,21 +31,21 @@ const CustomDrawerContent = () => {
           onPress={() => navigation.navigate("ChatStack", {})}
         >
           <Ionicons name="home" size={30} />
-          <Text style={styles.drawerButtonText}>Home</Text>
+          <Text style={styles.drawerButtonText}>Chats List</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("OptionsStack", {})}
         >
           <Ionicons name="people" size={30} />
-          <Text style={styles.drawerButtonText}>Create group</Text>
+          <Text style={styles.drawerButtonText}>Settings</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
-          onPress={() => AsyncStorage.removeItem("authToken", undefined)}
+          onPress={() => navigation.navigate("DialogStack", {})}
         >
           <Ionicons name="settings" size={30} />
-          <Text style={styles.drawerButtonText}>Remove jwt</Text>
+          <Text style={styles.drawerButtonText}>Empty</Text>
         </TouchableOpacity>
       </View>
     </View>
