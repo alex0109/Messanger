@@ -71,7 +71,7 @@ const InitialStackNavigator: FC = () => {
 const AuthStackNavigator = () => (
   <AuthStack.Navigator
     initialRouteName="SignInStack"
-    screenOptions={{ headerShown: false }}
+    screenOptions={{ headerShown: false, animationEnabled: false }}
   >
     <AuthStack.Screen name="SignUpStack" component={SignUpScreen} />
     <AuthStack.Screen name="SignInStack" component={SignInScreen} />

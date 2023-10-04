@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   Text,
@@ -12,6 +12,7 @@ import {
 import type * as StackNavigator from "@shared/lib/navigation/StackNavigator";
 
 export default function SignUpScreen() {
+  const colors = useTheme().colors;
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -33,9 +34,11 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={[styles.registration]}>
+    <View style={[styles.registration, { backgroundColor: colors.themeColor }]}>
       <View style={[styles.registrationTitle]}>
-        <Text style={styles.titleText}>Register</Text>
+        <Text style={[styles.titleText, { color: colors.themeColorText }]}>
+          Register
+        </Text>
       </View>
       <View style={styles.registrationBox}>
         <View style={styles.inputsContainer}>

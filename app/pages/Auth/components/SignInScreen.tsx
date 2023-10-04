@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   Text,
@@ -12,6 +12,7 @@ import {
 import type { RootStackParamList } from "@/shared/lib/navigation/StackNavigator";
 
 export default function SignInScreen() {
+  const colors = useTheme().colors;
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,9 +29,11 @@ export default function SignInScreen() {
   };
 
   return (
-    <View style={styles.registration}>
+    <View style={[styles.registration, { backgroundColor: colors.themeColor }]}>
       <View style={styles.registrationTitle}>
-        <Text style={styles.titleText}>Authorize first</Text>
+        <Text style={[styles.titleText, { color: colors.themeColorText }]}>
+          Authorize first
+        </Text>
       </View>
       <View style={styles.registrationBox}>
         <View style={styles.inputsContainer}>

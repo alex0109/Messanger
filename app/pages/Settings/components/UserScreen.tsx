@@ -37,14 +37,14 @@ const UserScreen: FC = () => {
           <TouchableOpacity
             style={[styles.button, { backgroundColor: colors.blue }]}
           >
-            <Text style={[styles.buttonText, { color: colors.whiter }]}>
+            <Text style={[styles.buttonText, { color: colors.white }]}>
               Open Chat
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, { backgroundColor: colors.success }]}
           >
-            <Text style={[styles.buttonText, { color: colors.whiter }]}>
+            <Text style={[styles.buttonText, { color: colors.white }]}>
               Add Friend
             </Text>
           </TouchableOpacity>
