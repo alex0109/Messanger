@@ -1,3 +1,4 @@
+import { useTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 
@@ -31,31 +32,41 @@ const InitialStack = createStackNavigator<RootStackParamList>();
 const AuthStack = createStackNavigator<RootStackParamList>();
 
 const Empty: FC = () => <View />;
-
-const InitialStackNavigator = () => (
-  <InitialStack.Navigator initialRouteName="ChatStack">
-    <InitialStack.Screen
-      name="ChatStack"
-      component={ChatList}
-      options={{ header: () => <ChatListHeader /> }}
-    />
-    <InitialStack.Screen
-      name="DialogStack"
-      component={Empty}
-      options={{ header: () => <DialogHeader /> }}
-    />
-    <InitialStack.Screen
-      name="UserStack"
-      component={UserScreen}
-      options={{ header: () => <UserScreenHeader /> }}
-    />
-    <InitialStack.Screen
-      name="SettingsStack"
-      component={SettingsPage}
-      options={{ header: () => <SettingsHeader /> }}
-    />
-  </InitialStack.Navigator>
-);
+const InitialStackNavigator: FC = () => {
+  const colors = useTheme().colors;
+  return (
+    <InitialStack.Navigator
+      initialRouteName="ChatStack"
+      screenOptions={{ animationEnabled: false }}
+    >
+      <InitialStack.Screen
+        name="ChatStack"
+        component={ChatList}
+        options={{ header: () => <ChatListHeader /> }}
+      />
+      <InitialStack.Screen
+        name="DialogStack"
+        component={Empty}
+        options={{ header: () => <DialogHeader /> }}
+      />
+      <InitialStack.Screen
+        name="UserStack"
+        component={UserScreen}
+        options={{
+          header: () => <UserScreenHeader />,
+          cardStyle: { backgroundColor: colors.themeColor },
+        }}
+      />
+      <InitialStack.Screen
+        name="SettingsStack"
+        component={SettingsPage}
+        options={{
+          header: () => <SettingsHeader />,
+        }}
+      />
+    </InitialStack.Navigator>
+  );
+};
 
 const AuthStackNavigator = () => (
   <AuthStack.Navigator

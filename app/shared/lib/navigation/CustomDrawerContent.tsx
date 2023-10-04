@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
 import {
@@ -14,8 +14,6 @@ import {
 import { ThemeContext } from "../providers/ThemeProvider";
 
 import type { FC } from "react";
-
-//import DropDownPicker from "react-native-dropdown-picker";
 
 const CustomDrawerContent: FC = () => {
   const colors = useTheme().colors;
@@ -61,29 +59,45 @@ const CustomDrawerContent: FC = () => {
           style={styles.drawerButton}
           onPress={() => navigation.navigate("ChatStack", {})}
         >
-          <Ionicons name="home" size={30} />
-          <Text style={styles.drawerButtonText}>Chats List</Text>
+          <Ionicons name="home" size={30} color={colors.themeColorText} />
+          <Text
+            style={[styles.drawerButtonText, { color: colors.themeColorText }]}
+          >
+            Chats List
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("UserStack", {})}
         >
-          <Ionicons name="people" size={30} />
-          <Text style={styles.drawerButtonText}>User settings</Text>
+          <Ionicons name="people" size={30} color={colors.themeColorText} />
+          <Text
+            style={[styles.drawerButtonText, { color: colors.themeColorText }]}
+          >
+            User settings
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("DialogStack", {})}
         >
-          <Ionicons name="settings" size={30} />
-          <Text style={styles.drawerButtonText}>Dialog</Text>
+          <Ionicons name="settings" size={30} color={colors.themeColorText} />
+          <Text
+            style={[styles.drawerButtonText, { color: colors.themeColorText }]}
+          >
+            Dialog
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("SettingsStack", {})}
         >
-          <Ionicons name="settings" size={30} />
-          <Text style={styles.drawerButtonText}>Settings</Text>
+          <Ionicons name="settings" size={30} color={colors.themeColorText} />
+          <Text
+            style={[styles.drawerButtonText, { color: colors.themeColorText }]}
+          >
+            Settings
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

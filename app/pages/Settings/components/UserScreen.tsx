@@ -148,15 +148,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  // Лишний стиль, кнопки одинаковые, не надо дублироваться
-  // addFriendsButton: {
-  //   width: "80%",
-  //   backgroundColor: "#4ACD86",
-  //   borderRadius: 30,
-  //   height: 40,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
   buttonText: {
     fontWeight: "700",
     fontSize: 16,

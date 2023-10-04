@@ -11,13 +11,11 @@ import {
 
 import type { FC } from "react";
 
-//Хедер выносим в отдельную компоненту
 const UserScreenHeader: FC = () => {
   const navigation = useNavigation();
   const colors = useTheme().colors;
   return (
     <View style={[styles.header, { backgroundColor: colors.blue }]}>
-      {/* Для хедера обяхателен StatusBar */}
       <StatusBar backgroundColor={colors.blue} barStyle="dark-content" />
       <TouchableOpacity
         style={{

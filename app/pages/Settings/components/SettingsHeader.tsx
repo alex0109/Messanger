@@ -12,7 +12,6 @@ import {
 import type { FC } from "react";
 
 const SettingsHeader: FC = () => {
-  //Для навигации в приложении
   const navigation = useNavigation();
 
   return (

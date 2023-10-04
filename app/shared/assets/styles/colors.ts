@@ -15,7 +15,6 @@ const commonColors = {
 const light = {
   colors: {
     themeColor: "#F1F1F1",
-    themeColorBlock: "#FFFFFF",
     themeColorText: "#000",
     ligtWhite: "#000000",
     sky: "#DE5E69",
@@ -27,7 +26,6 @@ const light = {
 const dark = {
   colors: {
     themeColor: "#1D1D1D",
-    themeColorBlock: "#5D5E63",
     themeColorText: "#fff",
     darkWhite: "#FFFFFF",
     sky: "#831a23",
