@@ -10,6 +10,7 @@ import type { ThemeType } from "@shared/lib/providers/ThemeProvider";
 
 export default function Root() {
   const { theme } = useContext(ThemeContext);
+
   const currentTheme = (theme: ThemeType) => {
     if (theme === "light") {
       return Colors.light;

@@ -17,7 +17,7 @@ const DialogHeader: FC = () => {
       >
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>
-      <View style={[{ flex: 1, borderRadius: 90 }, styles.fullAlign]}>
+      <View style={[{ flex: 1, borderRadius: 30 }, styles.fullAlign]}>
         <Image
           style={styles.userAvatar}
           source={{
@@ -47,10 +47,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#5698FB",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
+    paddingHorizontal: 5,
   },
   userAvatar: {
-    height: "80%",
-    width: "80%",
+    height: 40,
+    width: 40,
     backgroundColor: "#4265E1",
     borderRadius: 30,
   },

@@ -40,6 +40,7 @@ const style = StyleSheet.create({
     backgroundColor: "#5698FB",
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
+    paddingHorizontal: 5,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

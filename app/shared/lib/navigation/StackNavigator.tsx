@@ -15,6 +15,7 @@ import UserScreen from "@/pages/Settings/components/UserScreen";
 import UserScreenHeader from "@/pages/Settings/components/UserScreenHeader";
 
 import type { FC } from "react";
+import DialogPage from "@/pages/Dialog/components/DialogPage";
 
 export type RootStackParamList = {
   ChatStack: { name: string };
@@ -41,7 +42,7 @@ const InitialStackNavigator = () => (
     />
     <InitialStack.Screen
       name="DialogStack"
-      component={Empty}
+      component={DialogPage}
       options={{ header: () => <DialogHeader /> }}
     />
     <InitialStack.Screen

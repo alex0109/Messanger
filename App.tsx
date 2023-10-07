@@ -5,13 +5,16 @@ import React from "react";
 import { Provider } from "react-redux";
 
 import Root from "@/Root";
+import { UserProvider } from "@/shared/lib/providers/UserProvider";
 
 export default function App() {
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <Root />
-      </ThemeProvider>
+      <UserProvider>
+        <ThemeProvider>
+          <Root />
+        </ThemeProvider>
+      </UserProvider>
     </Provider>
   );
 }

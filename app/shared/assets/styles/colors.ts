@@ -12,14 +12,15 @@ const commonColors = {
   peach: "#FF6262",
   blue: "#4891FF",
 };
+
 const light = {
   colors: {
     themeColor: "#F1F1F1",
     themeColorBlock: "#FFFFFF",
     themeColorText: "#000",
-    ligtWhite: "#000000",
+    lightWhite: "#000000",
     sky: "#DE5E69",
-    ligtGray: "gray",
+    lightGray: "gray",
     ...commonColors,
   },
 };
