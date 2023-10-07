@@ -24,9 +24,11 @@ const CustomDrawerContent: FC = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.themeColor }]}>
+    <View
+      style={[styles.container, { backgroundColor: colors.drawerBackground }]}
+    >
       <View
-        style={[styles.drawerProfile, { borderColor: colors.themeColorText }]}
+        style={[styles.drawerProfile, { borderColor: colors.adaptiveText }]}
       >
         <View style={{ alignItems: "center", width: "70%" }}>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
@@ -37,14 +39,14 @@ const CustomDrawerContent: FC = () => {
               style={{
                 fontSize: 16,
                 fontWeight: "600",
-                color: colors.themeColorText,
+                color: colors.adaptiveText,
               }}
             >
               User Name
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
-            <Text style={{ color: "gray" }}>@user_login</Text>
+            <Text style={{ color: colors.labelGrey }}>@user_login</Text>
           </TouchableOpacity>
         </View>
         <View style={{ height: "100%", width: "15%", paddingVertical: 10 }}>
@@ -61,29 +63,45 @@ const CustomDrawerContent: FC = () => {
           style={styles.drawerButton}
           onPress={() => navigation.navigate("ChatStack", {})}
         >
-          <Ionicons name="home" size={30} />
-          <Text style={styles.drawerButtonText}>Chats List</Text>
+          <Ionicons name="home" size={30} color={colors.adaptiveText} />
+          <Text
+            style={[styles.drawerButtonText, { color: colors.adaptiveText }]}
+          >
+            Chats List
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("UserStack", {})}
         >
-          <Ionicons name="people" size={30} />
-          <Text style={styles.drawerButtonText}>User settings</Text>
+          <Ionicons name="people" size={30} color={colors.adaptiveText} />
+          <Text
+            style={[styles.drawerButtonText, { color: colors.adaptiveText }]}
+          >
+            User settings
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("DialogStack", {})}
         >
-          <Ionicons name="settings" size={30} />
-          <Text style={styles.drawerButtonText}>Dialog</Text>
+          <Ionicons name="settings" size={30} color={colors.adaptiveText} />
+          <Text
+            style={[styles.drawerButtonText, { color: colors.adaptiveText }]}
+          >
+            Dialog
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("SettingsStack", {})}
         >
-          <Ionicons name="settings" size={30} />
-          <Text style={styles.drawerButtonText}>Settings</Text>
+          <Ionicons name="settings" size={30} color={colors.adaptiveText} />
+          <Text
+            style={[styles.drawerButtonText, { color: colors.adaptiveText }]}
+          >
+            Settings
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

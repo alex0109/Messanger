@@ -16,9 +16,9 @@ const UserScreenHeader: FC = () => {
   const navigation = useNavigation();
   const colors = useTheme().colors;
   return (
-    <View style={[styles.header, { backgroundColor: colors.blue }]}>
+    <View style={[styles.header, { backgroundColor: colors.header }]}>
       {/* Для хедера обяхателен StatusBar */}
-      <StatusBar backgroundColor={colors.blue} barStyle="dark-content" />
+      <StatusBar backgroundColor={colors.header} barStyle="light-content" />
       <TouchableOpacity
         style={{
           justifyContent: "flex-start",

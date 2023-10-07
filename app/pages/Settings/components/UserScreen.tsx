@@ -13,7 +13,7 @@ import type { FC } from "react";
 const UserScreen: FC = () => {
   const colors = useTheme().colors;
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.mainBackground }}>
       <View style={styles.userAvatarContainer}>
         {/* Это должга быть картинка а не просто view */}
         <View style={styles.userAvatar} />
@@ -25,7 +25,7 @@ const UserScreen: FC = () => {
             style={{
               fontSize: 16,
               fontWeight: "500",
-              color: colors.themeColorText,
+              color: colors.adaptiveText,
             }}
           >
             I love flowers🌸
@@ -54,7 +54,7 @@ const UserScreen: FC = () => {
             <Text
               style={[
                 styles.chatHistoryButtonText,
-                { color: colors.themeColorText },
+                { color: colors.adaptiveText },
               ]}
             >
               Messages
@@ -64,7 +64,7 @@ const UserScreen: FC = () => {
             <Text
               style={[
                 styles.chatHistoryButtonText,
-                { color: colors.themeColorText },
+                { color: colors.adaptiveText },
               ]}
             >
               Images
@@ -74,7 +74,7 @@ const UserScreen: FC = () => {
             <Text
               style={[
                 styles.chatHistoryButtonText,
-                { color: colors.themeColorText },
+                { color: colors.adaptiveText },
               ]}
             >
               Voices
@@ -84,7 +84,7 @@ const UserScreen: FC = () => {
             <Text
               style={[
                 styles.chatHistoryButtonText,
-                { color: colors.themeColorText },
+                { color: colors.adaptiveText },
               ]}
             >
               Documents

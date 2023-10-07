@@ -1,7 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import React, { useState, useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-
 import { useActions } from "@/shared/lib/hooks/useActions";
 
 import type { FC } from "react";
@@ -26,6 +25,8 @@ const ChatBar: FC<ChatBarProps> = ({ id, userName, message, archived }) => {
     setIsArchived(!isArchived);
   };
 
+  const colors = useTheme().colors;
+
   return (
     //Зачем длинное нажатие?
     <TouchableOpacity
@@ -36,7 +37,9 @@ const ChatBar: FC<ChatBarProps> = ({ id, userName, message, archived }) => {
       onPress={() => navigation.navigate("DialogStack", {})}
       onLongPress={() => handleClick()}
     >
-      <View style={style.chatItemContent}>
+      <View
+        style={[style.chatItemContent, { backgroundColor: colors.chatsBars }]}
+      >
         <Image
           source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
           width={60}
@@ -44,20 +47,27 @@ const ChatBar: FC<ChatBarProps> = ({ id, userName, message, archived }) => {
           borderRadius={30}
         />
         <View style={{ flexDirection: "column", width: "75%" }}>
-          <Text style={style.chatItemUserName}>{userName}</Text>
-          <Text style={style.chatItemText} numberOfLines={2}>
+          <Text style={[style.chatItemUserName, { color: colors.mainText }]}>
+            {userName}
+          </Text>
+          <Text
+            style={[style.chatItemText, { color: colors.secondaryText }]}
+            numberOfLines={2}
+          >
             {isArchived
               ? "archived"
               : "najlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfba"}
           </Text>
         </View>
       </View>
-      <Text style={style.chatItemTime}>11:30</Text>
-      <View style={[style.chatItemUnreadedMsg]}>
+      <Text style={[style.chatItemTime, { color: colors.grey }]}>11:30</Text>
+      <View
+        style={[style.chatItemUnreadedMsg, { backgroundColor: colors.blue }]}
+      >
         <Text
           allowFontScaling
           adjustsFontSizeToFit
-          style={style.chatItemUnreadMeassageText}
+          style={[style.chatItemUnreadMeassageText, { color: colors.white }]}
         >
           1
         </Text>
@@ -78,26 +88,23 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   chatItemUnreadedMsg: {
-    left: 8,
+    left: 3,
     position: "absolute",
     height: 20,
     width: 20,
     borderRadius: 10,
-    backgroundColor: "#5698FB",
     justifyContent: "center",
     alignItems: "center",
   },
   chatItemUnreadMeassageText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#FFFFFF",
   },
   chatItemContent: {
     marginTop: 10,
     padding: 10,
     width: "100%",
     height: 65,
-    backgroundColor: "#C6E0FE",
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
@@ -106,18 +113,15 @@ const style = StyleSheet.create({
   chatItemUserName: {
     fontSize: 14,
     fontWeight: "700",
-    color: "black",
     marginVertical: 4,
   },
   chatItemText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#4F4F4F",
   },
   chatItemTime: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#727272",
     alignSelf: "flex-start",
   },
 });

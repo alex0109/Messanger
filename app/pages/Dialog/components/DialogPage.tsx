@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 
+import { useTheme } from "@react-navigation/native";
+
 import DialogFooter from "./DialogFooter";
 import DialogHeader from "./DialogHeader";
 
@@ -22,6 +24,8 @@ export const MessageItem: FC<MessageItemProps> = ({ mess, myMess }) => (
 //А потом стили компоненты
 // export default function DialogPage() {
 const DialogPage: FC = () => {
+  const colors = useTheme().colors;
+
   const [mess, setMess] = useState([
     {
       id: "1",
@@ -46,10 +50,10 @@ const DialogPage: FC = () => {
   ]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <DialogHeader />
+    <View style={{ flex: 1, backgroundColor: colors.mainBackground }}>
       {/* <FlatList /> */}
-      <DialogFooter setData={undefined} data={undefined} />
+      <View style={{ flex: 1 }}></View>
+      <DialogFooter />
     </View>
   );
 };

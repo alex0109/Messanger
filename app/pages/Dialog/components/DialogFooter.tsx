@@ -2,13 +2,18 @@ import { Ionicons } from "@expo/vector-icons";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableHighlight, TextInput } from "react-native";
 
+import { useNavigation, useTheme } from "@react-navigation/native";
+
 import type { FC } from "react";
+import colors from "@/shared/assets/styles/colors";
 
 //Входящие пропсы надо типизировать
 const Footer: FC = ({ setData, data }) => {
   //Отделяй константы, функции и методы энтерами
   //Константы групируй и отделяй между собой тоже, стейты отдельно, другие хуки отдельно(сортируй по библиотекам, например)
   const [input, setInput] = useState("");
+
+  const colors = useTheme().colors;
 
   useEffect(() => {}, [input]);
 
@@ -23,25 +28,25 @@ const Footer: FC = ({ setData, data }) => {
   };
 
   return (
-    <View style={style.sendBar}>
+    <View style={[style.sendBar, { backgroundColor: colors.footer }]}>
       <TextInput
         multiline
         placeholder="Type..."
-        style={style.msgInput}
-        cursorColor="black"
+        placeholderTextColor={colors.grey}
+        style={[style.msgInput, { color: colors.adaptiveText }]}
+        cursorColor={colors.adaptiveText}
         defaultValue={input}
         onChangeText={(userInput) => setInput(userInput)}
       />
-      <View style={style.separator} />
+      <View style={[style.separator, { backgroundColor: colors.darkGrey }]} />
       <TouchableHighlight
         style={style.sendButton}
         onPress={() => sendMessageHandler()}
-        underlayColor="#c0c0c0"
       >
         <Ionicons
           name="send"
           size={24}
-          color="black"
+          color={colors.blue}
           style={style.buttonIcon}
         />
       </TouchableHighlight>

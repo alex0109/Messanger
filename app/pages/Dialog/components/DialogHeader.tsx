@@ -1,5 +1,5 @@
 import { AntDesign, Entypo } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
@@ -9,13 +9,15 @@ const DialogHeader: FC = () => {
   //Для навигации в приложении
   const navigation = useNavigation();
 
+  const colors = useTheme().colors;
+
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, { backgroundColor: colors.header }]}>
       <TouchableOpacity
         onPress={() => navigation.goBack()}
-        style={[styles.fullAlign]}
+        style={[styles.fullAlign, { marginHorizontal: 15 }]}
       >
-        <AntDesign name="arrowleft" size={24} color="black" />
+        <AntDesign name="arrowleft" size={24} color={colors.white} />
       </TouchableOpacity>
       <View style={[{ flex: 1, borderRadius: 90 }, styles.fullAlign]}>
         <Image
@@ -26,12 +28,14 @@ const DialogHeader: FC = () => {
         />
       </View>
       <View style={[{ flex: 4 }, styles.topStatus]}>
-        <Text style={styles.username}>Username</Text>
-        <Text style={styles.timeStatus}>last time 09:32</Text>
+        <Text style={[styles.username, { color: colors.white }]}>Username</Text>
+        <Text style={[styles.timeStatus, { color: colors.lightGrey }]}>
+          last time 09:32
+        </Text>
       </View>
-      <View style={[{ flex: 1 }, styles.fullAlign]}>
-        <Entypo name="dots-three-vertical" size={24} color="black" />
-      </View>
+      <TouchableOpacity style={[{ flex: 1 }, styles.fullAlign]}>
+        <Entypo name="dots-three-vertical" size={24} color={colors.white} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -44,14 +48,12 @@ const styles = StyleSheet.create({
     height: 50,
     width: "100%",
     alignItems: "center",
-    backgroundColor: "#5698FB",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
   userAvatar: {
     height: "80%",
-    width: "80%",
-    backgroundColor: "#4265E1",
+    aspectRatio: 1,
     borderRadius: 30,
   },
   topStatus: {

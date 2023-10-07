@@ -7,58 +7,106 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import { useTheme } from "@react-navigation/native";
 
 import type { FC } from "react";
 
-const Settings: FC = () => (
-  <View style={style.container}>
-    {/* блок редактирования фото */}
-    <View style={style.photoEditBlock}>
-      <View
-        style={{
-          height: 136,
-          width: 136,
-          borderRadius: 70,
-          backgroundColor: "#D9D9D9",
-        }}
-      />
-      <TouchableOpacity style={{ padding: 10 }}>
-        <Text style={style.photoEditText}>Edit photo</Text>
-      </TouchableOpacity>
-    </View>
-    {/* блок настроек данных пользователя */}
-    <View style={style.infoEditBlock}>
-      <Text style={style.textInfo}>Username</Text>
-      <TextInput style={style.inputsInfo} defaultValue="Username" />
+const Settings: FC = () => {
+  const colors = useTheme().colors;
 
-      <Text style={style.textInfo}>Email</Text>
-      <TextInput style={style.inputsInfo} defaultValue="Email" />
+  return (
+    <View style={[style.container, { backgroundColor: colors.mainBackground }]}>
+      {/* блок редактирования фото */}
+      <View style={style.photoEditBlock}>
+        <View
+          style={{
+            height: 136,
+            width: 136,
+            borderRadius: 70,
+            backgroundColor: "#D9D9D9",
+          }}
+        />
+        <TouchableOpacity style={{ padding: 10 }}>
+          <Text style={[style.photoEditText, { color: colors.blue }]}>
+            Edit photo
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {/* блок настроек данных пользователя */}
+      <View style={style.infoEditBlock}>
+        <Text style={[style.textInfo, { color: colors.labelGrey }]}>
+          Username
+        </Text>
+        <TextInput
+          style={[style.inputsInfo, { color: colors.adaptiveText }]}
+          defaultValue="Username"
+        />
 
-      <Text style={style.textInfo}>Bio</Text>
-      <TextInput style={style.inputsInfo} defaultValue="Bio" />
+        <Text style={[style.textInfo, { color: colors.labelGrey }]}>Email</Text>
+        <TextInput
+          style={[style.inputsInfo, { color: colors.adaptiveText }]}
+          defaultValue="Email"
+        />
+
+        <Text style={[style.textInfo, { color: colors.labelGrey }]}>Bio</Text>
+        <TextInput
+          style={[style.inputsInfo, { color: colors.adaptiveText }]}
+          defaultValue="Bio"
+        />
+      </View>
+      {/* блок настрое приложения */}
+      <View style={style.appSettingsBlock}>
+        <Text style={[style.settingsMainText, { color: colors.adaptiveText }]}>
+          Settings
+        </Text>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons
+            name="md-chatbubbles-sharp"
+            size={24}
+            color={colors.adaptiveText}
+          />
+          <Text style={[style.settingsText, { color: colors.adaptiveText }]}>
+            Chat view
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons
+            name="globe-outline"
+            size={24}
+            color={colors.adaptiveText}
+          />
+          <Text style={[style.settingsText, { color: colors.adaptiveText }]}>
+            Language
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons
+            name="ios-lock-closed"
+            size={24}
+            color={colors.adaptiveText}
+          />
+          <Text style={[style.settingsText, { color: colors.adaptiveText }]}>
+            Privacy & Security
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons name="pie-chart" size={24} color={colors.adaptiveText} />
+          <Text style={[style.settingsText, { color: colors.adaptiveText }]}>
+            Data & Storage
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons
+            name="log-out-outline"
+            size={24}
+            color={colors.adaptiveText}
+          />
+          <Text style={[style.logOutText, { color: colors.red }]}>Log Out</Text>
+        </TouchableOpacity>
+      </View>
     </View>
-    {/* блок настрое приложения */}
-    <View style={style.appSettingsBlock}>
-      <Text style={style.settingsMainText}>Settings</Text>
-      <TouchableOpacity style={style.iconTextBlock}>
-        <Ionicons name="md-chatbubbles-sharp" size={24} color="black" />
-        <Text style={style.settingsText}>Chat view</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={style.iconTextBlock}>
-        <Ionicons name="globe-outline" size={24} color="black" />
-        <Text style={style.settingsText}>Language</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={style.iconTextBlock}>
-        <Ionicons name="ios-lock-closed" size={24} color="black" />
-        <Text style={style.settingsText}>Privacy & Security</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={style.iconTextBlock}>
-        <Ionicons name="pie-chart" size={24} color="black" />
-        <Text style={style.settingsText}>Data & Storage</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-);
+  );
+};
 
 export default Settings;
 
@@ -68,7 +116,6 @@ const style = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "#F1F1F1",
   },
   photoEditBlock: {
     flexDirection: "column",
@@ -76,7 +123,6 @@ const style = StyleSheet.create({
     marginVertical: 28,
   },
   photoEditText: {
-    color: "#2E84E8",
     fontWeight: "bold",
     fontSize: 16,
   },
@@ -92,34 +138,37 @@ const style = StyleSheet.create({
     borderColor: "#9D9D9D",
     fontSize: 16,
     fontWeight: "500",
-    color: "#000000",
   },
   textInfo: {
     marginTop: 10,
     fontSize: 13,
     fontWeight: "500",
-    color: "#9D9D9D",
   },
   appSettingsBlock: {
+    flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    margin: 50,
+    justifyContent: "space-between",
+    margin: 30,
   },
   settingsText: {
     fontSize: 18,
     fontWeight: "500",
-    color: "#000000",
     marginHorizontal: 10,
   },
   iconTextBlock: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 15,
+    marginVertical: 10,
   },
   settingsMainText: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#000000",
     marginVertical: 15,
+  },
+  logOutText: {
+    fontSize: 18,
+    fontWeight: "700",
+    marginHorizontal: 10,
   },
 });
