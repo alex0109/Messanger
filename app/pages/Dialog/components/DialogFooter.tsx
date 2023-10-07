@@ -32,13 +32,13 @@ const Footer: FC = ({ setData, data }) => {
       <TextInput
         multiline
         placeholder="Type..."
-        placeholderTextColor={colors.grey}
+        placeholderTextColor={colors.adaptiveGrey}
         style={[style.msgInput, { color: colors.adaptiveText }]}
         cursorColor={colors.adaptiveText}
         defaultValue={input}
         onChangeText={(userInput) => setInput(userInput)}
       />
-      <View style={[style.separator, { backgroundColor: colors.darkGrey }]} />
+      <View style={[style.separator, { backgroundColor: colors.adaptiveGrey }]} />
       <TouchableHighlight
         style={style.sendButton}
         onPress={() => sendMessageHandler()}

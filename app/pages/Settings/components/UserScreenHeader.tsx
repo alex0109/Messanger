@@ -25,13 +25,13 @@ const UserScreenHeader: FC = () => {
         }}
         onPress={() => navigation.goBack()}
       >
-        <MaterialCommunityIcons name="arrow-left" size={18} color="white" />
+        <MaterialCommunityIcons name="arrow-left" size={18} color={colors.white} />
       </TouchableOpacity>
       <View style={{ flex: 1, justifyContent: "center" }}>
         <Text style={styles.hederText}>user_name</Text>
       </View>
       <TouchableOpacity style={{ justifyContent: "flex-end" }}>
-        <MaterialCommunityIcons name="dots-vertical" size={18} color="white" />
+        <MaterialCommunityIcons name="dots-vertical" size={18} color={colors.white} />
       </TouchableOpacity>
     </View>
   );

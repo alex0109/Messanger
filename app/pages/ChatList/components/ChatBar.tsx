@@ -60,7 +60,7 @@ const ChatBar: FC<ChatBarProps> = ({ id, userName, message, archived }) => {
           </Text>
         </View>
       </View>
-      <Text style={[style.chatItemTime, { color: colors.grey }]}>11:30</Text>
+      <Text style={[style.chatItemTime, { color: colors.adaptiveGrey }]}>11:30</Text>
       <View
         style={[style.chatItemUnreadedMsg, { backgroundColor: colors.blue }]}
       >

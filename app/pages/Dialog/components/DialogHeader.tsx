@@ -29,7 +29,7 @@ const DialogHeader: FC = () => {
       </View>
       <View style={[{ flex: 4 }, styles.topStatus]}>
         <Text style={[styles.username, { color: colors.white }]}>Username</Text>
-        <Text style={[styles.timeStatus, { color: colors.lightGrey }]}>
+        <Text style={[styles.timeStatus, { color: colors.adaptiveGrey }]}>
           last time 09:32
         </Text>
       </View>

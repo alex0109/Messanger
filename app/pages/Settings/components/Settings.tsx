@@ -34,7 +34,7 @@ const Settings: FC = () => {
       </View>
       {/* блок настроек данных пользователя */}
       <View style={style.infoEditBlock}>
-        <Text style={[style.textInfo, { color: colors.labelGrey }]}>
+        <Text style={[style.textInfo, { color: colors.adaptiveGrey }]}>
           Username
         </Text>
         <TextInput
@@ -42,13 +42,13 @@ const Settings: FC = () => {
           defaultValue="Username"
         />
 
-        <Text style={[style.textInfo, { color: colors.labelGrey }]}>Email</Text>
+        <Text style={[style.textInfo, { color: colors.adaptiveGrey }]}>Email</Text>
         <TextInput
           style={[style.inputsInfo, { color: colors.adaptiveText }]}
           defaultValue="Email"
         />
 
-        <Text style={[style.textInfo, { color: colors.labelGrey }]}>Bio</Text>
+        <Text style={[style.textInfo, { color: colors.adaptiveGrey }]}>Bio</Text>
         <TextInput
           style={[style.inputsInfo, { color: colors.adaptiveText }]}
           defaultValue="Bio"

@@ -46,7 +46,7 @@ const CustomDrawerContent: FC = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
-            <Text style={{ color: colors.labelGrey }}>@user_login</Text>
+            <Text style={{ color: colors.adaptiveGrey }}>@user_login</Text>
           </TouchableOpacity>
         </View>
         <View style={{ height: "100%", width: "15%", paddingVertical: 10 }}>

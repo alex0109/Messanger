@@ -20,7 +20,7 @@ const UserScreen: FC = () => {
       </View>
       <View style={{ width: "100%", alignItems: "center" }}>
         <View style={styles.description}>
-          <Text style={{ fontSize: 13, color: colors.grayDark }}>Bio </Text>
+          <Text style={{ fontSize: 13, color: colors.adaptiveGrey }}>Bio </Text>
           <Text
             style={{
               fontSize: 16,
@@ -32,19 +32,19 @@ const UserScreen: FC = () => {
           </Text>
         </View>
         <View
-          style={[styles.buttonsContainer, { borderColor: colors.grayDark }]}
+          style={[styles.buttonsContainer, { borderColor: colors.adaptiveGrey }]}
         >
           <TouchableOpacity
             style={[styles.button, { backgroundColor: colors.blue }]}
           >
-            <Text style={[styles.buttonText, { color: colors.whiter }]}>
+            <Text style={[styles.buttonText, { color: colors.white }]}>
               Open Chat
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, { backgroundColor: colors.success }]}
           >
-            <Text style={[styles.buttonText, { color: colors.whiter }]}>
+            <Text style={[styles.buttonText, { color: colors.white }]}>
               Add Friend
             </Text>
           </TouchableOpacity>
@@ -95,7 +95,7 @@ const UserScreen: FC = () => {
         {/* В будущем историю нужно будет отделить в отдельную компоненту */}
         {/* для каждого вида истории нужна будет своя компонента */}
         <View style={styles.history}>
-          <Text style={[styles.historyText, { color: colors.grayDark }]}>
+          <Text style={[styles.historyText, { color: colors.adaptiveGrey }]}>
             No history yet
           </Text>
         </View>
@@ -103,7 +103,7 @@ const UserScreen: FC = () => {
 
       <View style={styles.blockButtonContainer}>
         <TouchableOpacity
-          style={[styles.blockButton, { borderColor: colors.grayDark }]}
+          style={[styles.blockButton, { borderColor: colors.adaptiveGrey }]}
         >
           <Text style={styles.blockButtonText}>Block user</Text>
         </TouchableOpacity>
