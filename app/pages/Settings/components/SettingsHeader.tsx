@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import React from "react";
 import {
   View,
@@ -14,16 +14,20 @@ import type { FC } from "react";
 const SettingsHeader: FC = () => {
   //Для навигации в приложении
   const navigation = useNavigation();
+  const colors = useTheme().colors;
 
   return (
     <View>
-      <StatusBar backgroundColor="#5698FB" barStyle="dark-content" />
-      <View style={style.header}>
+      <StatusBar
+        backgroundColor={colors.themeColorBlock}
+        barStyle="dark-content"
+      />
+      <View style={[style.header, { backgroundColor: colors.themeColorBlock }]}>
         <TouchableOpacity
           style={style.headerButtons}
           onPress={() => navigation.goBack()}
         >
-          <Ionicons name="arrow-back" size={25} color="black" />
+          <Ionicons name="arrow-back" size={25} color={colors.white} />
         </TouchableOpacity>
         <TouchableOpacity style={style.headerButtons}>
           <Text style={style.saveBtn}>Save</Text>
@@ -37,7 +41,7 @@ const style = StyleSheet.create({
   header: {
     width: "100%",
     height: 50,
-    backgroundColor: "#5698FB",
+
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
     flexDirection: "row",
@@ -52,7 +56,6 @@ const style = StyleSheet.create({
   saveBtn: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#FFFFFF",
   },
 });
 

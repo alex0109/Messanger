@@ -1,34 +1,52 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View,
   StyleSheet,
+  Alert,
 } from "react-native";
+
+import { AuthContext } from "@/shared/lib/providers/AuthProvider";
 
 import type * as StackNavigator from "@shared/lib/navigation/StackNavigator";
 
+const url = process.env.EXPO_PUBLIC_LOCAL_URL;
+
 export default function SignUpScreen() {
-  const [emailAddress, setEmailAddress] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [securePassword, setSecurePassword] = useState(true);
   const [secureConfirmPassword, setSecureConfirmPassword] = useState(true);
 
+  const { authenticate } = useContext(AuthContext);
+
   const navigation = useNavigation<StackNavigator.RootStackParamList>();
 
   const onSignUpPress = async () => {
+    console.log(url);
+
     if (password !== confirmPassword) {
       return;
     }
     try {
-      console.log("Created account");
+      const user = {
+        email,
+        password,
+      };
+
+      await axios.post(`${url}/register`, user).then(() => {
+        Alert.alert("Successfully registered✅");
+      });
     } catch (err: any) {
       console.log(err);
+      Alert.alert("Error while registring⛔️");
     }
   };
 
@@ -42,9 +60,9 @@ export default function SignUpScreen() {
           <View style={styles.textInput}>
             <TextInput
               autoCapitalize="none"
-              value={emailAddress}
+              value={email}
               placeholder="Email"
-              onChangeText={(email) => setEmailAddress(email)}
+              onChangeText={(email) => setEmail(email)}
               placeholderTextColor="#9D9D9D"
               style={styles.input}
             />

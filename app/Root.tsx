@@ -22,8 +22,8 @@ export default function Root() {
 
   return (
     <NavigationContainer theme={currentTheme(theme)}>
-      <DrawerNavigator />
-      {/* <AuthStackNavigator /> */}
+      {/* <DrawerNavigator /> */}
+      <AuthStackNavigator />
     </NavigationContainer>
   );
 }

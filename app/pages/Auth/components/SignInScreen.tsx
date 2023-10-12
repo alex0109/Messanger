@@ -1,30 +1,47 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View,
   StyleSheet,
+  Alert,
 } from "react-native";
 
 import type { RootStackParamList } from "@/shared/lib/navigation/StackNavigator";
+import { AuthContext } from "@/shared/lib/providers/AuthProvider";
 
 export default function SignInScreen() {
-  const [emailAddress, setEmailAddress] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [securePassword, setSecurePassword] = useState(true);
 
+  const { authenticate } = useContext(AuthContext);
+
   const navigation = useNavigation<RootStackParamList>();
 
   const onSignInPress = async () => {
-    try {
-      console.log("Loged in");
-    } catch (err: any) {
-      console.log(err);
-    }
+    const user = {
+      email,
+      password,
+    };
+
+    axios
+      .post("http://localhost:8000/login", user)
+      .then((response) => {
+        console.log(response);
+        const token = response.data.token;
+        authenticate(token);
+      })
+      .catch((error) => {
+        Alert.alert("Login Error", "Invalid email or password");
+        console.log("Login Error", error);
+      });
   };
 
   return (
@@ -37,10 +54,10 @@ export default function SignInScreen() {
           <View style={styles.textInput}>
             <TextInput
               autoCapitalize="none"
-              value={emailAddress}
+              value={email}
               placeholderTextColor="#9D9D9D"
               placeholder="Email"
-              onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
+              onChangeText={(emailAddress) => setEmail(emailAddress)}
               style={styles.input}
             />
           </View>

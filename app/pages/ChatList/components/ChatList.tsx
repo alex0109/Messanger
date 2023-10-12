@@ -1,29 +1,79 @@
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import { useTheme } from "@react-navigation/native";
+import React, { useContext, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 
-import ChatListBase from "@/pages/ChatList/components/ChatBar";
+import ChatBar from "@/pages/ChatList/components/ChatBar";
 import { useActions } from "@/shared/lib/hooks/useActions";
 import { useTypedSelector } from "@/shared/lib/hooks/useTypedSelector";
+import jwt_decode from "jwt-decode";
+
+import ChatRequest from "./ChatRequest";
 
 import type { FC } from "react";
+import axios from "axios";
+import { AuthContext } from "@/shared/lib/providers/AuthProvider";
 
 const ChatList: FC = () => {
   const chats = useTypedSelector((state) => state.chats);
   const { addChatHandler } = useActions();
+
+  const { token } = useContext(AuthContext);
+
+  const colors = useTheme().colors;
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const decodedToken = jwt_decode(token);
+      const userId = decodedToken.userId;
+      setUserId(userId);
+
+      axios
+        .get(`http://localhost:8000/users/${userId}`)
+        .then((response) => {
+          setUsers(response.data);
+        })
+        .catch((error) => {
+          console.log("error retrieving users", error);
+        });
+    };
+
+    fetchUsers();
+  }, []);
+
   return (
     //Углубись в то как работает flexbox позиционирование
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: colors.themeColor }}>
       <ScrollView>
-        {chats.map((chat) => (
-          <ChatListBase
-            key={chat.userID}
-            id={chat.userID}
-            userName={chat.userName}
-            message={chat.message}
-            archived={chat.isArchived}
-          />
-        ))}
+        {chats.map((chat) =>
+          chat.isRequestApproved === false ? (
+            <ChatRequest
+              key={chat.userID}
+              userID={chat.userID}
+              userName={chat.userName}
+              isRequestApproved={chat.isRequestApproved}
+            />
+          ) : null
+        )}
+        <View
+          style={{
+            width: "85%",
+            alignSelf: "center",
+            borderBottomWidth: 1,
+            borderColor: colors.gray,
+          }}
+        />
+        {chats.map((chat) =>
+          chat.isRequestApproved ? (
+            <ChatBar
+              key={chat.userID}
+              userID={chat.userID}
+              userName={chat.userName}
+              message={chat.message}
+              isArchived={chat.isArchived}
+            />
+          ) : null
+        )}
       </ScrollView>
 
       <TouchableOpacity
