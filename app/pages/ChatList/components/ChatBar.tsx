@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
@@ -16,7 +16,7 @@ interface ChatBarProps {
 const ChatBar: FC<ChatBarProps> = ({ id, userName, message, archived }) => {
   // const [isUnread, setIsUnread] = useState(false);
   const [isArchived, setIsArchived] = useState(archived);
-
+  const colors = useTheme().colors;
   const navigation = useNavigation();
 
   const { archiveChatHandler } = useActions();
@@ -36,7 +36,12 @@ const ChatBar: FC<ChatBarProps> = ({ id, userName, message, archived }) => {
       onPress={() => navigation.navigate("DialogStack", {})}
       onLongPress={() => handleClick()}
     >
-      <View style={style.chatItemContent}>
+      <View
+        style={[
+          style.chatItemContent,
+          { backgroundColor: colors.themeColorChatBlock },
+        ]}
+      >
         <Image
           source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
           width={60}
@@ -44,8 +49,15 @@ const ChatBar: FC<ChatBarProps> = ({ id, userName, message, archived }) => {
           borderRadius={30}
         />
         <View style={{ flexDirection: "column", width: "75%" }}>
-          <Text style={style.chatItemUserName}>{userName}</Text>
-          <Text style={style.chatItemText} numberOfLines={2}>
+          <Text
+            style={[style.chatItemUserName, { color: colors.themeColorText }]}
+          >
+            {userName}
+          </Text>
+          <Text
+            style={[style.chatItemText, { color: colors.themeColorText }]}
+            numberOfLines={2}
+          >
             {isArchived
               ? "archived"
               : "najlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfba"}
@@ -57,7 +69,7 @@ const ChatBar: FC<ChatBarProps> = ({ id, userName, message, archived }) => {
         <Text
           allowFontScaling
           adjustsFontSizeToFit
-          style={style.chatItemUnreadMeassageText}
+          style={[style.chatItemUnreadMeassageText, { color: colors.white }]}
         >
           1
         </Text>
@@ -90,14 +102,12 @@ const style = StyleSheet.create({
   chatItemUnreadMeassageText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#FFFFFF",
   },
   chatItemContent: {
     marginTop: 10,
     padding: 10,
     width: "100%",
     height: 65,
-    backgroundColor: "#C6E0FE",
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
@@ -106,13 +116,11 @@ const style = StyleSheet.create({
   chatItemUserName: {
     fontSize: 14,
     fontWeight: "700",
-    color: "black",
     marginVertical: 4,
   },
   chatItemText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#4F4F4F",
   },
   chatItemTime: {
     fontSize: 12,

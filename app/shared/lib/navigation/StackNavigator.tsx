@@ -10,6 +10,7 @@ import ChatList from "@/pages/ChatList/components/ChatList";
 import ChatListHeader from "@/pages/ChatList/components/ChatListHeader";
 
 import DialogHeader from "@/pages/Dialog/components/DialogHeader";
+import EmptyChat from "@/pages/Dialog/components/EmptyDialog";
 import SettingsPage from "@/pages/Settings/components/Settings";
 import SettingsHeader from "@/pages/Settings/components/SettingsHeader";
 import UserScreen from "@/pages/Settings/components/UserScreen";
@@ -47,14 +48,17 @@ const InitialStackNavigator: FC = () => {
       <InitialStack.Screen
         name="DialogStack"
         component={Empty}
-        options={{ header: () => <DialogHeader /> }}
+        options={{
+          header: () => <DialogHeader />,
+          cardStyle: { backgroundColor: colors.themeColor },
+        }}
       />
       <InitialStack.Screen
         name="UserStack"
         component={UserScreen}
         options={{
           header: () => <UserScreenHeader />,
-          cardStyle: { backgroundColor: colors.themeColor },
+          cardStyle: { backgroundColor: "#1D9EBA" },
         }}
       />
       <InitialStack.Screen

@@ -7,13 +7,15 @@ import { useActions } from "@/shared/lib/hooks/useActions";
 import { useTypedSelector } from "@/shared/lib/hooks/useTypedSelector";
 
 import type { FC } from "react";
+import { useTheme } from "@react-navigation/native";
 
 const ChatList: FC = () => {
+  const colors = useTheme().colors;
   const chats = useTypedSelector((state) => state.chats);
   const { addChatHandler } = useActions();
   return (
     //Углубись в то как работает flexbox позиционирование
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: colors.themeColor }}>
       <ScrollView>
         {chats.map((chat) => (
           <ChatListBase
@@ -27,7 +29,7 @@ const ChatList: FC = () => {
       </ScrollView>
 
       <TouchableOpacity
-        style={style.addButton}
+        style={[style.addButton, { backgroundColor: colors.headerColor }]}
         onPress={() =>
           addChatHandler({
             id: new Date().getTime().toString(),
@@ -46,7 +48,6 @@ export default ChatList;
 
 const style = StyleSheet.create({
   addButton: {
-    backgroundColor: "#5698FB",
     borderRadius: 60,
     height: 60,
     width: 60,

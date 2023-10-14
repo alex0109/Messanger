@@ -1,17 +1,25 @@
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
 import type { FC } from "react";
 
-const EmptyChat: FC = () => (
-  <View style={style.emptyBlock}>
-    <Text style={style.title}>Chat’s clear!</Text>
-    <Text style={style.subtitle}>
-      Send your first message to start a dialog ;)
-    </Text>
-    <Text style={style.text}>wish you good luck</Text>
-  </View>
-);
+const EmptyChat: FC = () => {
+  const colors = useTheme().colors;
+  return (
+    <View
+      style={[style.emptyBlock, { backgroundColor: colors.themeColorBlock }]}
+    >
+      <Text style={[style.title, { color: colors.themeColorText }]}>
+        Chat’s clear!
+      </Text>
+      <Text style={[style.subtitle, { color: colors.themeColorText }]}>
+        Send your first message to start a dialog ;)
+      </Text>
+      <Text style={style.text}>wish you good luck</Text>
+    </View>
+  );
+};
 
 export default EmptyChat;
 
@@ -19,7 +27,6 @@ const style = StyleSheet.create({
   emptyBlock: {
     width: 320,
     height: 350,
-    backgroundColor: "white",
     borderRadius: 10,
     flexDirection: "column",
     justifyContent: "space-between",
@@ -29,13 +36,11 @@ const style = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "700",
-    color: "black",
     marginTop: 40,
   },
   subtitle: {
     fontSize: 16,
     fontWeight: "600",
-    color: "black",
     width: "75%",
     textAlign: "center",
   },

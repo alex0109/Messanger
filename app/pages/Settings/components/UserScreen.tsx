@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import React from "react";
 import {
@@ -14,42 +15,43 @@ const UserScreen: FC = () => {
   const colors = useTheme().colors;
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.themeColor }}>
-      <View style={styles.userAvatarContainer}>
-        {/* Это должга быть картинка а не просто view */}
-        <View style={styles.userAvatar} />
-      </View>
+      {/* Это должга быть картинка а не просто view */}
+      <View style={styles.userAvatar} />
+
       <View style={{ width: "100%", alignItems: "center" }}>
-        <View style={styles.description}>
-          <Text style={{ fontSize: 13, color: colors.grayDark }}>Bio </Text>
+        <View
+          style={[styles.description, { borderBottomColor: colors.grayDark }]}
+        >
           <Text
             style={{
-              fontSize: 16,
-              fontWeight: "500",
+              fontSize: 32,
+              fontWeight: "600",
               color: colors.themeColorText,
             }}
           >
-            I love flowers🌸
+            User Name, 19 😎
           </Text>
         </View>
-        <View
-          style={[styles.buttonsContainer, { borderColor: colors.grayDark }]}
+        <Text
+          style={[
+            styles.description,
+            {
+              fontSize: 16,
+              fontWeight: "600",
+              color: colors.grayDark,
+            },
+          ]}
         >
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: colors.blue }]}
-          >
-            <Text style={[styles.buttonText, { color: colors.white }]}>
-              Open Chat
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: colors.success }]}
-          >
-            <Text style={[styles.buttonText, { color: colors.white }]}>
-              Add Friend
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.chatHistoryButtonsContainer}>
+          Hi, my name is (what?)My name is (who?)My name is (chka-chka, Slim
+          Shady)Hi, my name is (huh?)My name is (what?)My name is (chka-chka,
+          Slim Shady)
+        </Text>
+        <View
+          style={[
+            styles.chatHistoryButtonsContainer,
+            { borderTopColor: colors.grayDark },
+          ]}
+        >
           <TouchableOpacity>
             <Text
               style={[
@@ -99,13 +101,11 @@ const UserScreen: FC = () => {
             No history yet
           </Text>
         </View>
-      </View>
-
-      <View style={styles.blockButtonContainer}>
-        <TouchableOpacity
-          style={[styles.blockButton, { borderColor: colors.grayDark }]}
-        >
-          <Text style={styles.blockButtonText}>Block user</Text>
+        <TouchableOpacity style={styles.chatButton}>
+          <Ionicons name="chatbox-ellipses" size={31} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.friendButton}>
+          <Ionicons name="person-add" size={31} color="white" />
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -115,22 +115,40 @@ const UserScreen: FC = () => {
 export default UserScreen;
 
 const styles = StyleSheet.create({
-  userAvatarContainer: {
-    justifyContent: "center",
+  chatButton: {
+    backgroundColor: "#5698FB",
+    borderRadius: 70,
+    height: 70,
+    width: 70,
+    position: "absolute",
+    bottom: 35,
+    right: 35,
     alignItems: "center",
-    marginVertical: 37,
+    justifyContent: "center",
+  },
+  friendButton: {
+    backgroundColor: "#45932A",
+    borderRadius: 70,
+    height: 70,
+    width: 70,
+    position: "absolute",
+    bottom: 35,
+    right: 35,
+    alignItems: "center",
+    justifyContent: "center",
   },
   userAvatar: {
-    height: 207,
-    width: 207,
-    backgroundColor: "#A1C9DA",
-    borderRadius: 180,
+    height: 375,
+    width: "100%",
+    backgroundColor: "#1D9EBA",
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30,
   },
   description: {
     width: "80%",
-    marginVertical: 10,
     flexDirection: "row",
     alignItems: "center",
+    marginVertical: 10,
   },
   buttonsContainer: {
     alignItems: "center",
@@ -140,22 +158,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderTopWidth: 1,
   },
-  button: {
-    width: "80%",
-    borderRadius: 30,
-    height: 40,
-    marginBottom: 9,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    fontWeight: "700",
-    fontSize: 16,
-  },
   chatHistoryButtonsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     width: "80%",
+    borderTopWidth: 1,
   },
   chatHistoryButtonText: {
     fontSize: 16,
@@ -169,20 +176,5 @@ const styles = StyleSheet.create({
   historyText: {
     fontWeight: "500",
     fontSize: 20,
-  },
-  blockButtonContainer: {
-    padding: 10,
-    width: "100%",
-    alignItems: "center",
-  },
-  blockButton: {
-    alignItems: "center",
-    borderTopWidth: 1,
-    width: "80%",
-  },
-  blockButtonText: {
-    color: "#DC5656",
-    fontSize: 20,
-    fontWeight: "700",
   },
 });

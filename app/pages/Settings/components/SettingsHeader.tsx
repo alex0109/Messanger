@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import React from "react";
 import {
   View,
@@ -12,20 +12,21 @@ import {
 import type { FC } from "react";
 
 const SettingsHeader: FC = () => {
+  const colors = useTheme().colors;
   const navigation = useNavigation();
 
   return (
-    <View>
+    <View style={{ backgroundColor: colors.themeColor }}>
       <StatusBar backgroundColor="#5698FB" barStyle="dark-content" />
-      <View style={style.header}>
+      <View style={[style.header, { backgroundColor: colors.headerColor }]}>
         <TouchableOpacity
           style={style.headerButtons}
           onPress={() => navigation.goBack()}
         >
-          <Ionicons name="arrow-back" size={25} color="black" />
+          <Ionicons name="arrow-back" size={25} color={colors.white} />
         </TouchableOpacity>
         <TouchableOpacity style={style.headerButtons}>
-          <Text style={style.saveBtn}>Save</Text>
+          <Text style={[style.saveBtn, { color: colors.white }]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -36,7 +37,6 @@ const style = StyleSheet.create({
   header: {
     width: "100%",
     height: 50,
-    backgroundColor: "#5698FB",
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
     flexDirection: "row",
@@ -51,7 +51,6 @@ const style = StyleSheet.create({
   saveBtn: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#FFFFFF",
   },
 });
 

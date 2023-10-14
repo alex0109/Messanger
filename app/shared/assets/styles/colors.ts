@@ -15,7 +15,9 @@ const light = {
   colors: {
     themeColor: "#F1F1F1",
     themeColorText: "#000",
+    themeColorChatBlock:"#C6E0FE",
     themeColorBlock:"#fff",
+    headerColor:"#1E70ED",
     ...commonColors,
   },
 };
@@ -25,6 +27,8 @@ const dark = {
     themeColor: "#1D1D1D",
     themeColorText: "#fff",
     themeColorBlock:"#282828",
+    themeColorChatBlock:"#282828",
+    headerColor:"#282828",
     ...commonColors,
   },
 };

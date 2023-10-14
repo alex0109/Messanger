@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import {
   View,
@@ -10,55 +11,101 @@ import {
 
 import type { FC } from "react";
 
-const Settings: FC = () => (
-  <View style={style.container}>
-    {/* блок редактирования фото */}
-    <View style={style.photoEditBlock}>
-      <View
-        style={{
-          height: 136,
-          width: 136,
-          borderRadius: 70,
-          backgroundColor: "#D9D9D9",
-        }}
-      />
-      <TouchableOpacity style={{ padding: 10 }}>
-        <Text style={style.photoEditText}>Edit photo</Text>
-      </TouchableOpacity>
-    </View>
-    {/* блок настроек данных пользователя */}
-    <View style={style.infoEditBlock}>
-      <Text style={style.textInfo}>Username</Text>
-      <TextInput style={style.inputsInfo} defaultValue="Username" />
+const Settings: FC = () => {
+  const colors = useTheme().colors;
+  return (
+    <View style={[style.container, { backgroundColor: colors.themeColor }]}>
+      {/* блок редактирования фото */}
+      <View style={style.photoEditBlock}>
+        <View
+          style={{
+            height: 136,
+            width: 136,
+            borderRadius: 70,
+            backgroundColor: "#D9D9D9",
+          }}
+        />
+        <TouchableOpacity style={{ padding: 10 }}>
+          <Text style={style.photoEditText}>Edit photo</Text>
+        </TouchableOpacity>
+      </View>
+      {/* блок настроек данных пользователя */}
+      <View style={style.infoEditBlock}>
+        <Text style={style.textInfo}>Username</Text>
+        <TextInput
+          style={[style.inputsInfo, { color: colors.themeColorText }]}
+          defaultValue="Username"
+        />
 
-      <Text style={style.textInfo}>Email</Text>
-      <TextInput style={style.inputsInfo} defaultValue="Email" />
+        <Text style={style.textInfo}>Email</Text>
+        <TextInput
+          style={[style.inputsInfo, { color: colors.themeColorText }]}
+          defaultValue="Email"
+        />
 
-      <Text style={style.textInfo}>Bio</Text>
-      <TextInput style={style.inputsInfo} defaultValue="Bio" />
+        <Text style={style.textInfo}>Bio</Text>
+        <TextInput
+          style={[style.inputsInfo, { color: colors.themeColorText }]}
+          defaultValue="Bio"
+        />
+      </View>
+      {/* блок настрое приложения */}
+      <View style={style.appSettingsBlock}>
+        <Text
+          style={[style.settingsMainText, { color: colors.themeColorText }]}
+        >
+          Settings
+        </Text>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons
+            name="md-chatbubbles-sharp"
+            size={24}
+            color={colors.themeColorText}
+          />
+          <Text style={[style.settingsText, { color: colors.themeColorText }]}>
+            Chat view
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons
+            name="globe-outline"
+            size={24}
+            color={colors.themeColorText}
+          />
+          <Text style={[style.settingsText, { color: colors.themeColorText }]}>
+            Language
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons
+            name="ios-lock-closed"
+            size={24}
+            color={colors.themeColorText}
+          />
+          <Text style={[style.settingsText, { color: colors.themeColorText }]}>
+            Privacy & Security
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons name="pie-chart" size={24} color={colors.themeColorText} />
+          <Text style={[style.settingsText, { color: colors.themeColorText }]}>
+            Data & Storage
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.iconTextBlock}>
+          <Ionicons
+            name="exit-outline"
+            size={24}
+            color={colors.themeColorText}
+          />
+          <Text style={[style.settingsText, { color: "#DC5656" }]}>
+            Log out
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
-    {/* блок настрое приложения */}
-    <View style={style.appSettingsBlock}>
-      <Text style={style.settingsMainText}>Settings</Text>
-      <TouchableOpacity style={style.iconTextBlock}>
-        <Ionicons name="md-chatbubbles-sharp" size={24} color="black" />
-        <Text style={style.settingsText}>Chat view</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={style.iconTextBlock}>
-        <Ionicons name="globe-outline" size={24} color="black" />
-        <Text style={style.settingsText}>Language</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={style.iconTextBlock}>
-        <Ionicons name="ios-lock-closed" size={24} color="black" />
-        <Text style={style.settingsText}>Privacy & Security</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={style.iconTextBlock}>
-        <Ionicons name="pie-chart" size={24} color="black" />
-        <Text style={style.settingsText}>Data & Storage</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-);
+  );
+};
 
 export default Settings;
 
@@ -68,7 +115,6 @@ const style = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "#F1F1F1",
   },
   photoEditBlock: {
     flexDirection: "column",
@@ -108,7 +154,6 @@ const style = StyleSheet.create({
   settingsText: {
     fontSize: 18,
     fontWeight: "500",
-    color: "#000000",
     marginHorizontal: 10,
   },
   iconTextBlock: {
@@ -119,7 +164,6 @@ const style = StyleSheet.create({
   settingsMainText: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#000000",
     marginVertical: 15,
   },
 });
