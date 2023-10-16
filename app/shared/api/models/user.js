@@ -13,13 +13,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  isActivated: {
-    type: Boolean,
-    default: false,
-  },
-  activationLink: {
-    type: String,
-  },
   friendRequest: [
     {
       type: Schema.Types.ObjectId,

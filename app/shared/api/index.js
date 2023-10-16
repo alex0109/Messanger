@@ -6,6 +6,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 
+const errorMiddleware = require("./middlewares/error-middleware");
 const router = require("./router");
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use("/api", router);
+app.use(errorMiddleware);
 
 mongoose
   .connect(
