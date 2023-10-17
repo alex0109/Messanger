@@ -3,6 +3,8 @@ import { useNavigation, useTheme } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
+import { LinearGradient } from 'expo-linear-gradient';
+
 import type { FC } from 'react';
 
 const DialogHeader: FC = () => {
@@ -12,7 +14,7 @@ const DialogHeader: FC = () => {
   const colors = useTheme().colors;
 
   return (
-    <View style={[styles.header, { backgroundColor: colors.header }]}>
+    <LinearGradient style={[styles.header]} colors={["#0C9622",colors.header]} end={{ x: 0.5, y: 0.7 }}>
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={[styles.fullAlign, { marginHorizontal: 15 }]}>
@@ -33,7 +35,7 @@ const DialogHeader: FC = () => {
       <TouchableOpacity style={[{ flex: 1 }, styles.fullAlign]}>
         <Entypo name='dots-three-vertical' size={24} color={colors.white} />
       </TouchableOpacity>
-    </View>
+    </LinearGradient>
   );
 };
 

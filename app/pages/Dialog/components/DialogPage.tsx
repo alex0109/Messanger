@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from '@react-navigation/native';
 
-import DialogFooter from "./DialogFooter";
-import DialogHeader from "./DialogHeader";
+import DialogFooter from './DialogFooter';
+import DialogHeader from './DialogHeader';
 
-import type { FC } from "react";
+import type { FC } from 'react';
 
 interface MessageItemProps {
   mess: string;
@@ -28,32 +28,41 @@ const DialogPage: FC = () => {
 
   const [mess, setMess] = useState([
     {
-      id: "1",
+      id: '1',
       myMess: true,
-      mess: "afasfdafdafd",
+      mess: 'afasfdafdafd',
     },
     {
-      id: "2",
+      id: '2',
       myMess: false,
-      mess: "afasfdafdafd",
+      mess: 'afasfdafdafd',
     },
     {
-      id: "3",
+      id: '3',
       myMess: false,
-      mess: "afasfdafdafd",
+      mess: 'afasfdafdafd',
     },
     {
-      id: "4",
+      id: '4',
       myMess: true,
-      mess: "afasfdafdafd",
+      mess: 'afasfdafdafd',
     },
   ]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.mainBackground }}>
+    <View style={{ flex: 1, backgroundColor: colors.mainBackground, position: 'relative' }}>
       {/* <FlatList /> */}
-      <View style={{ flex: 1 }}></View>
-      <DialogFooter />
+      <View style={{ flex: 1, zIndex: 0 }}>
+        <Image
+          source={{
+            uri: 'https://d1biw2rz2h5h5w.cloudfront.net/images/patterns/thumbs/detail/24147/Vertical-Chains.jpg',
+          }}
+          style={{ flex: 1 }}
+        />
+      </View>
+      <View style={{ zIndex: 1, position: 'absolute', width: '100%', bottom: 0 }}>
+        <DialogFooter />
+      </View>
     </View>
   );
 };
@@ -62,6 +71,6 @@ export default DialogPage;
 
 const style = StyleSheet.create({
   messageItem: {
-    backgroundColor: "purple",
+    backgroundColor: 'purple',
   },
 });

@@ -9,6 +9,8 @@ import {
   Keyboard,
 } from 'react-native';
 
+import { BlurView } from 'expo-blur';
+
 import { useNavigation, useTheme } from '@react-navigation/native';
 import EmojiSelector from 'react-native-emoji-selector';
 
@@ -42,8 +44,8 @@ const Footer: FC = ({ setData, data }) => {
   };
 
   return (
-    <View>
-      <View style={style.sendBar}>
+    <BlurView intensity={100}>
+      <BlurView style={[style.sendBar]} intensity={10}>
         <View style={[style.textInputBar, { backgroundColor: colors.footer }]}>
           <TouchableOpacity
             style={{ justifyContent: 'flex-end', alignItems: 'center', margin: 5 }}
@@ -60,13 +62,19 @@ const Footer: FC = ({ setData, data }) => {
             onChangeText={(userInput) => setInput(userInput)}
           />
         </View>
-        <TouchableHighlight
-          style={style.sendButton}
-          underlayColor={colors.mainBackground}
-          onPress={() => sendMessageHandler()}>
-          <Ionicons name='send' size={26} color={colors.blue} style={style.buttonIcon} />
-        </TouchableHighlight>
-      </View>
+        {input ? (
+          <TouchableHighlight
+            style={style.sendButton}
+            underlayColor={colors.mainBackground}
+            onPress={() => sendMessageHandler()}>
+            <Ionicons name='send' size={26} color={colors.blue} style={style.buttonIcon} />
+          </TouchableHighlight>
+        ) : (
+          <TouchableHighlight style={style.sendButton} underlayColor={colors.mainBackground}>
+            <Ionicons name='mic' size={26} color={colors.blue} style={style.buttonIcon} />
+          </TouchableHighlight>
+        )}
+      </BlurView>
       {showEmojiSelector && (
         <EmojiSelector
           style={{ height: 250 }}
@@ -75,7 +83,7 @@ const Footer: FC = ({ setData, data }) => {
           }}
         />
       )}
-    </View>
+    </BlurView>
   );
 };
 
@@ -91,7 +99,7 @@ const style = StyleSheet.create({
     alignSelf: 'center',
   },
   sendBar: {
-    marginHorizontal: 5,
+    paddingHorizontal: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',

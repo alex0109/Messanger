@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, StyleSheet, TouchableOpacity, ScrollView} from "react-native";
 
 import ChatListBase from "@/pages/ChatList/components/ChatBar";
 import { useActions } from "@/shared/lib/hooks/useActions";
