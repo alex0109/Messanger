@@ -10,11 +10,16 @@ const errorMiddleware = require("./middlewares/error-middleware");
 const router = require("./router");
 
 const app = express();
-const port = 3000;
+const port = process.env.API_PORT;
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://10.0.2.2:8000",
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use("/api", router);
