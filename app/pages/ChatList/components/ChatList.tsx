@@ -12,34 +12,12 @@ import ChatRequest from "./ChatRequest";
 
 import type { FC } from "react";
 import axios from "axios";
-import { AuthContext } from "@/shared/lib/providers/AuthProvider";
 
 const ChatList: FC = () => {
   const chats = useTypedSelector((state) => state.chats);
   const { addChatHandler } = useActions();
 
-  const { token } = useContext(AuthContext);
-
   const colors = useTheme().colors;
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const decodedToken = jwt_decode(token);
-      const userId = decodedToken.userId;
-      setUserId(userId);
-
-      axios
-        .get(`http://localhost:8000/users/${userId}`)
-        .then((response) => {
-          setUsers(response.data);
-        })
-        .catch((error) => {
-          console.log("error retrieving users", error);
-        });
-    };
-
-    fetchUsers();
-  }, []);
 
   return (
     //Углубись в то как работает flexbox позиционирование

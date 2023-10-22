@@ -3,8 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { Chat } from "../types/interfaces";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-//Все должно быть типизированным, если добавляешь параметры к пользователю,
-//то сначала описывай их в интерфейсе
 const initialState: Chat[] = [
   {
     userID: "1",

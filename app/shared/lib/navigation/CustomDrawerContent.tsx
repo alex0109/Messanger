@@ -1,5 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
 import {
@@ -11,7 +10,10 @@ import {
   StyleSheet,
 } from "react-native";
 
+import { useAppDispatch } from "../hooks/useAppDispatch";
 import { ThemeContext } from "../providers/ThemeProvider";
+
+import { logoutThunk } from "../store/user-thunks";
 
 import type { FC } from "react";
 
@@ -20,6 +22,8 @@ import type { FC } from "react";
 const CustomDrawerContent: FC = () => {
   const colors = useTheme().colors;
   const { theme, changeTheme } = useContext(ThemeContext);
+
+  const dispatch = useAppDispatch();
 
   const navigation = useNavigation();
 
@@ -84,6 +88,13 @@ const CustomDrawerContent: FC = () => {
         >
           <Ionicons name="settings" size={30} />
           <Text style={styles.drawerButtonText}>Settings</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.drawerButton}
+          onPress={() => dispatch(logoutThunk())}
+        >
+          <MaterialCommunityIcons name="logout" size={24} color="black" />
+          <Text style={styles.drawerButtonText}>Log out</Text>
         </TouchableOpacity>
       </View>
     </View>

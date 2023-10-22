@@ -1,7 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
@@ -11,7 +10,9 @@ import {
   Alert,
 } from "react-native";
 
-import { AuthContext } from "@/shared/lib/providers/AuthProvider";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
+
+import { registrationThunk } from "@/shared/lib/store/user-thunks";
 
 import type * as StackNavigator from "@shared/lib/navigation/StackNavigator";
 
@@ -25,25 +26,21 @@ export default function SignUpScreen() {
   const [securePassword, setSecurePassword] = useState(true);
   const [secureConfirmPassword, setSecureConfirmPassword] = useState(true);
 
-  const { authenticate } = useContext(AuthContext);
+  const dispatch = useAppDispatch();
 
   const navigation = useNavigation<StackNavigator.RootStackParamList>();
 
   const onSignUpPress = async () => {
-    console.log(url);
-
     if (password !== confirmPassword) {
       return;
     }
     try {
-      const user = {
+      const userData = {
         email,
         password,
       };
 
-      await axios.post(`${url}/register`, user).then(() => {
-        Alert.alert("Successfully registered✅");
-      });
+      dispatch(registrationThunk(userData));
     } catch (err: any) {
       console.log(err);
       Alert.alert("Error while registring⛔️");
@@ -124,7 +121,7 @@ export default function SignUpScreen() {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.googleButton}>
+      <TouchableOpacity disabled style={styles.googleButton}>
         <Text style={[{ color: "#4285F4" }, styles.googleText]}>G</Text>
         <Text style={[{ color: "#DB4437" }, styles.googleText]}>o</Text>
         <Text style={[{ color: "#F4B400" }, styles.googleText]}>o</Text>
@@ -132,7 +129,7 @@ export default function SignUpScreen() {
         <Text style={[{ color: "#0F9D58" }, styles.googleText]}>l</Text>
         <Text style={[{ color: "#DB4437" }, styles.googleText]}>e</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.facebookButton}>
+      <TouchableOpacity disabled style={styles.facebookButton}>
         <Text style={styles.facebookText}>Facebook</Text>
       </TouchableOpacity>
       <TouchableOpacity

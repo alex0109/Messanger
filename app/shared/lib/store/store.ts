@@ -5,8 +5,11 @@ import thunk from "redux-thunk";
 
 import { chatsReducer } from "@/pages/ChatList/lib/store/chatSlice";
 
+import { userReducer } from "./user-slice";
+
 const rootReducer = combineReducers({
   chats: chatsReducer,
+  user: userReducer,
 });
 
 const store = configureStore({

@@ -5,16 +5,13 @@ import React from "react";
 import { Provider } from "react-redux";
 
 import Root from "@/Root";
-import { AuthContextProvider } from "@/shared/lib/providers/AuthProvider";
 
 export default function App() {
   return (
     <Provider store={store}>
-      <AuthContextProvider>
-        <ThemeProvider>
-          <Root />
-        </ThemeProvider>
-      </AuthContextProvider>
+      <ThemeProvider>
+        <Root />
+      </ThemeProvider>
     </Provider>
   );
 }

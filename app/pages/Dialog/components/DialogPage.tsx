@@ -11,8 +11,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { AuthContext } from "@/shared/lib/providers/AuthProvider";
-
 import type { FC } from "react";
 
 interface MessageItemProps {
@@ -28,10 +26,8 @@ export const MessageItem: FC<MessageItemProps> = ({ mess, myMess }) => (
 
 const DialogPage: FC = () => {
   const [message, setMessage] = useState("");
-  const { userId, setUserId } = useContext(AuthContext);
-  const scrollViewRef = useRef(null);
 
-  const route = useRoute();
+  const scrollViewRef = useRef(null);
 
   const colors = useTheme().colors;
 
@@ -60,7 +56,7 @@ const DialogPage: FC = () => {
             fontSize: 36,
           }}
         >
-          {route.params.userID}
+          1
         </Text>
       </ScrollView>
 

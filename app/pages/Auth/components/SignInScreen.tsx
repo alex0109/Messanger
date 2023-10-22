@@ -1,19 +1,17 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
   TouchableOpacity,
   View,
   StyleSheet,
-  Alert,
 } from "react-native";
 
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import type { RootStackParamList } from "@/shared/lib/navigation/StackNavigator";
-import { AuthContext } from "@/shared/lib/providers/AuthProvider";
+import { loginThunk } from "@/shared/lib/store/user-thunks";
 
 export default function SignInScreen() {
   const [email, setEmail] = useState("");
@@ -21,27 +19,17 @@ export default function SignInScreen() {
 
   const [securePassword, setSecurePassword] = useState(true);
 
-  const { authenticate } = useContext(AuthContext);
-
   const navigation = useNavigation<RootStackParamList>();
 
+  const dispatch = useAppDispatch();
+
   const onSignInPress = async () => {
-    const user = {
+    const userData = {
       email,
       password,
     };
 
-    axios
-      .post("http://localhost:8000/login", user)
-      .then((response) => {
-        console.log(response);
-        const token = response.data.token;
-        authenticate(token);
-      })
-      .catch((error) => {
-        Alert.alert("Login Error", "Invalid email or password");
-        console.log("Login Error", error);
-      });
+    dispatch(loginThunk(userData));
   };
 
   return (
@@ -93,7 +81,7 @@ export default function SignInScreen() {
       <TouchableOpacity style={styles.forgotPasswordButton}>
         <Text style={styles.forgotPasswordText}>Forgot password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.googleButton}>
+      <TouchableOpacity disabled style={styles.googleButton}>
         <Text style={[{ color: "#4285F4" }, styles.googleText]}>G</Text>
         <Text style={[{ color: "#DB4437" }, styles.googleText]}>o</Text>
         <Text style={[{ color: "#F4B400" }, styles.googleText]}>o</Text>
@@ -101,7 +89,7 @@ export default function SignInScreen() {
         <Text style={[{ color: "#0F9D58" }, styles.googleText]}>l</Text>
         <Text style={[{ color: "#DB4437" }, styles.googleText]}>e</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.facebookButton}>
+      <TouchableOpacity disabled style={styles.facebookButton}>
         <Text style={styles.facebookText}>Facebook</Text>
       </TouchableOpacity>
       <TouchableOpacity
