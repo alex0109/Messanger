@@ -13,7 +13,7 @@ const commonColors = {
 const light = {
   colors: {
     themeColor: "#F1F1F1",
-    themeColorBlock: "#C6E0FE",
+    themeColorBlock: "#E9E9E9",
     themeColorHeader: "#1E70ED",
     themeColorText: "#000",
     themeGrayText: "#4F4F4F",

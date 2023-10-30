@@ -107,15 +107,14 @@ class UserService {
 
   //Метод для получения всех пользователей
   async getAllUsers() {
-    const users = await UserModel.find();
-    return users;
+    return await UserModel.find();
   }
 
-  async findUserById(userId) {
-    return await UserModel.findById(userId);
+  async findUserById(userID) {
+    return await UserModel.findById(userID);
   }
 
-  async sendFriendRequest(senderID, receiverID) {
+  async sendFriendRequest(senderID, receiverID, firstMessage) {
     const sender = await this.findUserById(senderID);
     const receiver = await this.findUserById(receiverID);
 
@@ -136,6 +135,7 @@ class UserService {
         const newFriendRequest = new FRModel({
           from: senderID,
           to: receiverID,
+          firstMessage,
         });
         await newFriendRequest.save();
 
@@ -144,7 +144,10 @@ class UserService {
         await sender.save();
         await receiver.save();
 
-        return { requestID: newFriendRequest.id, message: "request sent" };
+        return {
+          message: "Request has been sent",
+          requestID: newFriendRequest.id,
+        };
       } else {
         throw ApiError.BadRequest("Already requested");
       }
@@ -161,40 +164,47 @@ class UserService {
       const request = await FRModel.findOne({
         from: requesterID,
         to: userID,
+        status: "pending",
       });
 
       if (request !== -1 && request.status !== "accepted") {
-        const acceptedRequest = await FRModel.findByIdAndUpdate(
+        const respondedRequest = await FRModel.findByIdAndUpdate(
           request.id,
-          { status: "accepted" },
+          { status: accept ? "accepted" : "rejected" },
           { new: true }
         );
 
         await UserModel.updateOne(
-          { _id: acceptedRequest.from },
+          { _id: respondedRequest.from },
           { $pull: { outgoingRequests: request._id } }
         );
 
-        // Удалить ID запроса из входящих запросов получателя
         await UserModel.updateOne(
-          { _id: acceptedRequest.to },
+          { _id: respondedRequest.to },
           { $pull: { incomingRequests: request._id } }
         );
 
-        // Добавление пользователей в список друзей друг у друга
-        const sender = await UserModel.findById(acceptedRequest.from);
-        const receiver = await UserModel.findById(acceptedRequest.to);
+        if (accept) {
+          const sender = await UserModel.findById(respondedRequest.from);
+          const receiver = await UserModel.findById(respondedRequest.to);
 
-        sender.contacts.push(receiver._id);
+          sender.contacts.push(receiver._id);
 
-        receiver.contacts.push(sender._id);
+          receiver.contacts.push(sender._id);
 
-        await sender.save();
-        await receiver.save();
+          await sender.save();
+          await receiver.save();
+
+          return {
+            message: "Request has been accepted",
+            requestID: request._id,
+            firstMessage: request.firstMessage,
+          };
+        }
 
         return {
-          message: "Request has been found",
-          requestID: request,
+          message: "Request has been rejected",
+          requestID: request._id,
         };
       } else {
         throw ApiError.BadRequest(

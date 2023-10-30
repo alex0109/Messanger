@@ -8,6 +8,7 @@ const friendRequestSchema = new Schema({
     enum: ["pending", "accepted", "rejected"],
     default: "pending",
   },
+  firstMessage: String,
 });
 
 module.exports = model("FriendRequest", friendRequestSchema);

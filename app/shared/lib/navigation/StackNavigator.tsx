@@ -13,6 +13,7 @@ import SettingsPage from "@/pages/Settings/components/Settings";
 import SettingsHeader from "@/pages/Settings/components/SettingsHeader";
 import UserScreen from "@/pages/Settings/components/UserScreen";
 import UserScreenHeader from "@/pages/Settings/components/UserScreenHeader";
+import RespondDialog from "@/pages/Dialog/components/RespondDialog";
 
 export type RootStackParamList = {
   ChatStack: { name: string };
@@ -45,7 +46,7 @@ const InitialStackNavigator = () => {
       />
       <InitialStack.Screen
         name="DialogStack"
-        component={DialogPage}
+        component={RespondDialog}
         options={{
           header: () => <DialogHeader />,
         }}

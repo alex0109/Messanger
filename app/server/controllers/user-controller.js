@@ -2,8 +2,8 @@
 const { validationResult } = require("express-validator");
 
 const ApiError = require("../exceptions/api-error");
-const userService = require("../service/user-service");
 const tokenService = require("../service/token-service");
+const userService = require("../service/user-service");
 
 //Класс для роботы с сервером
 class UserController {
@@ -116,38 +116,73 @@ class UserController {
     }
   }
 
+  async getOneUser(req, res, next) {
+    try {
+      const userID = req.params.userID;
+
+      const user = await userService.findUserById(userID);
+      return res.json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async sendFriendRequest(req, res, next) {
     try {
       const receiverID = req.params.receiverID;
       const { refreshToken } = req.cookies;
+      const { firstMessage } = req.body;
 
       const userData = await tokenService.validateRefreshToken(refreshToken);
 
-      const message = await userService.sendFriendRequest(
+      const requestResponse = await userService.sendFriendRequest(
         userData.id,
-        receiverID
+        receiverID,
+        firstMessage
       );
 
       res.json({
+        message: requestResponse.message,
+        firstMessage,
         sender: userData.id,
         receiverID,
-        message,
+        requestID: requestResponse.requestID,
       });
     } catch (error) {
       next(error);
     }
   }
 
-  async respondToFriendRequest(req, res, next) {
+  async acceptFriendRequest(req, res, next) {
     try {
       const receiverID = req.params.receiverID;
       const { refreshToken } = req.cookies;
 
       const userData = await tokenService.validateRefreshToken(refreshToken);
 
-      res.json(
-        await userService.respondToFriendRequest(userData.id, receiverID, true)
+      const { message, requestID, firstMessage } =
+        await userService.respondToFriendRequest(userData.id, receiverID, true);
+
+      res.json({ message, requestID, firstMessage });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async rejectFriendRequest(req, res, next) {
+    try {
+      const receiverID = req.params.receiverID;
+      const { refreshToken } = req.cookies;
+
+      const userData = await tokenService.validateRefreshToken(refreshToken);
+
+      const { message, requestID } = await userService.respondToFriendRequest(
+        userData.id,
+        receiverID,
+        false
       );
+
+      res.json({ message, requestID });
     } catch (error) {
       next(error);
     }
