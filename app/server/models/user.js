@@ -1,9 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
-  name: {
-    type: String,
-  },
+  name: String,
   email: {
     type: String,
     required: true,
@@ -13,24 +11,15 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  friendRequest: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
-  sentFriendRequests: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
+  photo: String,
+  outgoingRequests: [{ type: Schema.Types.ObjectId, ref: "FriendRequest" }],
+  incomingRequests: [{ type: Schema.Types.ObjectId, ref: "FriendRequest" }],
+  contacts: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  bio: String,
+  registeredAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = model("User", userSchema);
