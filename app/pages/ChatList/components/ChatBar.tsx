@@ -1,8 +1,6 @@
 import { useNavigation, useTheme } from "@react-navigation/native";
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-
-import { useActions } from "@/shared/lib/hooks/useActions";
 
 import type { FC } from "react";
 
@@ -58,15 +56,6 @@ const ChatBar: FC<ChatBarProps> = ({
         </View>
       </View>
       <Text style={[style.chatItemTime, { color: colors.gray }]}>11:30</Text>
-      {/* <View style={[style.chatItemUnreadedMsg]}>
-        <Text
-          allowFontScaling
-          adjustsFontSizeToFit
-          style={style.chatItemUnreadMeassageText}
-        >
-          1
-        </Text>
-      </View> */}
     </TouchableOpacity>
   );
 };

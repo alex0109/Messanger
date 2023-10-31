@@ -16,8 +16,6 @@ import { registrationThunk } from "@/shared/lib/store/user-thunks";
 
 import type * as StackNavigator from "@shared/lib/navigation/StackNavigator";
 
-const url = process.env.EXPO_PUBLIC_LOCAL_URL;
-
 export default function SignUpScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -37,7 +37,7 @@ export default function Root() {
     }
 
     checkForToken();
-  }, [isAuth]);
+  }, []);
 
   return (
     <NavigationContainer theme={currentTheme(theme)}>

@@ -1,7 +1,8 @@
 import { ThemeProvider } from "@shared/lib/providers/ThemeProvider";
-import { store } from "@shared/lib/store/store";
+import { persistor, store } from "@shared/lib/store/store";
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import { connect } from "socket.io-client";
 
 import Root from "@/Root";
@@ -19,9 +20,11 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <Root />
-      </ThemeProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider>
+          <Root />
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   );
 }

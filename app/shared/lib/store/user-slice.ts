@@ -1,16 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { loginThunk, logoutThunk, registrationThunk } from "./user-thunks";
+import {
+  getUsersThunk,
+  loginThunk,
+  logoutThunk,
+  registrationThunk,
+  requestFriendThunk,
+} from "./user-thunks";
 
+import type { IUser } from "../models/IUser";
 import type { IUserState } from "../models/IUserState";
-import { IUser } from "../models/IUser";
 
-const initialState = {
-  user: {},
+const initialState: IUserState = {
+  user: {
+    id: "",
+    email: "",
+    password: "",
+    outgoingRequests: [],
+    incomingRequests: [],
+    contacts: [],
+    registeredAt: "",
+  },
+  loadedUsers: [],
   isAuth: false,
   loading: false,
   error: null,
-} as IUserState;
+};
 
 export const userSlice = createSlice({
   initialState,
@@ -58,6 +73,32 @@ export const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(logoutThunk.rejected, (state, action) => {
+        state.error = action.payload?.message;
+        state.loading = false;
+      })
+      .addCase(getUsersThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUsersThunk.fulfilled, (state, action) => {
+        state.loadedUsers = action.payload.filter(
+          (loadedUser) => state.user.id !== loadedUser._id
+        );
+        state.loading = false;
+      })
+      .addCase(getUsersThunk.rejected, (state, action) => {
+        state.error = action.payload?.message;
+        state.loading = false;
+      })
+      .addCase(requestFriendThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(requestFriendThunk.fulfilled, (state, action) => {
+        state.user.outgoingRequests.push(action.payload.receiverID);
+        state.loading = false;
+      })
+      .addCase(requestFriendThunk.rejected, (state, action) => {
         state.error = action.payload?.message;
         state.loading = false;
       });

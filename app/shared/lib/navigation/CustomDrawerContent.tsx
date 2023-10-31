@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 import { ThemeContext } from "../providers/ThemeProvider";
 
 import { logoutThunk } from "../store/user-thunks";
@@ -23,6 +24,8 @@ const CustomDrawerContent: FC = () => {
   const colors = useTheme().colors;
   const { theme, changeTheme } = useContext(ThemeContext);
 
+  const user = useTypedSelector((state) => state.user);
+
   const dispatch = useAppDispatch();
 
   const navigation = useNavigation();
@@ -34,7 +37,21 @@ const CustomDrawerContent: FC = () => {
       >
         <View style={{ alignItems: "center", width: "70%" }}>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
-            <Image source={require("../../assets/images/Ellipse.png")} />
+            {/* <Image source={require("../../assets/images/Ellipse.png")} /> */}
+            <View
+              style={{
+                width: 100,
+                height: 100,
+                backgroundColor: colors.peach,
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 100,
+              }}
+            >
+              <Text style={{ fontSize: 40, fontWeight: "600" }}>
+                {user.user.email.split("")[0]}
+              </Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
             <Text
@@ -44,11 +61,11 @@ const CustomDrawerContent: FC = () => {
                 color: colors.themeColorText,
               }}
             >
-              User Name
+              {user.user.email.split("@")[0]}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
-            <Text style={{ color: "gray" }}>@user_login</Text>
+            <Text style={{ color: "gray" }}>{user.user.email}</Text>
           </TouchableOpacity>
         </View>
         <View style={{ height: "100%", width: "15%", paddingVertical: 10 }}>

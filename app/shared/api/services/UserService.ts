@@ -12,11 +12,11 @@ import type { AxiosResponse } from "axios";
 
 export default class UserService {
   static async fetchUsers(): Promise<AxiosResponse<IUser[]>> {
-    return $api.post<IUser[]>("/users");
+    return $api.get<IUser[]>("/users");
   }
 
   static async fetchOneUser(userID: string): Promise<AxiosResponse<IUser>> {
-    return $api.post<IUser>(`/users/${userID}`);
+    return $api.get<IUser>(`/users/${userID}`);
   }
 
   static async sendFriendRequest(
@@ -39,7 +39,7 @@ export default class UserService {
   static async rejectFriendRequest(
     receiverID: string
   ): Promise<AxiosResponse<IRejectFriendshipResponse>> {
-    return $api.put<IRejectFriendshipResponse>(
+    return $api.delete<IRejectFriendshipResponse>(
       `/friend-request/${receiverID}/reject`
     );
   }
