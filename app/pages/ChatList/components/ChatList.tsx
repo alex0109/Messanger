@@ -1,26 +1,20 @@
-import { Ionicons } from "@expo/vector-icons";
-import { useTheme } from "@react-navigation/native";
+import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '@react-navigation/native';
 
-import moment from "moment";
-import React, { useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  Text,
-} from "react-native";
+import moment from 'moment';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, TouchableOpacity, ScrollView, Text } from 'react-native';
 
-import ChatBar from "@/pages/ChatList/components/ChatBar";
-import { useActions } from "@/shared/lib/hooks/useActions";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { useTypedSelector } from "@/shared/lib/hooks/useTypedSelector";
+import ChatBar from '@/pages/ChatList/components/ChatBar';
+import { useActions } from '@/shared/lib/hooks/useActions';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { useTypedSelector } from '@/shared/lib/hooks/useTypedSelector';
 
-import { getUsersThunk } from "@/shared/lib/store/user-thunks";
+import { getUsersThunk } from '@/shared/lib/store/user-thunks';
 
-import ChatRequest from "./ChatRequest";
+import ChatRequest from './ChatRequest';
 
-import type { FC } from "react";
+import type { FC } from 'react';
 
 const ChatList: FC = () => {
   const chats = useTypedSelector((state) => state.chats);
@@ -37,7 +31,7 @@ const ChatList: FC = () => {
 
   return (
     //Углубись в то как работает flexbox позиционирование
-    <View style={{ flex: 1, backgroundColor: colors.themeColor }}>
+    <View style={{ flex: 1, backgroundColor: colors.mainBackground }}>
       <ScrollView>
         {chats.map((chat) =>
           chat.isRequestApproved === false ? (
@@ -51,8 +45,8 @@ const ChatList: FC = () => {
         )}
         <View
           style={{
-            width: "85%",
-            alignSelf: "center",
+            width: '85%',
+            alignSelf: 'center',
             borderBottomWidth: 1,
             borderColor: colors.gray,
           }}
@@ -70,21 +64,20 @@ const ChatList: FC = () => {
         )}
         <View
           style={{
-            width: "85%",
-            alignSelf: "center",
+            width: '85%',
+            alignSelf: 'center',
             borderBottomWidth: 1,
             borderColor: colors.gray,
           }}
         />
         <View
           style={{
-            width: "95%",
-            alignSelf: "center",
-            alignItems: "center",
-            justifyContent: "center",
+            width: '95%',
+            alignSelf: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
             marginTop: 20,
-          }}
-        >
+          }}>
           {user.loadedUsers.length == 0 ? (
             <View>
               <Text>No users has been loaded</Text>
@@ -94,47 +87,38 @@ const ChatList: FC = () => {
               <View
                 key={oneUser._id}
                 style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "row",
-                  width: "100%",
-                  backgroundColor: colors.themeColorBlock,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  width: '100%',
+                  backgroundColor: colors.chatsBars,
                   height: 70,
                   paddingHorizontal: 20,
                   marginBottom: 10,
                   borderRadius: 10,
-                }}
-              >
+                }}>
                 <View
                   style={{
-                    width: "70%",
-                    height: "70%",
-                    justifyContent: "center",
+                    width: '70%',
+                    height: '70%',
+                    justifyContent: 'center',
                     borderRightWidth: 1,
-                  }}
-                >
-                  <Text style={{ fontWeight: "800", fontSize: 16 }}>
-                    {oneUser.email}
-                  </Text>
-                  <Text>
-                    Registred:{" "}
-                    {moment(oneUser.registeredAt).format("DD.MM.YYYY")}
-                  </Text>
+                  }}>
+                  <Text style={{ fontWeight: '800', fontSize: 16 }}>{oneUser.email}</Text>
+                  <Text>Registred: {moment(oneUser.registeredAt).format('DD.MM.YYYY')}</Text>
                 </View>
                 <TouchableOpacity
                   style={{
-                    width: "30%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+                    width: '30%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
                   <Text
                     style={{
-                      fontWeight: "700",
+                      fontWeight: '700',
                       fontSize: 18,
                       color: colors.success,
-                    }}
-                  >
+                    }}>
                     Request
                   </Text>
                 </TouchableOpacity>
@@ -149,12 +133,11 @@ const ChatList: FC = () => {
         onPress={() =>
           addChatHandler({
             id: new Date().getTime().toString(),
-            userName: "Vova",
-            message: "dfasdfafas",
+            userName: 'Vova',
+            message: 'dfasdfafas',
           })
-        }
-      >
-        <Ionicons name="md-add" size={50} color="white" />
+        }>
+        <Ionicons name='md-add' size={50} color='white' />
       </TouchableOpacity>
     </View>
   );
@@ -164,14 +147,14 @@ export default ChatList;
 
 const style = StyleSheet.create({
   addButton: {
-    backgroundColor: "#5698FB",
+    backgroundColor: '#5698FB',
     borderRadius: 60,
     height: 60,
     width: 60,
-    position: "absolute",
+    position: 'absolute',
     bottom: 30,
     right: 30,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

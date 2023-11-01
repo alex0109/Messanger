@@ -1,36 +1,29 @@
-import { Ionicons } from "@expo/vector-icons";
-import { useNavigation, useTheme } from "@react-navigation/native";
-import React from "react";
-import { View, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation, useTheme } from '@react-navigation/native';
+import React from 'react';
+import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 
-import type { FC } from "react";
+import type { FC } from 'react';
 
 const ChatListHeader: FC = () => {
   const navigation = useNavigation();
+
   const colors = useTheme().colors;
 
   return (
-    <View>
-      <StatusBar
-        backgroundColor={colors.themeColorHeader}
-        barStyle="dark-content"
-      />
-      <View
-        style={[style.headerBar, { backgroundColor: colors.themeColorHeader }]}
-      >
-        <TouchableOpacity
-          style={style.button}
-          onPress={() => navigation.openDrawer()}
-        >
-          <Ionicons name="ios-menu" size={24} color={colors.white} />
+    <View style={{ backgroundColor: colors.mainBackground }}>
+      <StatusBar backgroundColor={colors.header} barStyle='light-content' />
+      <View style={[style.headerBar, { backgroundColor: colors.header }]}>
+        <TouchableOpacity style={style.button} onPress={() => navigation.openDrawer()}>
+          <Ionicons name='ios-menu' size={24} color={colors.white} />
         </TouchableOpacity>
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity style={style.button}>
-            <Ionicons name="md-search-sharp" size={24} color={colors.white} />
+            <Ionicons name='md-search-sharp' size={24} color={colors.white} />
           </TouchableOpacity>
-          <View style={{ borderRightWidth: 1 }} />
+          <View style={{ borderRightWidth: 1, borderColor: colors.white }} />
           <TouchableOpacity style={style.button}>
-            <Ionicons name="person-add" size={24} color={colors.white} />
+            <Ionicons name='person-add' size={24} color={colors.white} />
           </TouchableOpacity>
         </View>
       </View>
@@ -43,17 +36,15 @@ export default ChatListHeader;
 const style = StyleSheet.create({
   headerBar: {
     height: 50,
-
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
-    paddingHorizontal: 5,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   button: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginHorizontal: 15,
   },
 });
