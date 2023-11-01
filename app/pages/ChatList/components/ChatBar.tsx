@@ -1,19 +1,19 @@
-import { useNavigation, useTheme } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useNavigation, useTheme } from "@react-navigation/native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-import { useActions } from '@/shared/lib/hooks/useActions';
+import { useActions } from "@/shared/lib/hooks/useActions";
 
-import type { FC } from 'react';
+import type { FC } from "react";
 
 interface ChatBarProps {
   userID: string;
   userName: string;
   message: string;
-  isArchived: boolean;
+  archived: boolean;
 }
 
-const ChatBar: FC<ChatBarProps> = ({ userID, userName, message, isArchived }) => {
+const ChatBar: FC<ChatBarProps> = ({ userID, userName, message, archived }) => {
   const [isArchived, setIsArchived] = useState(archived);
 
   const navigation = useNavigation();
@@ -28,21 +28,21 @@ const ChatBar: FC<ChatBarProps> = ({ userID, userName, message, isArchived }) =>
 
   return (
     <TouchableOpacity
-      style={[style.chatItem, { backgroundColor: isArchived ? 'mediumslateblue' : 'transparent' }]}
-      onPress={() => navigation.navigate('DialogStack', { userID })}>
+      style={[style.chatItem, { backgroundColor: isArchived ? "mediumslateblue" : "transparent" }]}
+      onPress={() => navigation.navigate("DialogStack", { userID })}>
       <View style={[style.chatItemContent, { backgroundColor: colors.chatsBars }]}>
         <Image
-          source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
+          source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
           width={55}
           height={55}
           borderRadius={30}
         />
-        <View style={{ flexDirection: 'column', width: '75%' }}>
+        <View style={{ flexDirection: "column", width: "75%" }}>
           <Text style={[style.chatItemUserName, { color: colors.mainText }]}>{userName}</Text>
           <Text style={[style.chatItemText, { color: colors.secondaryText }]} numberOfLines={2}>
             {isArchived
-              ? 'archived'
-              : 'najlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfba'}
+              ? "archived"
+              : "najlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfba"}
           </Text>
         </View>
       </View>
@@ -65,46 +65,46 @@ const style = StyleSheet.create({
   chatItem: {
     marginVertical: 5,
     paddingHorizontal: 10,
-    width: '100%',
+    width: "100%",
     height: 92,
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: "column",
+    alignItems: "center",
   },
   chatItemUnreadedMsg: {
     left: 3,
-    position: 'absolute',
+    position: "absolute",
     height: 20,
     width: 20,
     borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   chatItemUnreadMeassageText: {
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   chatItemContent: {
     marginTop: 10,
     padding: 10,
-    width: '100%',
+    width: "100%",
     height: 65,
     borderRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
   },
   chatItemUserName: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: "700",
     marginVertical: 4,
   },
   chatItemText: {
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   chatItemTime: {
     fontSize: 12,
-    fontWeight: '600',
-    alignSelf: 'flex-start',
+    fontWeight: "600",
+    alignSelf: "flex-start",
   },
 });

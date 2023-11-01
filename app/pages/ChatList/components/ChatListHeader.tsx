@@ -1,9 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation, useTheme } from '@react-navigation/native';
-import React from 'react';
-import { View, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import React from "react";
+import { View, StyleSheet, TouchableOpacity, StatusBar } from "react-native";
 
-import type { FC } from 'react';
+import type { FC } from "react";
 
 const ChatListHeader: FC = () => {
   const navigation = useNavigation();
@@ -17,7 +17,7 @@ const ChatListHeader: FC = () => {
         <TouchableOpacity style={style.button} onPress={() => navigation.openDrawer()}>
           <Ionicons name='ios-menu' size={24} color={colors.white} />
         </TouchableOpacity>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: "row" }}>
           <TouchableOpacity style={style.button}>
             <Ionicons name='md-search-sharp' size={24} color={colors.white} />
           </TouchableOpacity>
@@ -38,13 +38,13 @@ const style = StyleSheet.create({
     height: 50,
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   button: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginHorizontal: 15,
   },
 });
