@@ -93,19 +93,20 @@ const UserScreen: FC = () => {
             </Text>
           </TouchableOpacity>
         </View>
-
-        {/* В будущем историю нужно будет отделить в отдельную компоненту */}
-        {/* для каждого вида истории нужна будет своя компонента */}
         <View style={styles.history}>
           <Text style={[styles.historyText, { color: colors.grayDark }]}>
             No history yet
           </Text>
         </View>
-        <TouchableOpacity style={styles.chatButton}>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: "#5698FB" }]}
+        >
           <Ionicons name="chatbox-ellipses" size={31} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.friendButton}>
-          <Ionicons name="person-add" size={31} color="white" />
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: "#45932A" }]}
+        >
+          <Ionicons name="person-add" size={24} color="white" />
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -115,25 +116,13 @@ const UserScreen: FC = () => {
 export default UserScreen;
 
 const styles = StyleSheet.create({
-  chatButton: {
-    backgroundColor: "#5698FB",
+  button: {
     borderRadius: 70,
-    height: 70,
-    width: 70,
+    height: 60,
+    width: 60,
     position: "absolute",
-    bottom: 35,
-    right: 35,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  friendButton: {
-    backgroundColor: "#45932A",
-    borderRadius: 70,
-    height: 70,
-    width: 70,
-    position: "absolute",
-    bottom: 35,
-    right: 35,
+    bottom: 20,
+    right: 20,
     alignItems: "center",
     justifyContent: "center",
   },
