@@ -1,13 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
-import {
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-} from "react-native";
+import { Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
 
 import type { RootStackParamList } from "@/shared/lib/navigation/StackNavigator";
 
@@ -31,9 +25,7 @@ export default function SignInScreen() {
   return (
     <View style={[styles.registration, { backgroundColor: colors.themeColor }]}>
       <View style={styles.registrationTitle}>
-        <Text style={[styles.titleText, { color: colors.themeColorText }]}>
-          Authorize first
-        </Text>
+        <Text style={[styles.titleText, { color: colors.themeColorText }]}>Authorize first</Text>
       </View>
       <View style={styles.registrationBox}>
         <View style={styles.inputsContainer}>
@@ -58,16 +50,11 @@ export default function SignInScreen() {
             />
             <TouchableOpacity
               style={styles.eye}
-              onPress={() => setSecurePassword((state) => !state)}
-            >
+              onPress={() => setSecurePassword((state) => !state)}>
               {securePassword ? (
                 <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
               ) : (
-                <MaterialCommunityIcons
-                  name="eye-off"
-                  size={25}
-                  color="#D9D9D9"
-                />
+                <MaterialCommunityIcons name="eye-off" size={25} color="#D9D9D9" />
               )}
             </TouchableOpacity>
           </View>
@@ -92,8 +79,7 @@ export default function SignInScreen() {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate("SignUpStack", {})}
-        style={styles.createAccountButton}
-      >
+        style={styles.createAccountButton}>
         <Text style={styles.createAccountText}>Create account</Text>
       </TouchableOpacity>
     </View>
