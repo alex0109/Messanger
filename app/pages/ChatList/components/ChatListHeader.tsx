@@ -8,15 +8,13 @@ import type { FC } from "react";
 const ChatListHeader: FC = () => {
   const colors = useTheme().colors;
   const navigation = useNavigation();
+  const colors = useTheme().colors;
 
   return (
     <View style={{ backgroundColor: colors.themeColor }}>
       <StatusBar backgroundColor="#5698FB" barStyle="dark-content" />
       <View style={[style.headerBar, { backgroundColor: colors.headerColor }]}>
-        <TouchableOpacity
-          style={style.button}
-          onPress={() => navigation.openDrawer()}
-        >
+        <TouchableOpacity style={style.button} onPress={() => navigation.openDrawer()}>
           <Ionicons name="ios-menu" size={24} color={colors.white} />
         </TouchableOpacity>
         <View style={{ flexDirection: "row" }}>
@@ -43,8 +41,10 @@ export default ChatListHeader;
 const style = StyleSheet.create({
   headerBar: {
     height: 50,
+
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
+    paddingHorizontal: 5,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

@@ -4,12 +4,20 @@ import Colors from "@shared/assets/styles/colors";
 import DrawerNavigator from "@shared/lib/navigation/DrawerNavigator";
 import { AuthStackNavigator } from "@shared/lib/navigation/StackNavigator";
 import { ThemeContext } from "@shared/lib/providers/ThemeProvider";
-import React, { useContext } from "react";
+import * as SecureStore from "expo-secure-store";
+import React, { useContext, useEffect } from "react";
+
+import { useActions } from "./shared/lib/hooks/useActions";
+import { useTypedSelector } from "./shared/lib/hooks/useTypedSelector";
 
 import type { ThemeType } from "@shared/lib/providers/ThemeProvider";
 
 export default function Root() {
   const { theme } = useContext(ThemeContext);
+  const { isAuth } = useTypedSelector((state) => state.user);
+
+  const { authentificate } = useActions();
+
   const currentTheme = (theme: ThemeType) => {
     if (theme === "light") {
       return Colors.light;
@@ -19,10 +27,21 @@ export default function Root() {
     }
   };
 
+  useEffect(() => {
+    async function checkForToken() {
+      const token = await SecureStore.getItemAsync("token");
+
+      if (token) {
+        authentificate();
+      }
+    }
+
+    checkForToken();
+  }, []);
+
   return (
     <NavigationContainer theme={currentTheme(theme)}>
-      <DrawerNavigator />
-      {/* <AuthStackNavigator /> */}
+      {isAuth ? <DrawerNavigator /> : <AuthStackNavigator />}
     </NavigationContainer>
   );
 }

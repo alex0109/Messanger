@@ -1,13 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import React from "react";
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import type { FC } from "react";
 
@@ -21,16 +15,14 @@ const UserScreenHeader: FC = () => {
         style={{
           justifyContent: "flex-start",
         }}
-        onPress={() => navigation.goBack()}
-      >
+        onPress={() => navigation.goBack()}>
         <MaterialCommunityIcons name="arrow-left" size={18} color="white" />
       </TouchableOpacity>
       <View
         style={{
           flex: 1,
           justifyContent: "center",
-        }}
-      >
+        }}>
         <Text style={styles.hederText}>user_login</Text>
       </View>
       <TouchableOpacity style={{ justifyContent: "flex-end" }}>
@@ -48,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: 51,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     justifyContent: "center",

@@ -1,8 +1,8 @@
 import { useTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
+import React, { FC } from "react";
 
-import { View } from "react-native";
+import { View } from "react-native/types";
 
 import SignInScreen from "@/pages/Auth/components/SignInScreen";
 import SignUpScreen from "@/pages/Auth/components/SignUpScreen";
@@ -10,13 +10,12 @@ import ChatList from "@/pages/ChatList/components/ChatList";
 import ChatListHeader from "@/pages/ChatList/components/ChatListHeader";
 
 import DialogHeader from "@/pages/Dialog/components/DialogHeader";
-import EmptyChat from "@/pages/Dialog/components/EmptyDialog";
+import RespondDialog from "@/pages/Dialog/components/RespondDialog";
+import DialogPage from "@/pages/Dialog/components/DialogPage";
 import SettingsPage from "@/pages/Settings/components/Settings";
 import SettingsHeader from "@/pages/Settings/components/SettingsHeader";
 import UserScreen from "@/pages/Settings/components/UserScreen";
 import UserScreenHeader from "@/pages/Settings/components/UserScreenHeader";
-
-import type { FC } from "react";
 
 export type RootStackParamList = {
   ChatStack: { name: string };
@@ -32,25 +31,25 @@ export type RootStackParamList = {
 const InitialStack = createStackNavigator<RootStackParamList>();
 const AuthStack = createStackNavigator<RootStackParamList>();
 
-const Empty: FC = () => <View />;
-const InitialStackNavigator: FC = () => {
+const InitialStackNavigator = () => {
   const colors = useTheme().colors;
+
   return (
     <InitialStack.Navigator
       initialRouteName="ChatStack"
-      screenOptions={{ animationEnabled: false }}
-    >
+      screenOptions={{ cardStyle: { backgroundColor: colors.themeColor } }}>
       <InitialStack.Screen
         name="ChatStack"
         component={ChatList}
-        options={{ header: () => <ChatListHeader /> }}
+        options={{
+          header: () => <ChatListHeader />,
+        }}
       />
       <InitialStack.Screen
         name="DialogStack"
-        component={Empty}
+        component={RespondDialog}
         options={{
           header: () => <DialogHeader />,
-          cardStyle: { backgroundColor: colors.themeColor },
         }}
       />
       <InitialStack.Screen
@@ -58,7 +57,6 @@ const InitialStackNavigator: FC = () => {
         component={UserScreen}
         options={{
           header: () => <UserScreenHeader />,
-          cardStyle: { backgroundColor: "#1D9EBA" },
         }}
       />
       <InitialStack.Screen
@@ -75,8 +73,7 @@ const InitialStackNavigator: FC = () => {
 const AuthStackNavigator = () => (
   <AuthStack.Navigator
     initialRouteName="SignInStack"
-    screenOptions={{ headerShown: false, animationEnabled: false }}
-  >
+    screenOptions={{ headerShown: false, animationEnabled: false }}>
     <AuthStack.Screen name="SignUpStack" component={SignUpScreen} />
     <AuthStack.Screen name="SignInStack" component={SignInScreen} />
   </AuthStack.Navigator>
