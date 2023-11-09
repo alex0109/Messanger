@@ -1,19 +1,15 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import {
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-} from "react-native";
+import { Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
 
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
+import { useTypedSelector } from "@/shared/lib/hooks/useTypedSelector";
 import type { RootStackParamList } from "@/shared/lib/navigation/StackNavigator";
 import { loginThunk } from "@/shared/lib/store/user-thunks";
 
 export default function SignInScreen() {
+  const { user } = useTypedSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -60,16 +56,11 @@ export default function SignInScreen() {
             />
             <TouchableOpacity
               style={styles.eye}
-              onPress={() => setSecurePassword((state) => !state)}
-            >
+              onPress={() => setSecurePassword((state) => !state)}>
               {securePassword ? (
                 <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
               ) : (
-                <MaterialCommunityIcons
-                  name="eye-off"
-                  size={25}
-                  color="#D9D9D9"
-                />
+                <MaterialCommunityIcons name="eye-off" size={25} color="#D9D9D9" />
               )}
             </TouchableOpacity>
           </View>
@@ -94,8 +85,7 @@ export default function SignInScreen() {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate("SignUpStack", {})}
-        style={styles.createAccountButton}
-      >
+        style={styles.createAccountButton}>
         <Text style={styles.createAccountText}>Create account</Text>
       </TouchableOpacity>
     </View>

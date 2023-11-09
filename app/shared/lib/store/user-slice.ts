@@ -6,6 +6,7 @@ import {
   logoutThunk,
   registrationThunk,
   requestFriendThunk,
+  updateSocketThunk,
 } from "./user-thunks";
 
 import type { IUser } from "../models/IUser";
@@ -21,6 +22,7 @@ const initialState: IUserState = {
     contacts: [],
     registeredAt: "",
   },
+  socketId: "",
   loadedUsers: [],
   isAuth: false,
   loading: false,
@@ -97,6 +99,18 @@ export const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(requestFriendThunk.rejected, (state, action) => {
+        state.error = action.payload?.message;
+        state.loading = false;
+      })
+      .addCase(updateSocketThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateSocketThunk.fulfilled, (state, action) => {
+        state.socketId = action.payload;
+        state.loading = false;
+      })
+      .addCase(updateSocketThunk.rejected, (state, action) => {
         state.error = action.payload?.message;
         state.loading = false;
       });

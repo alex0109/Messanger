@@ -10,16 +10,20 @@ import React, { useContext, useEffect } from "react";
 import { connect } from "socket.io-client";
 
 import { useActions } from "./shared/lib/hooks/useActions";
+import { useAppDispatch } from "./shared/lib/hooks/useAppDispatch";
 import { useTypedSelector } from "./shared/lib/hooks/useTypedSelector";
+
+import { updateSocketThunk } from "./shared/lib/store/user-thunks";
 
 import type { ThemeType } from "@shared/lib/providers/ThemeProvider";
 
-const url = process.env.EXPO_PUBLIC_SOCKET_IP;
+const url = process.env.EXPO_PUBLIC_LOCAL_SOCKET;
 const socket = connect(url);
 
 export default function Root() {
   const { theme } = useContext(ThemeContext);
-  const { isAuth } = useTypedSelector((state) => state.user);
+  const { isAuth, user, socketId } = useTypedSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const { authentificate } = useActions();
 
@@ -43,6 +47,7 @@ export default function Root() {
 
     socket.on("connect", () => {
       console.log("Connected", socket.id);
+      dispatch(updateSocketThunk({ userID: user.id, socketId: socket.id }));
     });
 
     socket.on("newFriendRequest", (data) => {

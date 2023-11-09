@@ -15,17 +15,13 @@ class TokenService {
       //Передаем данные которые хотим в него положить
       payload,
       //Используем секретный ключ для создания токена
-      process.env.EXPO_PUBLIC_JWT_ACCESS_SECRET,
+      process.env.JWT_ACCESS_SECRET,
       //Устанавливаем время жизни
       { expiresIn: "1h" }
     );
 
     //Создаем токен для обновления
-    const refreshToken = jwt.sign(
-      payload,
-      process.env.EXPO_PUBLIC_JWT_REFRESH_SECRET,
-      { expiresIn: "60d" }
-    );
+    const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: "60d" });
 
     //Возвращаем новые токены
     return { accessToken, refreshToken };
@@ -35,10 +31,7 @@ class TokenService {
   validateAccessToken(token) {
     try {
       //Проверка
-      const userData = jwt.verify(
-        token,
-        process.env.EXPO_PUBLIC_JWT_ACCESS_SECRET
-      );
+      const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
 
       //Если все хорошо возвращаем пользователя
       return userData;
@@ -50,10 +43,7 @@ class TokenService {
   //Метод для проверки токена обновления
   validateRefreshToken(token) {
     try {
-      const userData = jwt.verify(
-        token,
-        process.env.EXPO_PUBLIC_JWT_REFRESH_SECRET
-      );
+      const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
 
       return userData;
     } catch (error) {

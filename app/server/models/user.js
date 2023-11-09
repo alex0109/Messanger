@@ -11,10 +11,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  socketId: {
-    type: String,
-    default: null,
-  },
   photo: String,
   outgoingRequests: [{ type: Schema.Types.ObjectId, ref: "FriendRequest" }],
   incomingRequests: [{ type: Schema.Types.ObjectId, ref: "FriendRequest" }],

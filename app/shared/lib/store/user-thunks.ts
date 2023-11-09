@@ -67,6 +67,20 @@ export const getUsersThunk = createAsyncThunk<IUser[], null, { rejectValue: stri
   }
 );
 
+export const updateSocketThunk = createAsyncThunk<
+  string,
+  { userID: string; socketId: string },
+  { rejectValue: string }
+>("user/updateSocketThunk", async function (data, { rejectWithValue }) {
+  try {
+    await UserService.updateSocket(data.userID, data.socketId);
+
+    return data.socketId;
+  } catch (error) {
+    return rejectWithValue(error.response?.data);
+  }
+});
+
 export const requestFriendThunk = createAsyncThunk<
   IFriendshipResponse,
   { receiverID: string; firstMessage: string },

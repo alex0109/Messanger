@@ -24,7 +24,7 @@ router.post("/logout", userController.logout);
 router.get("/refresh", userController.refresh);
 router.get("/users", authMiddleware, userController.getUsers);
 router.get("/users/:userID", authMiddleware, userController.getOneUser);
-router.patch("/users/:userID", userController.updateUser);
+router.patch("/users/:userID", authMiddleware, userController.updateUser);
 router.post("/friend-request/:receiverID", authMiddleware, userController.sendFriendRequest);
 router.put(
   "/friend-request/:receiverID/accept",

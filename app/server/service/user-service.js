@@ -10,6 +10,7 @@ const FRModel = require("../models/friend-request");
 const UserModel = require("../models/user");
 
 //Для работы с токенами
+const socketService = require("./socket-service");
 const tokenService = require("./token-service");
 
 //Создаем класс с методами работы с пользователем и бд
@@ -115,7 +116,7 @@ class UserService {
     return await UserModel.findById(userID);
   }
 
-  //Сервис для обновления пользователяs
+  //Сервис для обновления пользователя
   async updateUser(userID, updates) {
     const user = await this.findUserById(userID);
 
@@ -123,7 +124,6 @@ class UserService {
       throw ApiError.BadRequest("User was not found");
     }
 
-    // Обновляем только те поля, которые были отправлены в запросе
     for (const key of Object.keys(updates)) {
       if (key !== "_id" && key !== "__v") {
         user[key] = updates[key];
@@ -131,8 +131,9 @@ class UserService {
 
       if (key === "socketId") {
         try {
-          const hashSocketId = await bcrypt.hash(updates.socketId, 2);
-          user.socketId = hashSocketId;
+          await socketService.saveSocket(user.id, updates.socketId);
+
+          return { message: "Updated successfully" };
         } catch (error) {
           console.error(error);
         }
@@ -141,9 +142,7 @@ class UserService {
 
     await user.save();
 
-    const userDto = new UserDto(user);
-
-    return userDto;
+    return { message: "Updated successfully" };
   }
 
   //Сервис для отправки запроса в друзья

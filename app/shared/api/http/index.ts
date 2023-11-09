@@ -2,7 +2,7 @@ import axios from "axios";
 
 import * as SecureStore from "expo-secure-store";
 
-const url = process.env.EXPO_PUBLIC_IP;
+const url = process.env.EXPO_PUBLIC_LOCAL_URL;
 
 export const API_URL = `${url}/api`;
 

@@ -15,8 +15,7 @@ const RespondDialog = () => {
             {
               backgroundColor: colors.themeColorBlock,
             },
-          ]}
-        >
+          ]}>
           <View style={styles.userInfo}>
             <View style={styles.avatar} />
             <Text style={{ fontSize: 18, color: colors.themeColorText }}>
@@ -26,9 +25,7 @@ const RespondDialog = () => {
           </View>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity>
-              <Text style={[styles.button, { color: colors.success }]}>
-                Accept
-              </Text>
+              <Text style={[styles.button, { color: colors.success }]}>Accept</Text>
             </TouchableOpacity>
             <View
               style={{

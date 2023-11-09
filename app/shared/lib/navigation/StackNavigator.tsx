@@ -13,7 +13,6 @@ import SettingsPage from "@/pages/Settings/components/Settings";
 import SettingsHeader from "@/pages/Settings/components/SettingsHeader";
 import UserScreen from "@/pages/Settings/components/UserScreen";
 import UserScreenHeader from "@/pages/Settings/components/UserScreenHeader";
-import RespondDialog from "@/pages/Dialog/components/RespondDialog";
 
 export type RootStackParamList = {
   ChatStack: { name: string };
@@ -34,31 +33,31 @@ const InitialStackNavigator = () => {
 
   return (
     <InitialStack.Navigator
-      initialRouteName='ChatStack'
+      initialRouteName="ChatStack"
       screenOptions={{ cardStyle: { backgroundColor: colors.themeColor } }}>
       <InitialStack.Screen
-        name='ChatStack'
+        name="ChatStack"
         component={ChatList}
         options={{
           header: () => <ChatListHeader />,
         }}
       />
       <InitialStack.Screen
-        name='DialogStack'
+        name="DialogStack"
         component={DialogPage}
         options={{
           header: () => <DialogHeader />,
         }}
       />
       <InitialStack.Screen
-        name='UserStack'
+        name="UserStack"
         component={UserScreen}
         options={{
           header: () => <UserScreenHeader />,
         }}
       />
       <InitialStack.Screen
-        name='SettingsStack'
+        name="SettingsStack"
         component={SettingsPage}
         options={{
           header: () => <SettingsHeader />,
@@ -69,9 +68,9 @@ const InitialStackNavigator = () => {
 };
 
 const AuthStackNavigator = () => (
-  <AuthStack.Navigator initialRouteName='SignInStack' screenOptions={{ headerShown: false }}>
-    <AuthStack.Screen name='SignUpStack' component={SignUpScreen} />
-    <AuthStack.Screen name='SignInStack' component={SignInScreen} />
+  <AuthStack.Navigator initialRouteName="SignInStack" screenOptions={{ headerShown: false }}>
+    <AuthStack.Screen name="SignUpStack" component={SignUpScreen} />
+    <AuthStack.Screen name="SignInStack" component={SignInScreen} />
   </AuthStack.Navigator>
 );
 export { InitialStackNavigator, AuthStackNavigator };
