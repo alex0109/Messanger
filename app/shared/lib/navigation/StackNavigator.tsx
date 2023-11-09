@@ -1,23 +1,23 @@
-import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import { useNavigation, useTheme } from '@react-navigation/native';
 
-import { View, Image } from "react-native";
+import { View, Image } from 'react-native';
 
-import SignInScreen from "@/pages/Auth/components/SignInScreen";
-import SignUpScreen from "@/pages/Auth/components/SignUpScreen";
-import ChatList from "@/pages/ChatList/components/ChatList";
-import ChatListHeader from "@/pages/ChatList/components/ChatListHeader";
+import SignInScreen from '@/pages/Auth/components/SignInScreen';
+import SignUpScreen from '@/pages/Auth/components/SignUpScreen';
+import ChatList from '@/pages/ChatList/components/ChatList';
+import ChatListHeader from '@/pages/ChatList/components/ChatListHeader';
 
-import DialogHeader from "@/pages/Dialog/components/DialogHeader";
-import SettingsPage from "@/pages/Settings/components/Settings";
-import SettingsHeader from "@/pages/Settings/components/SettingsHeader";
-import UserScreen from "@/pages/Settings/components/UserScreen";
-import UserScreenHeader from "@/pages/Settings/components/UserScreenHeader";
+import DialogHeader from '@/pages/Dialog/components/DialogHeader';
+import Settings from '@/pages/Settings/components/Settings.1';
+import SettingsHeader from '@/pages/Settings/components/SettingsHeader';
+import UserScreen from '@/pages/Settings/components/UserScreen';
+import UserScreenHeader from '@/pages/Settings/components/UserScreenHeader';
 
-import type { FC } from "react";
-import DialogPage from "@/pages/Dialog/components/DialogPage";
-import colors from "@/shared/assets/styles/colors";
+import type { FC } from 'react';
+import DialogPage from '@/pages/Dialog/components/DialogPage';
+import colors from '@/shared/assets/styles/colors';
 
 export type RootStackParamList = {
   ChatStack: { name: string };
@@ -65,7 +65,7 @@ const InitialStackNavigator = () => {
       />
       <InitialStack.Screen
         name="SettingsStack"
-        component={SettingsPage}
+        component={Settings}
         options={{
           header: () => <SettingsHeader />,
           cardStyle: { backgroundColor: colors.mainBackground },
@@ -76,10 +76,7 @@ const InitialStackNavigator = () => {
 };
 
 const AuthStackNavigator = () => (
-  <AuthStack.Navigator
-    initialRouteName="SignInStack"
-    screenOptions={{ headerShown: false }}
-  >
+  <AuthStack.Navigator initialRouteName="SignInStack" screenOptions={{ headerShown: false }}>
     <AuthStack.Screen name="SignUpStack" component={SignUpScreen} />
     <AuthStack.Screen name="SignInStack" component={SignInScreen} />
   </AuthStack.Navigator>

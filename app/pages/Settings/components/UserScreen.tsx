@@ -1,12 +1,6 @@
 import { useTheme } from "@react-navigation/native";
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 
 import type { FC } from "react";
 
@@ -26,67 +20,36 @@ const UserScreen: FC = () => {
               fontSize: 16,
               fontWeight: "500",
               color: colors.adaptiveText,
-            }}
-          >
+            }}>
             I love flowers🌸
           </Text>
         </View>
-        <View
-          style={[styles.buttonsContainer, { borderColor: colors.adaptiveGrey }]}
-        >
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: colors.blue }]}
-          >
-            <Text style={[styles.buttonText, { color: colors.white }]}>
-              Open Chat
-            </Text>
+        <View style={[styles.buttonsContainer, { borderColor: colors.adaptiveGrey }]}>
+          <TouchableOpacity style={[styles.button, { backgroundColor: colors.blue }]}>
+            <Text style={[styles.buttonText, { color: colors.white }]}>Open Chat</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: colors.success }]}
-          >
-            <Text style={[styles.buttonText, { color: colors.white }]}>
-              Add Friend
-            </Text>
+          <TouchableOpacity style={[styles.button, { backgroundColor: colors.success }]}>
+            <Text style={[styles.buttonText, { color: colors.white }]}>Add Friend</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.chatHistoryButtonsContainer}>
           <TouchableOpacity>
-            <Text
-              style={[
-                styles.chatHistoryButtonText,
-                { color: colors.adaptiveText },
-              ]}
-            >
+            <Text style={[styles.chatHistoryButtonText, { color: colors.adaptiveText }]}>
               Messages
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text
-              style={[
-                styles.chatHistoryButtonText,
-                { color: colors.adaptiveText },
-              ]}
-            >
+            <Text style={[styles.chatHistoryButtonText, { color: colors.adaptiveText }]}>
               Images
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text
-              style={[
-                styles.chatHistoryButtonText,
-                { color: colors.adaptiveText },
-              ]}
-            >
+            <Text style={[styles.chatHistoryButtonText, { color: colors.adaptiveText }]}>
               Voices
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text
-              style={[
-                styles.chatHistoryButtonText,
-                { color: colors.adaptiveText },
-              ]}
-            >
+            <Text style={[styles.chatHistoryButtonText, { color: colors.adaptiveText }]}>
               Documents
             </Text>
           </TouchableOpacity>
@@ -95,16 +58,12 @@ const UserScreen: FC = () => {
         {/* В будущем историю нужно будет отделить в отдельную компоненту */}
         {/* для каждого вида истории нужна будет своя компонента */}
         <View style={styles.history}>
-          <Text style={[styles.historyText, { color: colors.adaptiveGrey }]}>
-            No history yet
-          </Text>
+          <Text style={[styles.historyText, { color: colors.adaptiveGrey }]}>No history yet</Text>
         </View>
       </View>
 
       <View style={styles.blockButtonContainer}>
-        <TouchableOpacity
-          style={[styles.blockButton, { borderColor: colors.adaptiveGrey }]}
-        >
+        <TouchableOpacity style={[styles.blockButton, { borderColor: colors.adaptiveGrey }]}>
           <Text style={styles.blockButtonText}>Block user</Text>
         </TouchableOpacity>
       </View>

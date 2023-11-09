@@ -1,19 +1,13 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
-import {
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-} from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native';
 
-import type { RootStackParamList } from "@/shared/lib/navigation/StackNavigator";
+import type { RootStackParamList } from '@/shared/lib/navigation/StackNavigator';
 
 export default function SignInScreen() {
-  const [emailAddress, setEmailAddress] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailAddress, setEmailAddress] = useState('');
+  const [password, setPassword] = useState('');
 
   const [securePassword, setSecurePassword] = useState(true);
 
@@ -21,7 +15,7 @@ export default function SignInScreen() {
 
   const onSignInPress = async () => {
     try {
-      console.log("Loged in");
+      console.log('Loged in');
     } catch (err: any) {
       console.log(err);
     }
@@ -55,16 +49,11 @@ export default function SignInScreen() {
             />
             <TouchableOpacity
               style={styles.eye}
-              onPress={() => setSecurePassword((state) => !state)}
-            >
+              onPress={() => setSecurePassword((state) => !state)}>
               {securePassword ? (
                 <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
               ) : (
-                <MaterialCommunityIcons
-                  name="eye-off"
-                  size={25}
-                  color="#D9D9D9"
-                />
+                <MaterialCommunityIcons name="eye-off" size={25} color="#D9D9D9" />
               )}
             </TouchableOpacity>
           </View>
@@ -77,20 +66,19 @@ export default function SignInScreen() {
         <Text style={styles.forgotPasswordText}>Forgot password?</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.googleButton}>
-        <Text style={[{ color: "#4285F4" }, styles.googleText]}>G</Text>
-        <Text style={[{ color: "#DB4437" }, styles.googleText]}>o</Text>
-        <Text style={[{ color: "#F4B400" }, styles.googleText]}>o</Text>
-        <Text style={[{ color: "#4285F4" }, styles.googleText]}>g</Text>
-        <Text style={[{ color: "#0F9D58" }, styles.googleText]}>l</Text>
-        <Text style={[{ color: "#DB4437" }, styles.googleText]}>e</Text>
+        <Text style={[{ color: '#4285F4' }, styles.googleText]}>G</Text>
+        <Text style={[{ color: '#DB4437' }, styles.googleText]}>o</Text>
+        <Text style={[{ color: '#F4B400' }, styles.googleText]}>o</Text>
+        <Text style={[{ color: '#4285F4' }, styles.googleText]}>g</Text>
+        <Text style={[{ color: '#0F9D58' }, styles.googleText]}>l</Text>
+        <Text style={[{ color: '#DB4437' }, styles.googleText]}>e</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.facebookButton}>
         <Text style={styles.facebookText}>Facebook</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("SignUpStack", {})}
-        style={styles.createAccountButton}
-      >
+        onPress={() => navigation.navigate('SignUpStack', {})}
+        style={styles.createAccountButton}>
         <Text style={styles.createAccountText}>Create account</Text>
       </TouchableOpacity>
     </View>
@@ -100,86 +88,86 @@ export default function SignInScreen() {
 const styles = StyleSheet.create({
   registration: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 20,
-    backgroundColor: "#F0F6FF",
+    backgroundColor: '#F0F6FF',
   },
   textInput: {
     height: 40,
-    width: "85%",
-    flexDirection: "row",
+    width: '85%',
+    flexDirection: 'row',
     borderBottomWidth: 1,
-    borderColor: "#9D9D9D",
+    borderColor: '#9D9D9D',
   },
   registrationBox: {
     borderRadius: 30,
-    backgroundColor: "#9D9D9D80",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "80%",
+    backgroundColor: '#9D9D9D80',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '80%',
   },
   registrationTitle: {
-    width: "100%",
+    width: '100%',
     height: 36,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 23,
   },
   titleText: {
     fontSize: 31,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   input: {
-    width: "90%",
+    width: '90%',
     marginVertical: 10,
-    color: "#FFF",
+    color: '#FFF',
   },
   inputsContainer: {
     paddingVertical: 20,
     marginHorizontal: 10,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  eye: { width: "15%", justifyContent: "center", alignItems: "center" },
+  eye: { width: '15%', justifyContent: 'center', alignItems: 'center' },
   loginButton: {
-    width: "80%",
+    width: '80%',
     height: 48,
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginVertical: 15,
     borderRadius: 30,
   },
-  loginText: { color: "#2E84E8", fontSize: 20, fontWeight: "600" },
+  loginText: { color: '#2E84E8', fontSize: 20, fontWeight: '600' },
   forgotPasswordButton: { marginVertical: 18 },
-  forgotPasswordText: { fontWeight: "500", fontSize: 16, color: "#2E84E8" },
+  forgotPasswordText: { fontWeight: '500', fontSize: 16, color: '#2E84E8' },
   googleButton: {
-    flexDirection: "row",
-    width: "80%",
+    flexDirection: 'row',
+    width: '80%',
     height: 48,
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 15,
     marginBottom: 23,
     borderRadius: 30,
   },
-  googleText: { fontSize: 20, fontWeight: "600" },
+  googleText: { fontSize: 20, fontWeight: '600' },
   facebookButton: {
-    width: "80%",
+    width: '80%',
     height: 48,
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 17,
     borderRadius: 30,
   },
-  facebookText: { color: "#4267B2", fontSize: 20, fontWeight: "600" },
+  facebookText: { color: '#4267B2', fontSize: 20, fontWeight: '600' },
 
   createAccountButton: {
     marginTop: 20,
   },
-  createAccountText: { fontWeight: "600", fontSize: 20, color: "#2E84E8" },
+  createAccountText: { fontWeight: '600', fontSize: 20, color: '#2E84E8' },
 });

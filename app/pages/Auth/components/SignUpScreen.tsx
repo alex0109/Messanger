@@ -1,13 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import {
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-} from "react-native";
+import { Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
 
 import type * as StackNavigator from "@shared/lib/navigation/StackNavigator";
 
@@ -61,16 +55,11 @@ export default function SignUpScreen() {
             />
             <TouchableOpacity
               style={styles.eye}
-              onPress={() => setSecurePassword((state) => !state)}
-            >
+              onPress={() => setSecurePassword((state) => !state)}>
               {securePassword ? (
                 <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
               ) : (
-                <MaterialCommunityIcons
-                  name="eye-off"
-                  size={25}
-                  color="#D9D9D9"
-                />
+                <MaterialCommunityIcons name="eye-off" size={25} color="#D9D9D9" />
               )}
             </TouchableOpacity>
           </View>
@@ -80,23 +69,16 @@ export default function SignUpScreen() {
               placeholder="Confirm Password"
               placeholderTextColor="#9D9D9D"
               secureTextEntry={secureConfirmPassword}
-              onChangeText={(confirmPassword) =>
-                setConfirmPassword(confirmPassword)
-              }
+              onChangeText={(confirmPassword) => setConfirmPassword(confirmPassword)}
               style={styles.input}
             />
             <TouchableOpacity
               style={styles.eye}
-              onPress={() => setSecureConfirmPassword((state) => !state)}
-            >
+              onPress={() => setSecureConfirmPassword((state) => !state)}>
               {secureConfirmPassword ? (
                 <MaterialCommunityIcons name="eye" size={25} color="#D9D9D9" />
               ) : (
-                <MaterialCommunityIcons
-                  name="eye-off"
-                  size={25}
-                  color="#D9D9D9"
-                />
+                <MaterialCommunityIcons name="eye-off" size={25} color="#D9D9D9" />
               )}
             </TouchableOpacity>
           </View>
@@ -119,8 +101,7 @@ export default function SignUpScreen() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.createAccountButton}
-        onPress={() => navigation.navigate("SignInStack", {})}
-      >
+        onPress={() => navigation.navigate("SignInStack", {})}>
         <Text style={styles.createAccountText}>Log in</Text>
       </TouchableOpacity>
     </View>

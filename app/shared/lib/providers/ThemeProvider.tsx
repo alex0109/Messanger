@@ -45,10 +45,6 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
   const contextValue = { theme, changeTheme };
 
-  return (
-    <ThemeContext.Provider value={contextValue}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
 };
 export { ThemeContext, ThemeProvider };

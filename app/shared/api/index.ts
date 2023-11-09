@@ -18,13 +18,10 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 mongoose
-  .connect(
-    "mongodb+srv://krossyouyub:buo5O7qdGY7hRjRG@messanger-cluster.iqbd4ps.mongodb.net/",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as ConnectOptions,
-  )
+  .connect("mongodb+srv://krossyouyub:buo5O7qdGY7hRjRG@messanger-cluster.iqbd4ps.mongodb.net/", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  } as ConnectOptions)
   .then(() => console.log("Connected successfully!"))
   .catch((error) => console.log(error));
 
@@ -62,9 +59,7 @@ app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res
-      .status(404)
-      .json({ message: "Email and the password are required!" });
+    return res.status(404).json({ message: "Email and the password are required!" });
   }
 
   User.findOne({ email })

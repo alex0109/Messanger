@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
@@ -24,8 +24,8 @@ const Footer: FC = ({ setData, data }) => {
   const [input, setInput] = useState('');
   const [showEmojiSelector, setShowEmojiSelector] = useState(false);
   const handleEmojiPress = () => {
-    setShowEmojiSelector(!showEmojiSelector);
     Keyboard.dismiss();
+    setShowEmojiSelector(!showEmojiSelector);
   };
 
   const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
@@ -50,11 +50,11 @@ const Footer: FC = ({ setData, data }) => {
           <TouchableOpacity
             style={{ justifyContent: 'flex-end', alignItems: 'center', margin: 5 }}
             onPress={() => handleEmojiPress()}>
-            <Ionicons name='happy-outline' size={30} color={colors.adaptiveText} />
+            <MaterialCommunityIcons name="emoticon-outline" size={24} color={colors.adaptiveText} />
           </TouchableOpacity>
           <TextInput
             multiline
-            placeholder='Type...'
+            placeholder="Type..."
             placeholderTextColor={colors.adaptiveGrey}
             style={[style.msgInput, { color: colors.adaptiveText }]}
             cursorColor={colors.adaptiveText}
@@ -67,11 +67,21 @@ const Footer: FC = ({ setData, data }) => {
             style={style.sendButton}
             underlayColor={colors.mainBackground}
             onPress={() => sendMessageHandler()}>
-            <Ionicons name='send' size={26} color={colors.blue} style={style.buttonIcon} />
+            <MaterialCommunityIcons
+              name="send"
+              size={26}
+              color={colors.blue}
+              style={style.buttonIcon}
+            />
           </TouchableHighlight>
         ) : (
           <TouchableHighlight style={style.sendButton} underlayColor={colors.mainBackground}>
-            <Ionicons name='mic' size={26} color={colors.blue} style={style.buttonIcon} />
+            <MaterialCommunityIcons
+              name="microphone"
+              size={26}
+              color={colors.blue}
+              style={style.buttonIcon}
+            />
           </TouchableHighlight>
         )}
       </BlurView>

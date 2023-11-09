@@ -1,9 +1,9 @@
 {
+  "endOfLine": "auto",
   "arrowParens": "always",
   "bracketSpacing": true,
   "bracketSameLine": true,
   "jsxBracketSameLine": false,
-  "jsxSingleQuote": true,
   "quoteProps": "as-needed",
   "singleQuote": true,
   "semi": true,

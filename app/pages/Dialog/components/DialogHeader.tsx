@@ -1,9 +1,8 @@
-import { AntDesign, Entypo } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation, useTheme } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-
-import { LinearGradient } from 'expo-linear-gradient';
 
 import type { FC } from 'react';
 
@@ -14,11 +13,14 @@ const DialogHeader: FC = () => {
   const colors = useTheme().colors;
 
   return (
-    <LinearGradient style={[styles.header]} colors={["#0C9622",colors.header]} end={{ x: 0.5, y: 0.7 }}>
+    <LinearGradient
+      style={[styles.header]}
+      colors={['#0C9622', colors.header]}
+      end={{ x: 0.5, y: 0.7 }}>
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={[styles.fullAlign, { marginHorizontal: 15 }]}>
-        <AntDesign name='arrowleft' size={24} color={colors.white} />
+        <MaterialCommunityIcons name="arrow-left" size={24} color={colors.white} />
       </TouchableOpacity>
       <View style={[{ flex: 1, borderRadius: 90 }, styles.fullAlign]}>
         <Image
@@ -33,7 +35,7 @@ const DialogHeader: FC = () => {
         <Text style={[styles.timeStatus, { color: colors.lightGrey }]}>last time 09:32</Text>
       </View>
       <TouchableOpacity style={[{ flex: 1 }, styles.fullAlign]}>
-        <Entypo name='dots-three-vertical' size={24} color={colors.white} />
+        <MaterialCommunityIcons name="dots-vertical" size={24} color={colors.white} />
       </TouchableOpacity>
     </LinearGradient>
   );
