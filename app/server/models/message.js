@@ -23,11 +23,11 @@ const messageSchema = new Schema({
 
 module.exports = model("Message", messageSchema);
 
-let message = {
-  messageID: "String",
-  roomID: "String",
-  senderID: "String",
-  type: "String(Text/Photo/Document/GIF/Video)",
-  date: "Date",
-  body: "String",
-};
+// let message = {
+//   messageID: "String",
+//   roomID: "String",
+//   senderID: "String",
+//   type: "String(Text/Photo/Document/GIF/Video)",
+//   date: "Date",
+//   body: "String",
+// };

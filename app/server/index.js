@@ -34,6 +34,12 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
   console.log(`${socket.id} user connected`);
+
+  socket.on("friendRequest", (data) => {
+    io.to(data.recipientId).emit("newFriendRequest", {
+      message: `У вас новый запрос в друзья ${data.recipientId}!`,
+    });
+  });
 });
 
 //Подключаем парсеры
@@ -57,13 +63,10 @@ app.use(errorMiddleware);
 
 //Подключаем базу данных(путь лучше спрятать)
 mongoose
-  .connect(
-    "mongodb+srv://krossyouyub:buo5O7qdGY7hRjRG@messanger-cluster.iqbd4ps.mongodb.net/",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect("mongodb+srv://krossyouyub:buo5O7qdGY7hRjRG@messanger-cluster.iqbd4ps.mongodb.net/", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connected successfully!"))
   .catch((error) => console.log(error));
 

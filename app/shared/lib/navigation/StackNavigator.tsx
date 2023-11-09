@@ -1,19 +1,19 @@
-import { useTheme } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import { useTheme } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import React from "react";
 
-import SignInScreen from '@/pages/Auth/components/SignInScreen';
-import SignUpScreen from '@/pages/Auth/components/SignUpScreen';
-import ChatList from '@/pages/ChatList/components/ChatList';
-import ChatListHeader from '@/pages/ChatList/components/ChatListHeader';
+import SignInScreen from "@/pages/Auth/components/SignInScreen";
+import SignUpScreen from "@/pages/Auth/components/SignUpScreen";
+import ChatList from "@/pages/ChatList/components/ChatList";
+import ChatListHeader from "@/pages/ChatList/components/ChatListHeader";
 
-import DialogHeader from '@/pages/Dialog/components/DialogHeader';
-import DialogPage from '@/pages/Dialog/components/DialogPage';
-import SettingsPage from '@/pages/Settings/components/Settings';
-import SettingsHeader from '@/pages/Settings/components/SettingsHeader';
-import UserScreen from '@/pages/Settings/components/UserScreen';
-import UserScreenHeader from '@/pages/Settings/components/UserScreenHeader';
-import RespondDialog from '@/pages/Dialog/components/RespondDialog';
+import DialogHeader from "@/pages/Dialog/components/DialogHeader";
+import DialogPage from "@/pages/Dialog/components/DialogPage";
+import SettingsPage from "@/pages/Settings/components/Settings";
+import SettingsHeader from "@/pages/Settings/components/SettingsHeader";
+import UserScreen from "@/pages/Settings/components/UserScreen";
+import UserScreenHeader from "@/pages/Settings/components/UserScreenHeader";
+import RespondDialog from "@/pages/Dialog/components/RespondDialog";
 
 export type RootStackParamList = {
   ChatStack: { name: string };

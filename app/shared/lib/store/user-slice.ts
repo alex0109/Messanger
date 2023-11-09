@@ -81,9 +81,7 @@ export const userSlice = createSlice({
         state.error = null;
       })
       .addCase(getUsersThunk.fulfilled, (state, action) => {
-        state.loadedUsers = action.payload.filter(
-          (loadedUser) => state.user.id !== loadedUser._id
-        );
+        state.loadedUsers = action.payload.filter((loadedUser) => state.user.id !== loadedUser._id);
         state.loading = false;
       })
       .addCase(getUsersThunk.rejected, (state, action) => {

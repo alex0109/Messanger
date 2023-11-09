@@ -14,7 +14,7 @@ const tokenService = require("./token-service");
 
 //Создаем класс с методами работы с пользователем и бд
 class UserService {
-  //Метод регистрации
+  //Сервис регистрации
   async registration(email, password) {
     //Ищем пользователя по почте
     const candidate = await UserModel.findOne({ email });
@@ -24,7 +24,7 @@ class UserService {
     }
 
     //Хешируем пароль, чтобы он не хранился в открытом виде в бд
-    const hashPassword = await bcrypt.hash(password, 3);
+    const hashPassword = await bcrypt.hash(password, 10);
 
     //Создаем пользователя в бд
     const user = await UserModel.create({
@@ -42,7 +42,7 @@ class UserService {
     return { ...tokens, user: userDto };
   }
 
-  //Метод логина
+  //Сервис логина
   async login(email, password) {
     //Ищем пользователя по почте
     const user = await UserModel.findOne({ email });
@@ -70,7 +70,7 @@ class UserService {
     return { ...tokens, user: userDto };
   }
 
-  //Метод для выхода из аккаунта
+  //Сервис для выхода из аккаунта
   async logout(refreshToken) {
     //Удаляем токен из бд
     const token = await tokenService.removeToken(refreshToken);
@@ -78,7 +78,7 @@ class UserService {
     return token;
   }
 
-  //Метод обновления токена обновления
+  //Сервис обновления токена обновления
   async refresh(refreshToken) {
     //Если токена нету кидаем ошибку
     if (!refreshToken) {
@@ -105,15 +105,48 @@ class UserService {
     return { ...tokens, user: userDto };
   }
 
-  //Метод для получения всех пользователей
+  //Сервис для получения всех пользователей
   async getAllUsers() {
     return await UserModel.find();
   }
 
+  //Сервис для получения одного пользователя
   async findUserById(userID) {
     return await UserModel.findById(userID);
   }
 
+  //Сервис для обновления пользователяs
+  async updateUser(userID, updates) {
+    const user = await this.findUserById(userID);
+
+    if (!user) {
+      throw ApiError.BadRequest("User was not found");
+    }
+
+    // Обновляем только те поля, которые были отправлены в запросе
+    for (const key of Object.keys(updates)) {
+      if (key !== "_id" && key !== "__v") {
+        user[key] = updates[key];
+      }
+
+      if (key === "socketId") {
+        try {
+          const hashSocketId = await bcrypt.hash(updates.socketId, 2);
+          user.socketId = hashSocketId;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+
+    await user.save();
+
+    const userDto = new UserDto(user);
+
+    return userDto;
+  }
+
+  //Сервис для отправки запроса в друзья
   async sendFriendRequest(senderID, receiverID, firstMessage) {
     const sender = await this.findUserById(senderID);
     const receiver = await this.findUserById(receiverID);
@@ -123,13 +156,11 @@ class UserService {
         contact.from.equals(receiverID)
       );
 
-      const alreadyRequestedReceiver = receiver.incomingRequests.some(
-        (contact) => contact.from.equals(receiverID)
-      );
-
-      const alreadyFriends = sender.contacts.some((contact) =>
+      const alreadyRequestedReceiver = receiver.incomingRequests.some((contact) =>
         contact.from.equals(receiverID)
       );
+
+      const alreadyFriends = sender.contacts.some((contact) => contact.from.equals(receiverID));
 
       if (!alreadyRequested && !alreadyRequestedReceiver && !alreadyFriends) {
         const newFriendRequest = new FRModel({
@@ -156,6 +187,7 @@ class UserService {
     }
   }
 
+  //Сервис для ответа на заявку в друзья
   async respondToFriendRequest(userID, requesterID, accept) {
     const user = await this.findUserById(userID);
     const requester = await this.findUserById(requesterID);
@@ -207,9 +239,7 @@ class UserService {
           requestID: request._id,
         };
       } else {
-        throw ApiError.BadRequest(
-          "Request didn't find or already has been accepted"
-        );
+        throw ApiError.BadRequest("Request didn't find or already has been accepted");
       }
     } else {
       throw ApiError.BadRequest("User didn't find");

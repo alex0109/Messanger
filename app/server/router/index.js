@@ -21,15 +21,11 @@ router.post(
 );
 router.post("/login", userController.login);
 router.post("/logout", userController.logout);
-router.get("/activate/:link", userController.activate);
 router.get("/refresh", userController.refresh);
 router.get("/users", authMiddleware, userController.getUsers);
 router.get("/users/:userID", authMiddleware, userController.getOneUser);
-router.post(
-  "/friend-request/:receiverID",
-  authMiddleware,
-  userController.sendFriendRequest
-);
+router.patch("/users/:userID", userController.updateUser);
+router.post("/friend-request/:receiverID", authMiddleware, userController.sendFriendRequest);
 router.put(
   "/friend-request/:receiverID/accept",
   authMiddleware,

@@ -7,7 +7,7 @@ const userService = require("../service/user-service");
 
 //Класс для роботы с сервером
 class UserController {
-  //Метод регистрации
+  //Контроллер регистрации
   async registration(req, res, next) {
     try {
       //Берем массив ошибкок из запроса
@@ -15,9 +15,7 @@ class UserController {
 
       //Проверяем пустой он или нет, если нет, то возвращаем ошибку и массивом ошибок
       if (!errors.isEmpty()) {
-        return next(
-          ApiError.BadRequest("Error while validating inputs", errors.array())
-        );
+        return next(ApiError.BadRequest("Error while validating inputs", errors.array()));
       }
 
       //Берем почту и пароль из тела запроса
@@ -37,7 +35,7 @@ class UserController {
     }
   }
 
-  //Метод логина
+  //Контроллер логина
   async login(req, res, next) {
     try {
       //Берем почту и пароль из тела запроса
@@ -58,7 +56,7 @@ class UserController {
     }
   }
 
-  //Метод выхода
+  //Контроллер выхода
   async logout(req, res, next) {
     try {
       //Берем токен обновления из куки
@@ -77,15 +75,16 @@ class UserController {
     }
   }
 
-  //Метод активации пользователя
+  //Контроллер активации пользователя
   async activate(req, res, next) {
     try {
+      return res.json(req.body);
     } catch (error) {
       next(error);
     }
   }
 
-  //Метод обновления токенов обновления
+  //Контроллер обновления токенов обновления
   async refresh(req, res, next) {
     try {
       //Берем токен из куки
@@ -106,7 +105,7 @@ class UserController {
     }
   }
 
-  //Метод получения всех пользователей
+  //Контроллер получения всех пользователей
   async getUsers(req, res, next) {
     try {
       const users = await userService.getAllUsers();
@@ -116,6 +115,7 @@ class UserController {
     }
   }
 
+  //Контроллер получения одного пользователя
   async getOneUser(req, res, next) {
     try {
       const userID = req.params.userID;
@@ -127,6 +127,20 @@ class UserController {
     }
   }
 
+  //Контроллер для обновления пользователя
+  async updateUser(req, res, next) {
+    try {
+      const userID = req.params.userID;
+      const updates = req.body;
+
+      const updated = await userService.updateUser(userID, updates);
+      return res.json(updated);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  //Контроллер отправки запроса в друзья
   async sendFriendRequest(req, res, next) {
     try {
       const receiverID = req.params.receiverID;
@@ -153,6 +167,7 @@ class UserController {
     }
   }
 
+  //Контроллер для принятия запроса в друзья
   async acceptFriendRequest(req, res, next) {
     try {
       const receiverID = req.params.receiverID;
@@ -160,8 +175,11 @@ class UserController {
 
       const userData = await tokenService.validateRefreshToken(refreshToken);
 
-      const { message, requestID, firstMessage } =
-        await userService.respondToFriendRequest(userData.id, receiverID, true);
+      const { message, requestID, firstMessage } = await userService.respondToFriendRequest(
+        userData.id,
+        receiverID,
+        true
+      );
 
       res.json({ message, requestID, firstMessage });
     } catch (error) {
@@ -169,6 +187,7 @@ class UserController {
     }
   }
 
+  //Контроллер для отклонения запроса в друзья
   async rejectFriendRequest(req, res, next) {
     try {
       const receiverID = req.params.receiverID;

@@ -25,6 +25,10 @@ const ChatList: FC = () => {
 
   const colors = useTheme().colors;
 
+  const handleRequest = (recipientId: string) => {
+    user.socket!.emit("friendRequest", { recipientId });
+  };
+
   useEffect(() => {
     dispatch(getUsersThunk());
   }, []);
@@ -108,6 +112,7 @@ const ChatList: FC = () => {
                   <Text>Registred: {moment(oneUser.registeredAt).format("DD.MM.YYYY")}</Text>
                 </View>
                 <TouchableOpacity
+                  onPress={() => handleRequest(oneUser.id)}
                   style={{
                     width: "30%",
                     alignItems: "center",
@@ -137,7 +142,7 @@ const ChatList: FC = () => {
             message: "dfasdfafas",
           })
         }>
-        <Ionicons name='md-add' size={50} color='white' />
+        <Ionicons name="md-add" size={50} color="white" />
       </TouchableOpacity>
     </View>
   );
