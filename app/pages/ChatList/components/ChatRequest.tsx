@@ -10,11 +10,7 @@ interface ChatRequestProps {
   isRequestApproved: boolean;
 }
 
-const ChatRequest: FC<ChatRequestProps> = ({
-  userID,
-  userName,
-  isRequestApproved,
-}) => {
+const ChatRequest: FC<ChatRequestProps> = ({ userID, userName, isRequestApproved }) => {
   const navigation = useNavigation();
 
   const colors = useTheme().colors;
@@ -22,10 +18,7 @@ const ChatRequest: FC<ChatRequestProps> = ({
   return (
     <TouchableOpacity
       style={style.chatItem}
-      onPress={() =>
-        navigation.navigate("DialogStack", { userID, isRequestApproved })
-      }
-    >
+      onPress={() => navigation.navigate("DialogStack", { userID, isRequestApproved })}>
       <View style={[style.chatItemContent, { backgroundColor: colors.blue }]}>
         <Image
           source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
@@ -34,15 +27,8 @@ const ChatRequest: FC<ChatRequestProps> = ({
           borderRadius={30}
         />
         <View style={{ flexDirection: "row", width: "75%" }}>
-          <Text style={[style.chatItemUserName, { color: colors.white }]}>
-            {userName}{" "}
-          </Text>
-          <Text
-            style={[
-              style.chatItemUserName,
-              { fontWeight: "500", color: colors.white },
-            ]}
-          >
+          <Text style={[style.chatItemUserName, { color: colors.white }]}>{userName} </Text>
+          <Text style={[style.chatItemUserName, { fontWeight: "500", color: colors.white }]}>
             send request to be friends
           </Text>
         </View>

@@ -1,21 +1,29 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+
+import { LinearGradient } from "expo-linear-gradient";
 
 import type { FC } from "react";
 
 const DialogHeader: FC = () => {
   //Для навигации в приложении
   const navigation = useNavigation();
+
   const colors = useTheme().colors;
 
   return (
-    <View style={[styles.header, { backgroundColor: colors.themeColorHeader }]}>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={[styles.fullAlign]}>
-        <MaterialCommunityIcons name="arrow-left" size={24} color={colors.white} />
+    <LinearGradient
+      style={[styles.header]}
+      colors={["#0C9622", colors.header]}
+      end={{ x: 0.5, y: 0.7 }}>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={[styles.fullAlign, { marginHorizontal: 15 }]}>
+        <AntDesign name='arrowleft' size={24} color={colors.white} />
       </TouchableOpacity>
-      <View style={[{ flex: 1, borderRadius: 30 }, styles.fullAlign]}>
+      <View style={[{ flex: 1, borderRadius: 90 }, styles.fullAlign]}>
         <Image
           style={styles.userAvatar}
           source={{
@@ -25,12 +33,12 @@ const DialogHeader: FC = () => {
       </View>
       <View style={[{ flex: 4 }, styles.topStatus]}>
         <Text style={[styles.username, { color: colors.white }]}>Username</Text>
-        <Text style={[styles.timeStatus, { color: colors.themeGrayText }]}>last time 09:32</Text>
+        <Text style={[styles.timeStatus, { color: colors.lightGrey }]}>last time 09:32</Text>
       </View>
-      <View style={[{ flex: 1 }, styles.fullAlign]}>
-        <MaterialCommunityIcons name="dots-vertical" size={24} color={colors.white} />
-      </View>
-    </View>
+      <TouchableOpacity style={[{ flex: 1 }, styles.fullAlign]}>
+        <Entypo name='dots-three-vertical' size={24} color={colors.white} />
+      </TouchableOpacity>
+    </LinearGradient>
   );
 };
 
@@ -42,15 +50,12 @@ const styles = StyleSheet.create({
     height: 50,
     width: "100%",
     alignItems: "center",
-
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    paddingHorizontal: 5,
   },
   userAvatar: {
-    height: 40,
-    width: 40,
-
+    height: "80%",
+    aspectRatio: 1,
     borderRadius: 30,
   },
   topStatus: {
@@ -59,12 +64,12 @@ const styles = StyleSheet.create({
   },
   username: {
     fontSize: 12,
-
+    color: "#FFFFFF",
     fontWeight: "600",
   },
   timeStatus: {
     fontSize: 12,
-
+    color: "#C0C0C0",
     fontWeight: "400",
   },
   fullAlign: {

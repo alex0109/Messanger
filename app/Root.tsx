@@ -30,6 +30,7 @@ export default function Root() {
   useEffect(() => {
     async function checkForToken() {
       const token = await SecureStore.getItemAsync("token");
+      console.log(token);
 
       if (token) {
         authentificate();

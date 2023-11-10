@@ -1,8 +1,7 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-
 import { useNavigation, useTheme } from "@react-navigation/native";
 import React, { useContext } from "react";
-import { Switch, TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
+import { Switch, TouchableOpacity, View, Text, StyleSheet } from "react-native";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useTypedSelector } from "../hooks/useTypedSelector";
@@ -11,6 +10,8 @@ import { ThemeContext } from "../providers/ThemeProvider";
 import { logoutThunk } from "../store/user-thunks";
 
 import type { FC } from "react";
+
+//import DropDownPicker from "react-native-dropdown-picker";
 
 const CustomDrawerContent: FC = () => {
   const colors = useTheme().colors;
@@ -23,8 +24,8 @@ const CustomDrawerContent: FC = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.themeColor }]}>
-      <View style={[styles.drawerProfile, { borderColor: colors.themeColorText }]}>
+    <View style={[styles.container, { backgroundColor: colors.drawerBackground }]}>
+      <View style={[styles.drawerProfile, { borderColor: colors.adaptiveText }]}>
         <View style={{ alignItems: "center", width: "70%" }}>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
             {/* <Image source={require("../../assets/images/Ellipse.png")} /> */}
@@ -47,13 +48,13 @@ const CustomDrawerContent: FC = () => {
               style={{
                 fontSize: 16,
                 fontWeight: "600",
-                color: colors.themeColorText,
+                color: colors.adaptiveText,
               }}>
               {user.user.email.split("@")[0]}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("UserStack")}>
-            <Text style={{ color: "gray" }}>{user.user.email}</Text>
+            <Text style={{ color: colors.adaptiveGrey }}>{user.user.email}</Text>
           </TouchableOpacity>
         </View>
         <View style={{ height: "100%", width: "15%", paddingVertical: 10 }}>
@@ -69,33 +70,31 @@ const CustomDrawerContent: FC = () => {
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("ChatStack", {})}>
-          <Ionicons name="home" size={30} color={colors.themeColorText} />
-          <Text style={[styles.drawerButtonText, { color: colors.themeColorText }]}>
-            Chats List
-          </Text>
+          <Ionicons name='home' size={30} color={colors.adaptiveText} />
+          <Text style={[styles.drawerButtonText, { color: colors.adaptiveText }]}>Chats List</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("UserStack", {})}>
-          <Ionicons name="people" size={30} color={colors.themeColorText} />
-          <Text style={[styles.drawerButtonText, { color: colors.themeColorText }]}>
+          <Ionicons name='people' size={30} color={colors.adaptiveText} />
+          <Text style={[styles.drawerButtonText, { color: colors.adaptiveText }]}>
             User settings
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("DialogStack", {})}>
-          <Ionicons name="settings" size={30} color={colors.themeColorText} />
-          <Text style={[styles.drawerButtonText, { color: colors.themeColorText }]}>Dialog</Text>
+          <Ionicons name='settings' size={30} color={colors.adaptiveText} />
+          <Text style={[styles.drawerButtonText, { color: colors.adaptiveText }]}>Dialog</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerButton}
           onPress={() => navigation.navigate("SettingsStack", {})}>
-          <Ionicons name="settings" size={30} color={colors.themeColorText} />
-          <Text style={[styles.drawerButtonText, { color: colors.themeColorText }]}>Settings</Text>
+          <Ionicons name='settings' size={30} color={colors.adaptiveText} />
+          <Text style={[styles.drawerButtonText, { color: colors.adaptiveText }]}>Settings</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.drawerButton} onPress={() => dispatch(logoutThunk())}>
-          <MaterialCommunityIcons name="logout" size={24} color="black" />
+          <MaterialCommunityIcons name='logout' size={24} color='black' />
           <Text style={styles.drawerButtonText}>Log out</Text>
         </TouchableOpacity>
       </View>

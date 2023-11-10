@@ -1,6 +1,8 @@
 import { useNavigation, useTheme } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+
+import { useActions } from "@/shared/lib/hooks/useActions";
 
 import type { FC } from "react";
 
@@ -8,22 +10,27 @@ interface ChatBarProps {
   userID: string;
   userName: string;
   message: string;
-  isArchived: boolean;
+  archived: boolean;
 }
 
-const ChatBar: FC<ChatBarProps> = ({ userID, userName, message, isArchived }) => {
-  // const [isUnread, setIsUnread] = useState(false);
+const ChatBar: FC<ChatBarProps> = ({ userID, userName, message, archived }) => {
   const [isArchived, setIsArchived] = useState(archived);
 
   const navigation = useNavigation();
-
   const colors = useTheme().colors;
+
+  const { archiveChatHandler } = useActions();
+
+  const handleClick = () => {
+    archiveChatHandler({ userID });
+    setIsArchived(!isArchived);
+  };
 
   return (
     <TouchableOpacity
       style={[style.chatItem, { backgroundColor: isArchived ? "mediumslateblue" : "transparent" }]}
       onPress={() => navigation.navigate("DialogStack", { userID })}>
-      <View style={[style.chatItemContent, { backgroundColor: colors.themeColorChatBlock }]}>
+      <View style={[style.chatItemContent, { backgroundColor: colors.chatsBars }]}>
         <Image
           source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
           width={55}
@@ -31,15 +38,20 @@ const ChatBar: FC<ChatBarProps> = ({ userID, userName, message, isArchived }) =>
           borderRadius={30}
         />
         <View style={{ flexDirection: "column", width: "75%" }}>
-          <Text style={style.chatItemUserName}>{userName}</Text>
-          <Text style={style.chatItemText} numberOfLines={2}>
-            {isArchived ? "archived" : message}
+          <Text style={[style.chatItemUserName, { color: colors.mainText }]}>{userName}</Text>
+          <Text style={[style.chatItemText, { color: colors.secondaryText }]} numberOfLines={2}>
+            {isArchived
+              ? "archived"
+              : "najlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfbanajlksdnfjasbdjfaksbdjfbasdkfbasdfba"}
           </Text>
         </View>
       </View>
-      <Text style={style.chatItemTime}>11:30</Text>
-      <View style={[style.chatItemUnreadedMsg]}>
-        <Text allowFontScaling adjustsFontSizeToFit style={style.chatItemUnreadMeassageText}>
+      <Text style={[style.chatItemTime, { color: colors.adaptiveGrey }]}>11:30</Text>
+      <View style={[style.chatItemUnreadedMsg, { backgroundColor: colors.blue }]}>
+        <Text
+          allowFontScaling
+          adjustsFontSizeToFit
+          style={[style.chatItemUnreadMeassageText, { color: colors.white }]}>
           1
         </Text>
       </View>
@@ -59,7 +71,7 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   chatItemUnreadedMsg: {
-    left: 8,
+    left: 3,
     position: "absolute",
     height: 20,
     width: 20,
